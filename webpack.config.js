@@ -25,7 +25,7 @@ module.exports = {
     ]
   },
 // resolve: 웹팩이 해석할 확장자를 지정. 
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ["*", ".js", ".jsx"],fallback: { "path": require.resolve("path-browserify") } },
 // output: 번들링 된 결과물을 어디다 둘 것인지에 대한 설정이 가능.
   output: {
     path: path.resolve(__dirname, "dist/"),

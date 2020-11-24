@@ -1,0 +1,13 @@
+.footer p {
+  text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: -0.02em;
+
+  /* Gray6 */
+
+  color: #868e96;
+}
+.footer {
+}

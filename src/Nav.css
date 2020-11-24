@@ -1,0 +1,22 @@
+.nav-btn li {
+  display: inline;
+  margin-left: 15px;
+}
+.nav-btn ul :hover {
+  cursor: pointer;
+}
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.nav-logo {
+  display: flex;
+}
+.nav-logo img {
+  margin: auto;
+}
+.nav-btn {
+  display: flex;
+}

@@ -1,3 +1,14 @@
-.App {
-  background-color: aquamarine;
+body,
+html {
+  margin: 0;
+  background-color: rgb(236, 236, 236);
+}
+.wrapper {
+  background-color: white;
+  min-width: 375px;
+  width: 40vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }

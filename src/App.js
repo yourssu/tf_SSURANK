@@ -1,10 +1,15 @@
 import React from "react";
 import "./App.css";
+import Nav from "./Nav.js"
+import Content from "./Content.js"
+import Footer from "./Footer.js"
 const App = () => {
   return (
-    <div className="App">
-      <h1>Hello World!!!!!!</h1>
-    </div>
+      <div className="wrapper">
+            <Nav/>
+            <Content/>
+            <Footer/>
+        </div>
   )
 }
 export default App;
