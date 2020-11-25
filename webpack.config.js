@@ -55,10 +55,10 @@ module.exports = {
       template: path.resolve('./build/index.html'),
     }),
   new CleanWebpackPlugin(),
-  new CopyPlugin({
+  /*new CopyPlugin({
     patterns: [
       { from: "./public/*.png" ,to:"./img"},
     ],
-  }),
+  }),*/
 ]
 };
