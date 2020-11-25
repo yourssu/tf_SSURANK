@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
-
 module.exports = {
 	// entry: 웹팩에게 어플리케이션이 어디서 시작하고 어디서부터 파일들을 묶을건지 시작점을 정해준다. 
   entry: "./src/index.js",
@@ -39,7 +38,7 @@ module.exports = {
   devServer: {
     hot :true,
     // 정적 파일 경로 설정
-    contentBase: path.join(__dirname, "build/"),
+    contentBase: path.join(__dirname, "public/"),
     //contentBase:"/build",
     inline:false,
    port: 3000,
@@ -54,11 +53,6 @@ module.exports = {
 	// 번들링된 JS를 주입하고 결과물을 옮길 대상이 되는 파일을 지정
       template: path.resolve('./build/index.html'),
     }),
-  new CleanWebpackPlugin(),
-  /*new CopyPlugin({
-    patterns: [
-      { from: "./public/*.png" ,to:"./img"},
-    ],
-  }),*/
+	new CleanWebpackPlugin(),
 ]
 };
