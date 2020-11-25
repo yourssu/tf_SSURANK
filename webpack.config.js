@@ -34,11 +34,12 @@ module.exports = {
     publicPath: "/",
     filename: "bundle.js"
   },
+  devtool:'eval-cheap-source-map',
 // webpack-dev-server의 옵션을 설정
   devServer: {
     hot :true,
     // 정적 파일 경로 설정
-    contentBase: path.join(__dirname, "public/"),
+    contentBase: path.join(__dirname, "./build"),
     //contentBase:"/build",
     inline:false,
    port: 3000,
@@ -55,9 +56,9 @@ module.exports = {
     }),
   new CleanWebpackPlugin(),
   new CopyPlugin({
-    patterns:[
-    { from: 'public', to: './build/img'}
-    //{ from: './index.html', to: '../'}
-  ]})
+    patterns: [
+      { from: "./public" ,to:"img",flatten: true},
+    ],
+  }),
 ]
 };
