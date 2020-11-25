@@ -29,7 +29,7 @@ module.exports = {
   resolve: { extensions: ["*", ".js", ".jsx"],fallback: { "path": require.resolve("path-browserify") } },
 // output: 번들링 된 결과물을 어디다 둘 것인지에 대한 설정이 가능.
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "dist"),
 	// 번들이 생기는 경로를 지정. webpack-dev-server도 이를 참조
     publicPath: "/",
     filename: "bundle.js"
@@ -42,17 +42,17 @@ module.exports = {
     contentBase: path.join(__dirname, "./build"),
     //contentBase:"/build",
     inline:false,
+    overlay: true,
+  writeToDisk: true,
    port: 3000,
-	// 번들된 코드가 실제로 어디 있는지 서버에게 알려주는 거임
-    //publicPath: "http://localhost:3000/build/",
 	// devserver 에서만 핫로딩 가능하게
     hotOnly: true
   },
   plugins: [
 	new webpack.HotModuleReplacementPlugin(),
 	new HtmlWebpackPlugin({
-	// 번들링된 JS를 주입하고 결과물을 옮길 대상이 되는 파일을 지정
-      template: path.resolve('./build/index.html'),
+	// Dev server를 킬땐 빌드 파일을 만들어서 실행하는게 아니라 이미 있는 파일에다가 번들파일을 덮어씌우는 방식임
+      template: path.resolve('/public/index.html'),
     }),
   new CleanWebpackPlugin(),
   new CopyPlugin({
