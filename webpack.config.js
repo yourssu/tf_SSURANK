@@ -30,21 +30,23 @@ module.exports = {
   resolve: { extensions: ["*", ".js", ".jsx"],fallback: { "path": require.resolve("path-browserify") } },
 // output: 번들링 된 결과물을 어디다 둘 것인지에 대한 설정이 가능.
   output: {
-    path: path.resolve(__dirname, "dist/"),
+    path: path.resolve(__dirname, "dist"),
 	// 번들이 생기는 경로를 지정. webpack-dev-server도 이를 참조
-    publicPath: "/dist/",
+    publicPath: "/",
     filename: "bundle.js"
   },
+  //오류가 났을때 어디파일에서 오류가 났는지 알려줌
+  devtool:'eval-cheap-source-map',
 // webpack-dev-server의 옵션을 설정
   devServer: {
     hot :true,
-    // 정적 파일 경로 설정
-    contentBase: path.join(__dirname, "public/"),
-    //contentBase:"/build",
+    //contentBase: path.join(__dirname, "public/"),
+    //베이스 주소가 여기임.
+    contentBase:"./dist",
     inline:false,
+    overlay: true,
+  writeToDisk: true,
    port: 3000,
-	//이..이게뭐노....
-    publicPath: "http://localhost:3000/dist/",
 	// devserver 에서만 핫로딩 가능하게
     hotOnly: true
   },
@@ -55,10 +57,10 @@ module.exports = {
       template: path.resolve('/public/index.html'),
     }),
   new CleanWebpackPlugin(),
-  /*new CopyPlugin({
+  new CopyPlugin({
     patterns: [
-      { from: "./public/*.png" ,to:"./img"},
+      { from: "./public" ,to:"img",flatten: true},
     ],
-  }),*/
+  }),
 ]
 };
