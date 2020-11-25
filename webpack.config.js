@@ -39,7 +39,7 @@ module.exports = {
   devServer: {
     hot :true,
     // 정적 파일 경로 설정
-    contentBase: path.join(__dirname, "build"),
+    contentBase: path.join(__dirname, "build/"),
     //contentBase:"/build",
     inline:false,
    port: 3000,
