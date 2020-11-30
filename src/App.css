@@ -1,7 +1,15 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+html,body,a,span,p,* {
+  font-family: "Noto Sans KR", sans-serif !important;
+}
+
 body,
 html {
   margin: 0;
   background-color: rgb(236, 236, 236);
+}
+ul{
+  margin: 0px;
 }
 .wrapper {
   background-color: white;
@@ -10,5 +18,7 @@ html {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
+  padding: 0 16px;
 }
