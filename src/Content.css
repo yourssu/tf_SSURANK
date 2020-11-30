@@ -21,6 +21,7 @@
   border-bottom-left-radius: 10px;
   border: none;
   box-sizing: border-box;
+  
   width: 100%;
   height: 100%;
   background-color: #f1f3f5;
@@ -50,6 +51,11 @@
   width: 100%;
   background-color: #f1f3f5;
   border-radius: 10px;
+  overflow: hidden;
+}
+.banner img{
+  height: 100%;
+  object-fit: cover;
 }
 .dropdown-header{
   height: 46px;
@@ -61,14 +67,18 @@ font-size: 14px;
 line-height: 18px;
 display: flex;
 align-items: center;
+cursor: pointer;
 }
 
 .dropdown-block{
-  height: 71px;
   display: flex;
   flex-direction: row;
   align-items: center;
+ 
+}
+.pf{
   border-bottom: 1px solid #E9ECEF;
+  height: 71px;
 }
 .major-wrapper{
   display: flex;
@@ -86,11 +96,31 @@ align-items: center;
   justify-content: space-between;
 }
 .major-block{
-  width: 109px;
+  min-width: 109px;
+  
   height: 34px;
   background: #F1F3F5;
 border-radius: 4px;
 display: flex;
+margin-bottom: 8px;
+justify-content: center;
+align-items: center;
+}
+.major-block p{
+  margin: 0px;
+  font-family: Noto Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 18px;
+/* identical to box height, or 138% */
+
+text-align: center;
+letter-spacing: -0.02em;
+
+/* Gray8 */
+
+color: #343A40;
 }
 .block-right{
   width: 100%;

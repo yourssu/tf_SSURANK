@@ -17,9 +17,11 @@ const App = () => {
   }, [category])
   return (
       <div className="wrapper">
+        <section>
             <Nav category={category} setContents={setContents}/>
             <Content category={category} />
             <Footer/>
+            </section>
         </div>
   )
 }
