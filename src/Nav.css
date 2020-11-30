@@ -1,6 +1,8 @@
 .nav-btn li {
-  display: inline;
+  display: inline-table;
   margin-left: 15px;
+  height: 100%;
+  padding-top: 12px;
 }
 .nav-btn ul :hover {
   cursor: pointer;
@@ -8,15 +10,38 @@
 .nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  min-width: 375px;
+ width: 100%;
+ height: 44px;
 }
-
+.nav ul{
+  height: 100%;
+}
 .nav-logo {
   display: flex;
+  width: 82.77px;
 }
 .nav-logo img {
   margin: auto;
 }
 .nav-btn {
   display: flex;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+
+}
+.none{
+font-weight: normal;
+line-height: 19px;
+font-style: normal;
+color: #333333;
+}
+.selected{
+  font-weight: 700;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+  color: #3C95FF;
+  border-bottom: 3px solid #3C95FF ;
 }

@@ -54,7 +54,7 @@ module.exports = {
 	new webpack.HotModuleReplacementPlugin(),
 	new HtmlWebpackPlugin({
 	// Dev server를 킬땐 빌드 파일을 만들어서 실행하는게 아니라 이미 있는 파일에다가 번들파일을 덮어씌우는 방식임
-      template: path.resolve('/public/index.html'),
+      template: path.resolve('./public/index.html'),
     }),
   new CleanWebpackPlugin(),
   new CopyPlugin({
