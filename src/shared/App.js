@@ -18,14 +18,12 @@ const App = () => {
   }, [category])
   return (
       <div className="wrapper">
-        <section>
             <Nav category={category} setContents={setContents}/>
             <Switch>
             <Route path="/class" component={ClassHome}/>
             <Route path="/professor" component={ProHome}/>
             </Switch>
             <Footer/>
-            </section>
         </div>
   )
 }
