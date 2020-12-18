@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDOM, { render } from "react-dom";
-import App from "./App.js";
-// App 컴포넌트를 root아이디를 가진 DOM에 랜더할 것임! (index.html의 그 root임)
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Root from './client/Root';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+
+ReactDOM.render(<Root />, document.getElementById('root'));
