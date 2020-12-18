@@ -49,16 +49,6 @@ const PropDropdown = (props)=>{
         <>
         <div className="major-dropdown-contents">
         <div className="dropdown">
-<<<<<<< HEAD:src/PropDropdown.js
-            <div className="dropdown-header">학과별 랭킹</div>
-        {sample.major.map((college,index) => (
-            console.log(college),
-            <div className="dropdown-block"> 
-                <div className="major-wrapper">
-                {college.type.map((major,subindex) =>(
-                        
-                        <div className="major-block"><p>{major.name}</p></div>
-=======
         <button onClick={()=>setMajor(major?false:true)} className="dropdown-header"><div className="header">학과별 랭킹</div> <div className="dropdown_icon"><img src={"./img/drop"+(major?"up":"down")+"_Icon.svg"}/></div></button>
             {major&&
                 <>
@@ -69,7 +59,6 @@ const PropDropdown = (props)=>{
                                 <div className="major-block"><p>{major.name}</p></div>
                         ))}
                     </div>
->>>>>>> main:src/components/PropDropdown.js
                 ))}
                 </>
             }
@@ -78,14 +67,6 @@ const PropDropdown = (props)=>{
      </div>
     <div className="pf-dropdown-contents">
        <div className="dropdown">
-<<<<<<< HEAD:src/PropDropdown.js
-           <div className="dropdown-header">명예의 전당</div>
-       {sample.honor.map(rank => (
-           <div className="dropdown-block pf"> 
-                <div className="block-left"><img className={"rank-img "+ rank.rank.substring(0,1) +" "+ caseR[parseInt((rank.rank.substring(1,2)))]} src={"./img/"+rank.rank.substring(0,1) +".svg"}/></div>
-                <div className="block-right">
-                    <span>{rank.name}</span>
-=======
        <button onClick={()=>setHonor(honor?false:true)} className="dropdown-header"><div className="header">명예의 전당</div> <div className="dropdown_icon"><img src={"./img/drop"+(honor?"up":"down")+"_Icon.svg"}/></div></button>
        {honor&&
         <>
@@ -97,7 +78,6 @@ const PropDropdown = (props)=>{
                         
                         <p>{rank.major}·{rank.position}</p>
                     </div>
->>>>>>> main:src/components/PropDropdown.js
                     
                 </div>
             ))}
