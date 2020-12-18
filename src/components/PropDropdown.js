@@ -9,17 +9,10 @@ const PropDropdown = (props)=>{
     const college=['1','2','3'];
     const sample = {
         honor:[
-<<<<<<< HEAD:src/PropDropdown.js
-            {top:1,name:"홍길동", major:"코카콜라맛있다학과", position:"척척박사", rank:"A1", },
-            {top:2,name:"김수한무", major:"펩시콜라맛있다학과", position:"척척석사", rank:"B2",},
-            {top:3,name:"김가나", major:"제로콜라맛있다학과", position:"조교수", rank:"C0", },
-            {top:4,name:"박페리오", major:"민트초코맛있다학과", position:"치약매니아", rank:"U2", },
-=======
             {top:1,name:"홍길동", major:"코카콜라맛있다학과", position:"척척박사", rank:"A1",season:"19년 2학기" },
             {top:2,name:"김수한무", major:"팹시콜라맛있다학과", position:"척척석사", rank:"B2",season:"19년 2학기"},
             {top:3,name:"김가나", major:"제로콜라맛있다학과", position:"조교수", rank:"C0", season:"19년 2학기"},
             {top:4,name:"박한별", major:"민트초코맛있다학과", position:"학생", rank:"U2", season:"19년 2학기"},
->>>>>>> main:src/components/PropDropdown.js
         ],
         major:[
             {study:'it',type:[{name:"컴퓨터",fullname:"컴퓨터학부"},{name:"소프트",fullname:"소프트웨어학부"},{name:"글로벌미디어",fullname:"글로벌미디어학부"},{name:"글로벌미디어",fullname:"글로벌미디어학부"}]},
