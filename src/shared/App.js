@@ -20,6 +20,9 @@ const App = () => {
       <div className="wrapper">
         <section>
             <Nav category={category} setContents={setContents}/>
+            <Route exact path="/">
+              <Redirect to="/class" />
+            </Route>
             <Switch>
             <Route path="/class" component={ClassHome}/>
             <Route path="/professor" component={ProHome}/>
