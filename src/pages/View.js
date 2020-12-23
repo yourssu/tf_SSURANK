@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { Link, Route } from 'react-router-dom';
 import SearchList from '../components/SearchList'
 import { VictoryLine,VictoryChart,VictoryTheme,VictoryContainer } from "victory";
-import  Lock from '@material-ui/icons/lock';
+import  LockIcon from '@material-ui/icons/Lock';
 import Search from './Search'
 const View = ({match}) => {
     const rank = ['U','A','B','C','D'];
@@ -73,14 +73,14 @@ const View = ({match}) => {
         <div className="detail-comment-list">
             <div className="detail-comment-header">
                 <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
-                 <button className={(recent?"none-btn":"selec-btn")} onClick={()=>setRecent(false)}>추천순 <Lock color="#343A40" fontSize="small" /></button>
+                 <button className={(recent?"none-btn":"selec-btn")} onClick={()=>setRecent(false)}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
             </div>
         {recent&&
             sample.comment.map((index)=>
                 <div className="comment-wrapper">
                     <div className="comment-head"><span>{index.opt1}</span><p>{index.opt2}</p></div>
                     <div className="comment-contents">{index.contents}</div>
-                    <div className="comment-footer">추천<Lock color="#3C95FF"  style={{ fontSize: 15 }}/>·비추천 <Lock color="#3C95FF"  style={{ fontSize: 15 }}/>·<button>신고</button></div>
+                    <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·<button>신고</button></div>
                 </div>
             )
         }
