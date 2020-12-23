@@ -8,9 +8,9 @@ const ClassHome = ({match}) => {
     
     return (
         <>
-        <Route exact path={match.url} render={()=>(<><div className="logo">
+        <Route exact path={match.url} render={({match})=>(<><div className="logo">
         <img src="./img/Logo_img.png"/>
-        </div> <SearchBox  /><Content category={1} /></>)}/>
+        </div> <SearchBox  /><Content category={1} match={match}/></>)}/>
         <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox/> <Search match={match}/></>)}/>
         <Route path={`${match.url}/view/:id`} component={View}/>
         

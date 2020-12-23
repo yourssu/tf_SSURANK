@@ -13,6 +13,9 @@ const View = ({match}) => {
       { year: 4, rank: 1 },
       { year: 5, rank: 3 }
       ];
+      const selectBar = {
+        background: 'url(./img/dropdown_Icon.svg) no-repeat 95% 50%'
+      }
     const sample= {top:1,name:"오픈소스기초설계", major:"스마트시스템소프트웨어학과", person:"김강희", rank:"A1",season:"19년 2학기" ,
                     comment:[
                         {opt1:"본전생",opt2:"2020년 2학기",contents:"동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세. 남산 위에 저 소나무, 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세."},
@@ -53,13 +56,13 @@ const View = ({match}) => {
             <textarea placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
             <div className="detail-input-footer">
                 <div>
-            <select className="select-bar">
+            <select className="select-bar"style={selectBar}>
                 <option selected>전공 여부</option>
                 <option >본전생</option>
                 <option >부전생</option>
                 <option >타과생</option>
             </select>
-            <select className="select-bar">
+            <select className="select-bar" style={selectBar}>
                 <option selected>수강학기</option>
                 <option >2020년 2학기</option>
                 <option >2020년 1학기</option>

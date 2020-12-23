@@ -8,13 +8,13 @@
   height: 100%;
   overflow: hidden;
 }
-.search{
+.search {
   min-width: 343px;
   width: 100%;
   height: 40px;
   display: flex;
   flex-direction: row;
-  margin : 16px 0;
+  margin: 16px 0;
 }
 .search_bar {
   border-top-left-radius: 10px;
@@ -26,7 +26,7 @@
   background-color: #f1f3f5;
   padding-left: 16px;
 }
-.search_bar_icon{
+.search_bar_icon {
   width: 33px;
   height: 100%;
   background-color: #f1f3f5;
@@ -37,13 +37,16 @@
 }
 
 .logo {
+  width: 100px;
+  height: 115px;
+  margin: 32px auto 48px auto;
   display: flex;
-  margin: 32px 0 48px 0;
 }
 .logo img {
+  width: 100%;
   margin: auto;
 }
-.comment-list{
+.comment-list {
   display: flex;
   flex-direction: row;
   white-space: nowrap;
@@ -54,22 +57,31 @@
   margin: 8px 4px;
   height: 118px;
   width: 343px;
-  background: #FFFFFF;
-  border: 0.5px solid #CED4DA;
+  background: #ffffff;
+  border: 0.5px solid #ced4da;
   border-radius: 8px;
-  color: #343A40;
+  color: #343a40;
   padding: 16px;
   box-sizing: border-box;
-  text-overflow: clip;
 }
-.box-header{
+.box-header {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 13px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
 }
-.box-contents{
-  width:100%;
+.box-header span {
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.box-contents {
+  width: 100%;
   -webkit-line-clamp: 3;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -79,33 +91,32 @@ font-size: 13px;
   font-size: 13px;
   line-height: 20px;
   overflow: hidden;
-  
 }
-.header{
+.header {
   height: 46px;
-  color:#3C95FF ;
+  color: #3c95ff;
   font-family: Noto Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 18px;
-display: flex;
-align-items: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
 }
-.dropdown-header{
+.dropdown-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
-.dropdown-block{
+.dropdown-block {
   height: 71px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid #e9ecef;
 }
-.major-wrapper{
+.major-wrapper {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
@@ -117,93 +128,91 @@ align-items: center;
   line-height: 18px;
   text-align: center;
   letter-spacing: -0.02em;
-  color: #343A40;
+  color: #343a40;
   justify-content: space-between;
 }
-.major-block{
+.major-block {
   min-width: 109px;
   height: 34px;
-  background: #F1F3F5;
+  background: #f1f3f5;
   margin-bottom: 8px;
   border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.major-block p{
+.major-block p {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 18px;
-/* identical to box height, or 138% */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  /* identical to box height, or 138% */
 
-text-align: center;
-letter-spacing: -0.02em;
+  text-align: center;
+  letter-spacing: -0.02em;
 
-/* Gray8 */
+  /* Gray8 */
 
-color: #343A40;
+  color: #343a40;
 }
-.block-right{
+.block-right {
   width: 25%;
   text-align: right;
 }
-.dropdown-block span{
+.dropdown-block span {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height, or 129% */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height, or 129% */
 
-letter-spacing: -0.02em;
+  letter-spacing: -0.02em;
 
-/* Gray8 */
+  /* Gray8 */
 
-color: #343A40;
-
+  color: #343a40;
 }
-.dropdown-block p{
+.dropdown-block p {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 18px;
-/* identical to box height, or 138% */
-margin: 3px 0px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  /* identical to box height, or 138% */
+  margin: 3px 0px;
 
-letter-spacing: -0.02em;
+  letter-spacing: -0.02em;
 
-/* 회색 글씨 */
+  /* 회색 글씨 */
 
-color: #777777;
+  color: #777777;
 }
-.block-center{
-  width: 100%
+.block-center {
+  width: 100%;
 }
-.block-left{
+.block-left {
   width: 56px;
 }
-.rank-img{
+.rank-img {
   object-fit: cover;
   width: 24px;
   height: 24px;
-  
 }
-.plus{
+.plus {
   object-position: 34% 0;
 }
-.minus{
+.minus {
   object-position: 100% 0;
 }
-.zero{
+.zero {
   object-position: 67% 0;
 }
-.none{
+.none {
   object-position: 0% 0;
 }
-.result-header{
+.result-header {
   height: 40px;
   align-items: center;
   font-family: Noto Sans;
@@ -211,23 +220,22 @@ color: #777777;
   font-weight: normal;
   font-size: 13px;
   line-height: 18px;
-  color: #343A40;
+  color: #343a40;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid #E9ECEF;
+  border-bottom: 1px solid #e9ecef;
 }
-.result-left span{
+.result-left span {
   margin-right: 16px;
 }
-.border-line{
-  background-color:#F1F3F5;
+.border-line {
+  background-color: #f1f3f5;
   height: 8px;
   width: 100%;
-
 }
 
-.detail-box{
+.detail-box {
   display: flex;
   flex-direction: row;
   height: 80px;
@@ -236,144 +244,139 @@ color: #777777;
 .detail-rank-logo {
   width: 48px;
   height: 48px;
-  margin-right:16px;
+  margin-right: 16px;
 }
-.detail-rank-logo img{
+.detail-rank-logo img {
   width: 100%;
   height: 100%;
 }
-.detail-info{
+.detail-info {
   display: flex;
   flex-direction: column;
-  
 }
-.detail-info span{
+.detail-info span {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 22px;
-letter-spacing: -0.02em;
-color: #343A40;
-
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: -0.02em;
+  color: #343a40;
 }
-.detail-info p{
+.detail-info p {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 18px;
-margin: 0;
-color: #868E96;
-
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+  color: #868e96;
 }
-.prof-detail-btn{
+.prof-detail-btn {
   width: 100%;
   height: 50px;
   align-items: center;
   justify-content: center;
   display: flex;
-  background: #F1F3F5;
-border-radius: 4px;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height, or 129% */
+  background: #f1f3f5;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height, or 129% */
 
-text-align: center;
-letter-spacing: -0.02em;
+  text-align: center;
+  letter-spacing: -0.02em;
 
-/* Gray8 */
+  /* Gray8 */
 
-color: #343A40;
-margin: 16px 0;
+  color: #343a40;
+  margin: 16px 0;
 }
-.selec-btn{
+.selec-btn {
   font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height, or 129% */
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height, or 129% */
 
-text-align: center;
-letter-spacing: -0.02em;
+  text-align: center;
+  letter-spacing: -0.02em;
 
-/* PointColor */
+  /* PointColor */
 
-color: #3C95FF;
-border-bottom: 2px solid #3C95FF;
+  color: #3c95ff;
+  border-bottom: 2px solid #3c95ff;
 }
-.none-btn{
+.none-btn {
   font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height, or 129% */
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height, or 129% */
 
-text-align: center;
-letter-spacing: -0.02em;
+  text-align: center;
+  letter-spacing: -0.02em;
 
-/* Gray8 */
+  /* Gray8 */
 
-color: #343A40;
-border-bottom: 2px solid  #F1F3F5;
+  color: #343a40;
+  border-bottom: 2px solid #f1f3f5;
 }
-.detail-comment-input{
+.detail-comment-input {
   height: 200px;
   justify-content: center;
   display: flex;
   flex-direction: column;
 }
-.detail-comment-input textarea{
-  background: #F1F3F5;
-border-radius: 4px;
-border: none;
-width: 100%;
-height: 80px;
-padding: 9px 16px;
-box-sizing: border-box;
-font-family: Noto Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 22px;
-/* identical to box height, or 157% */
+.detail-comment-input textarea {
+  background: #f1f3f5;
+  border-radius: 4px;
+  border: none;
+  width: 100%;
+  height: 80px;
+  padding: 9px 16px;
+  box-sizing: border-box;
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  /* identical to box height, or 157% */
 
-letter-spacing: -0.02em;
+  letter-spacing: -0.02em;
 
-/* Gray6 */
+  /* Gray6 */
 
-color: #868E96;
+  color: #868e96;
 }
-.detail-input-footer{
+.detail-input-footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 30px;
-  margin-top:18px;
+  margin-top: 18px;
 }
-.submit-btn{
-  background: #3C95FF;
-border-radius: 4px;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 22px;
-/* identical to box height, or 169% */
-width: 60px;
-height: 30px;
-letter-spacing: -0.02em;
-align-items: center;
-justify-content: center;
-display: flex;
-flex-direction: column;
-/* White */
+.submit-btn {
+  background: #3c95ff;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 22px;
+  /* identical to box height, or 169% */
+  width: 60px;
+  height: 30px;
+  letter-spacing: -0.02em;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  /* White */
 
-color: #FFFFFF;
+  color: #ffffff;
 }
 
-
-.select-bar{
-  background:url(https://blogfiles.pstatic.net/MjAyMDEyMTlfMTQ3/MDAxNjA4MzA4MTU3OTg1.Jml3WD08WyYfgtl8gnOvyt0mBo3f8tquOq2ACVIgOpgg.BX8msRpbtLK8pqJYfNHTxc7r9iUSn4meSTiCHA4dPuYg.PNG.min01134/Vector.png) no-repeat 95% 50%;
+.select-bar {
   padding: 5px 0; /* 여백으로 높이 설정 */
   font-family: inherit;
   border: none;
@@ -382,34 +385,32 @@ color: #FFFFFF;
   -moz-appearance: none;
   appearance: none;
   font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 18px;
-/* identical to box height, or 138% */
-margin-right: 16px;
-letter-spacing: -0.02em;
-min-width: 90px;
-width: auto;
-/* Gray8 */
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  /* identical to box height, or 138% */
+  margin-right: 16px;
+  letter-spacing: -0.02em;
+  min-width: 90px;
+  width: auto;
+  /* Gray8 */
 
-color: #343A40;
-
+  color: #343a40;
 }
-.detail-comment-header{
+.detail-comment-header {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 50px;
-
 }
-.detail-comment-header button{
+.detail-comment-header button {
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.detail-comment-more{
+.detail-comment-more {
   height: 50px;
   width: 100%;
   display: flex;
@@ -417,77 +418,77 @@ color: #343A40;
   justify-content: center;
   align-items: center;
   font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 18px;
-/* identical to box height, or 138% */
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  /* identical to box height, or 138% */
 
-display: flex;
-align-items: center;
-letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.02em;
 
-/* Gray8 */
+  /* Gray8 */
 
-color: #343A40;
+  color: #343a40;
 }
-.comment-wrapper{
+.comment-wrapper {
   height: 192px;
   padding: 16px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-bottom: 1px solid  #E5E5E5;
+  border-top: 1px solid #e5e5e5;
 }
-.comment-head{
+.comment-head {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.comment-head span{
+.comment-head span {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 13px;
-line-height: 18px;
-color: #868E96;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 18px;
+  color: #868e96;
 }
 .comment-head p {
   font-family: Noto Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 18px;
-color: #868E96;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #868e96;
 }
-.comment-contents{
+.comment-contents {
   height: 80%;
   font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 20px;
-/* or 154% */
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 20px;
+  /* or 154% */
 
-display: flex;
-align-items: start;
-letter-spacing: -0.02em;
+  display: flex;
+  align-items: start;
+  letter-spacing: -0.02em;
 
-/* Gray8 */
+  /* Gray8 */
 
-color: #343A40;
+  color: #343a40;
 }
-.comment-footer{
-  color:#3C95FF;
+.comment-footer {
+  color: #3c95ff;
   font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 18px;
-align-items: center;
-display: flex;
-flex-direction: row;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 
-.lock{
+.lock {
   background-color: rgba(0, 0, 0, 0.349);
 }
