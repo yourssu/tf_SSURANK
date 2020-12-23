@@ -34,10 +34,11 @@ const PropDropdown = (props)=>{
             setError(true);
           })
     }
-
+*/
     useEffect(() => {
-        getRanking();
-    }, [rank])*/
+    }, [major])
+    useEffect(() => {
+    }, [honor])
     return(
         <>
         <div className="major-dropdown-contents">
