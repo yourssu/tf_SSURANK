@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import "./App.css";
 import Nav from "../components/Nav.js"
 import Footer from "../components/Footer.js"
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch,Redirect } from 'react-router-dom';
 import { ProHome, ClassHome} from '../pages';
 const App = () => {
   const [category,setCategory]=useState(1);
