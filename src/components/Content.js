@@ -27,7 +27,7 @@ const Content = (props)=>{
         {props.category>0&&
         <div className="comment-list">
             {sample.class.map((comment,index) => (
-            <a href={"/class/"+comment.id}>
+            <a href={"/class/view/"+comment.id}>
             <div className="comment-box">
                  <div className="box-header">{comment.className} - {comment.proName}</div>
                  <div className="box-contents"><p>{comment.comment}</p></div>
@@ -40,7 +40,7 @@ const Content = (props)=>{
         <>
             <div className="comment-list">
             {sample.pro.map((comment,index) => (
-            <a href={"/class/"+comment.id}>
+            <a href={"/class/view/"+comment.id}>
             <div className="comment-box">
                  <div className="box-header">{comment.proName} - {comment.major}</div>
                  <div className="box-contents"><p>{comment.comment}</p></div>
