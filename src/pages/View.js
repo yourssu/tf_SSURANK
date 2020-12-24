@@ -1,10 +1,12 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Link, Route } from 'react-router-dom';
 import SearchList from '../components/SearchList'
 import { VictoryLine,VictoryChart,VictoryTheme,VictoryContainer } from "victory";
 import  LockIcon from '@material-ui/icons/Lock';
 import Search from './Search'
+import axios from "axios";
 const View = ({match}) => {
+    const [detailData, setDetailData] = useState();
     const rank = ['U','A','B','C','D'];
     const data = [
     { year: 1, rank: 1 },//1 -> A , 2 -> B , 3 -> C
@@ -16,6 +18,14 @@ const View = ({match}) => {
       const selectBar = {
         background: 'url(./img/dropdown_Icon.svg) no-repeat 95% 50%'
       }
+      const getDetailData = async () => {
+        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/detail/${id}`);
+        setDetailData(response.data.detailedCourse);
+        console.log(response.data.detailedCourse);
+    };
+    useEffect(() => {
+        getDetailData();
+    }, [])
     const sample= {top:1,name:"오픈소스기초설계", major:"스마트시스템소프트웨어학과", person:"김강희", rank:"A1",season:"19년 2학기" ,
                     comment:[
                         {opt1:"본전생",opt2:"2020년 2학기",contents:"동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세. 남산 위에 저 소나무, 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세."},

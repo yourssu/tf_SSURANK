@@ -94,6 +94,9 @@
   line-height: 20px;
   overflow: hidden;
 }
+.box-contents p {
+  overflow: hidden;
+}
 .header {
   height: 46px;
   color: #3c95ff;
@@ -117,6 +120,9 @@
   flex-direction: row;
   align-items: center;
   border-bottom: 1px solid #e9ecef;
+}
+.border-bottom {
+  border-bottom: none;
 }
 .major-wrapper {
   display: flex;
@@ -522,4 +528,59 @@
   height: 8px;
   width: 100%;
   background-color: #f8f9fa;
+}
+.bold {
+  font-weight: bold;
+}
+.color {
+  color: #3c95ff;
+}
+.detail-prof-percent-list {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: scroll;
+  height: auto;
+  margin-top: 16px;
+}
+.detail-prof-percent {
+  margin: 16px 0;
+}
+.detail-prof-percent p {
+  color: #343a40;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+}
+.detail-prof-percent-list div {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #868e96;
+  background-color: #f1f3f5;
+  width: 99px;
+  height: 26px;
+  border-radius: 2px;
+  margin-right: 8px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+:root {
+  --st-modal-borderRadius: 4px;
+  --st-modal-boxShadow: 0;
+
+  --st-modal-backgroundColor: #2a2a2a;
+  --st-modal-titleTextColor: #3c95ff;
+  --st-modal-secondColor: #343a40;
+
+  --st-dialog-contentColor: #343a40;
+
+  --st-modal-transformVisible: translate3d(-50%, -50%, 0) scale(1);
+  --st-modal-transformHidden: translate3d(-50%, -50%, 0) scale(0.1);
+
+  --st-button-primaryColor: #3c95ff;
+  --st-button-primaryTextColor: #ffffff;
 }

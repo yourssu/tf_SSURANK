@@ -8,11 +8,10 @@ const SearchBox = ({match,category})=>{
     function search(e){
         setValue(e.target.value);
     }
-
     return(
     <div className="search">
     <input className="search_bar"onChange={search} type="search" placeholder={placeholder}/>
-    <Link to={(`${match.url}/search/${value}`)}><div className="search_bar_icon"><img src="/img/search_Icon.svg"/></div></Link>
+    <Link to={((category===1?'/class':'/professor')+`/search/${value}`)}><div className="search_bar_icon"><img src="/img/search_Icon.svg"/></div></Link>
     </div>
     )
 }
