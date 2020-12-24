@@ -4,14 +4,16 @@ import { Link, Route } from 'react-router-dom';
 import Content from '../components/Content';
 import SearchBox from '../components/SearchBox';
 import ViewPro from './ViewPro';
+import Ranking from './Ranking';
 const ProHome = ({match}) => {
     return (
        <>
         <Route exact path={match.url} render={({match})=>(<><div className="logo">
         <img src="./img/Logo_img.png"/>
-        </div> <SearchBox  /><Content match={match} category={0} /></>)}/>
-        <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox/> <Search match={match}/></>)}/>
+        </div> <SearchBox category={0} match={match} /><Content match={match} category={0} /></>)}/>
+        <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox category={0} match={match}/> <Search category={0} match={match}/></>)}/>
         <Route path={`${match.url}/view/:id`} component={ViewPro}/>
+        <Route path={`${match.url}/ranking/:id`} component={Ranking}/>
        </>
     );
 };

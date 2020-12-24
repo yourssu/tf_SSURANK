@@ -4,6 +4,7 @@ import Nav from "../components/Nav.js"
 import Footer from "../components/Footer.js"
 import { Route, Switch,Redirect } from 'react-router-dom';
 import { ProHome, ClassHome} from '../pages';
+import 'regenerator-runtime/runtime'
 const App = () => {
   const [category,setCategory]=useState(1);
 
@@ -28,8 +29,9 @@ const App = () => {
             <Route path="/class" component={ClassHome}/>
             <Route path="/professor" component={ProHome}/>
             </Switch>
-            <Footer/>
+            
             </section>
+            <Footer/>
         </div>
   )
 }
