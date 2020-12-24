@@ -3,7 +3,7 @@ import Search from './Search'
 import { Link, Route } from 'react-router-dom';
 import Content from '../components/Content';
 import SearchBox from '../components/SearchBox';
-import View from './View';
+import ViewPro from './ViewPro';
 const ProHome = ({match}) => {
     return (
        <>
@@ -11,7 +11,7 @@ const ProHome = ({match}) => {
         <img src="./img/Logo_img.png"/>
         </div> <SearchBox  /><Content match={match} category={0} /></>)}/>
         <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox/> <Search match={match}/></>)}/>
-        <Route path={`${match.url}/view/:id`} component={View}/>
+        <Route path={`${match.url}/view/:id`} component={ViewPro}/>
        </>
     );
 };
