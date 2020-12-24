@@ -73,6 +73,11 @@ const View = ({match}) => {
     function changeInputEmail(e){
         setInputEmail(e.target.value)
     }
+    function enterSubmit(e){
+        if (e.keyCode === 13) {
+            setPopup(true)
+        }
+    }
     function sendDataComment(){
         console.log(inputWhen);
         console.log(inputText);
@@ -179,7 +184,7 @@ const View = ({match}) => {
         <div className="devider"></div>
         <div className="detail-comment-input">
             <div className="header">이 교수 한 줄 평</div>
-            <textarea onChange={changeInputText} placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
+            <textarea onChange={changeInputText} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
             <div className="detail-input-footer">
                 <div>
             <select onChange={changeInputMajor} className="select-bar"style={selectBar}>
