@@ -39,6 +39,7 @@ const View = ({match}) => {
             </div>
         </div>
         <button className="prof-detail-btn"><p>이 교수 평가 보러가기</p></button>
+        <div className="devider"></div>
         <div className="detail-graph">
             <div className="header">이 강의 지난 학기 평가</div>
             <VictoryChart
@@ -48,9 +49,10 @@ const View = ({match}) => {
       data: { stroke:  "#3C95FF" },
       parent: { border: "1px solid #ccc"},
       height: 135 
-    }} data={data} x="year" y="rank" interpolation="natural" labels={({ datum }) => {rank[datum.year]}}/>
+    }} data={data} x="year" y="rank" labels={({ datum }) => {rank[datum.year]}}/>
             </VictoryChart>
         </div>
+        <div className="devider"></div>
         <div className="detail-comment-input">
             <div className="header">이 강의 한 줄 평</div>
             <textarea placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
@@ -73,6 +75,7 @@ const View = ({match}) => {
             </div>
             
         </div>
+        <div className="devider"></div>
         <div className="detail-comment-list">
             <div className="detail-comment-header">
                 <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
@@ -83,7 +86,7 @@ const View = ({match}) => {
                 <div className="comment-wrapper">
                     <div className="comment-head"><span>{index.opt1}</span><p>{index.opt2}</p></div>
                     <div className="comment-contents">{index.contents}</div>
-                    <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·<button>신고</button></div>
+                    <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · 비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · <button>신고</button></div>
                 </div>
             )
         }

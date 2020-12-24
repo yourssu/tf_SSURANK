@@ -83,7 +83,7 @@ const View = ({match}) => {
                 <div className="comment-wrapper">
                     <div className="comment-head"><span>{index.opt1}</span><p>{index.opt2}</p></div>
                     <div className="comment-contents">{index.contents}</div>
-                    <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·<button>신고</button></div>
+                    <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · 비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·<button>신고</button></div>
                 </div>
             )
         }

@@ -10,8 +10,8 @@ const ClassHome = ({match}) => {
         <>
         <Route exact path={match.url} render={({match})=>(<><div className="logo">
         <img src="./img/Logo_img.png"/>
-        </div> <SearchBox  /><Content category={1} match={match}/></>)}/>
-        <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox/> <Search match={match}/></>)}/>
+        </div> <SearchBox  category={1} match={match}/><Content category={1} match={match}/></>)}/>
+        <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox category={1} match={match}/> <Search category={1} match={match}/></>)}/>
         <Route path={`${match.url}/view/:id`} component={View}/>
         
         </>

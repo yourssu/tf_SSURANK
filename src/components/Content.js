@@ -23,7 +23,7 @@ const Content = ({category,match})=>{
     return(
     <div className="contents">
        
-        <div className="header">최근 등록된 한줄 평</div>
+        <div className="header">최근 등록된 한 줄 평</div>
         {category>0&&
         <div className="comment-list">
             {sample.class.map((comment,index) => (
