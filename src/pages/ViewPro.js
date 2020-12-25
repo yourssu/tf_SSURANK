@@ -165,7 +165,7 @@ const View = ({match}) => {
                             <p>{rank.department}·{rank.name}</p>
                         </div>
                         <div className="block-right">
-                            <p>{rank.year} - {(rank.semester==='SEMESTER'?<>2학기</>:<>1학기</>)}</p>
+                            <p>{rank.year} - {(rank.semester==='SECOND'?<>2학기</>:<>1학기</>)}</p>
                         </div>
                     </div>
                 </Link>
