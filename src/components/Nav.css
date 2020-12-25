@@ -32,6 +32,7 @@
 }
 .nav-logo img {
   margin: auto;
+  width: 100%;
 }
 .nav-btn {
   display: flex;

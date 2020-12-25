@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { render } from "react-dom";
 import { Link, Route } from 'react-router-dom';
 const SearchList = (props)=>{
-    const caseR = ["plus",'zero','minus',''];
+    const caseR = ['none',"plus",'zero','minus'];
     const college=['1','2','3'];
     //1 : 강의별 , 2 : 교수별, 3: 학과랭킹
     return(
