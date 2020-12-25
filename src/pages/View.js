@@ -81,11 +81,7 @@ const View = ({match}) => {
         console.log(inputText);
         console.log(inputMajor);
         console.log(inputWhen);
-<<<<<<< HEAD
-        if(value&&inutText&&inputMajor){
-=======
         if(value&&inputWhen&&inputMajor&&inputText){
->>>>>>> main
             postCommentData(value);
         }
         else{
@@ -120,11 +116,7 @@ const View = ({match}) => {
         getDetailData();
         getCommentData(1);
     }, [])
-<<<<<<< HEAD
-    
-=======
    
->>>>>>> main
     const caseR = ["plus",'zero','minus','none'];
     const [recent,setRecent]=useState(true);
     return (
