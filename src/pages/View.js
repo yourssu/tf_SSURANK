@@ -169,6 +169,7 @@ const View = ({match}) => {
                 <option defaultValue>전공 여부</option>
                 <option >본전공</option>
                 <option >부전공</option>
+                <option >복수전공</option>
                 <option >타전공</option>
             </select>
             <select value={inputWhen} onChange={changeInputWhen} className="select-bar" style={selectBar}>
