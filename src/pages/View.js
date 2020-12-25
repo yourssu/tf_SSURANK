@@ -71,9 +71,9 @@ const View = ({match}) => {
                 <div>
             <select className="select-bar"style={selectBar}>
                 <option selected>전공 여부</option>
-                <option >본전생</option>
-                <option >부전생</option>
-                <option >타과생</option>
+                <option >본전공</option>
+                <option >부전공</option>
+                <option >타전공</option>
             </select>
             <select className="select-bar" style={selectBar}>
                 <option selected>수강학기</option>
