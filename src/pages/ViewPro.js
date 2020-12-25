@@ -1,9 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { Link, Route } from 'react-router-dom';
-import SearchList from '../components/SearchList'
-import { VictoryLine,VictoryChart,VictoryTheme,VictoryContainer } from "victory";
 import  LockIcon from '@material-ui/icons/Lock';
-import Search from './Search'
 import { StaticDialog, useDialog } from 'react-st-modal';
 import axios from "axios";
 const View = ({match}) => {
@@ -122,16 +119,7 @@ const View = ({match}) => {
         getProfClassData(1);
         getCommentData(1);
     }, [])
-    const sample= {top:1,name:"오픈소스기초설계", major:"스마트시스템소프트웨어학과", person:"김강희", rank:"A1",season:"19년 2학기" ,
-                    comment:[
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세. 남산 위에 저 소나무, 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세."},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세. 남산 위에 저 소나무, 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세."},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                    ]
-};
+
     const caseR = ["plus",'zero','minus','none'];
     const [recent,setRecent]=useState(true);
     return (detailData?
@@ -149,7 +137,7 @@ const View = ({match}) => {
         <CustomDialogContent />
       </StaticDialog>
         <div className="detail-box">
-            <div className="detail-rank-logo"><img className={"rank-img "+ "none"} src={"/img/"+detailData.ranking.substring(0,1) +".svg"}/></div>
+            <div className="detail-rank-logo"><img className={"rank-img "+ "none"} src={"/img/"+detailData.ranking.substring(0,1) +".png"}/></div>
             <div className="detail-info">
                 <span>{detailData.name}</span>
                 
@@ -170,7 +158,7 @@ const View = ({match}) => {
             detailClassData && detailClassData.map((rank,key) => (
                 <Link to ={'/class/view/'+rank.courseId}>
                 <div className={"dropdown-block" + (key === detailClassData.length-1?" border-bottom":" ")}> 
-                        <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".svg"}/></div>
+                        <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".png"}/></div>
                         <div className="block-center">
                             <span>{rank.title}</span>
                             

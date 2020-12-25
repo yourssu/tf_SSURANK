@@ -1,12 +1,17 @@
 import React,{useState,useEffect} from 'react';
 import { Link, Route } from 'react-router-dom';
-import SearchList from '../components/SearchList'
 import { VictoryLine,VictoryChart,VictoryTheme,VictoryContainer } from "victory";
 import  LockIcon from '@material-ui/icons/Lock';
-import Search from './Search'
+import { StaticDialog, useDialog } from 'react-st-modal';
 import axios from "axios";
 const View = ({match}) => {
     const [detailData, setDetailData] = useState();
+    const [commentData, setCommentData] = useState();
+    const [inputMajor,setInputMajor] = useState();
+    const [inputText,setInputText] = useState();
+    const [inputWhen,setInputWhen] = useState();
+    const [sender,setSender] = useState(false);
+    const [popup,setPopup] = useState(false);
     const rank = ['U','A','B','C','D'];
     const data = [
     { year: 1, rank: 1 },//1 -> A , 2 -> B , 3 -> C
@@ -23,8 +28,93 @@ const View = ({match}) => {
         setDetailData(response.data.detailedCourse);
         console.log(response.data.detailedCourse);
     };
+    const getCommentData = async (index) => {
+        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/evaluation/recent/${match.params.id}/${index}`);
+        setCommentData(response.data.evaluations);
+        console.log(response.data.evaluations);
+    };
+    const dialog = useDialog();
+    const postCommentData = async (value) => {
+        const json = JSON.stringify({ 
+            content:inputText,
+            email:value,
+            courseId:match.params.id,
+            type:inputMajor,
+            year:2019,
+            semester:1
+        });
+        const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/course/evaluation`,json, {
+            headers: {
+            'Content-Type': 'application/json'
+            }});
+        console.log(response.data.data);
+        setPopup(false);
+        window.location.reload(false);
+    };
+    const postReport = async () => {
+        const json = JSON.stringify({ 
+            content: "string",
+            id: 0,
+            reportCategory: "기타"
+        });
+        const response = await axios.post(`https://ssurank.herokuapp.com/ssurank/course/report`,json, {
+            headers: {
+              'Content-Type': 'application/json'
+            }});
+    };
+    function changeInputMajor(e){
+        setInputMajor(e.target.value)
+    }
+    function changeInputText(e){
+        setInputText(e.target.value)
+    }
+    function changeInputWhen(e){
+        setInputWhen(e.target.value)
+    }
+    function enterSubmit(e){
+        if (e.keyCode === 13) {
+            setPopup(true)
+        }
+    }
+    function sendDataComment(value){
+        console.log(value);
+        console.log(inputText);
+        console.log(inputMajor);
+        console.log(inputWhen);
+        if(value){
+            postCommentData(value);
+        }
+        else{
+            alert('데이터를 넣어주세요')
+        }
+    }
+    function CustomDialogContent() {
+        
+        const [value, setValue] = useState();
+        return (
+          <div className='modal-window'>
+              <p className='modal-text'>한 줄 평 작성 이벤트 참여 및 본인이 작성한 한 줄 평 수정, 삭제 시 아래 이메일을 통해 본인 인증이 이루어집니다.</p>
+            <input className="modal-input-bar"
+              type="email"
+              placeholder="이메일을 입력해주세요."
+              onChange={(e)=>{setValue(e.target.value)}}
+            />
+            <button className="modal-button full bg-color"
+              onClick={() => {
+                // Сlose the dialog and return the value
+                sendDataComment(value)
+              }}
+            >
+              작성
+            </button>
+            <Link to="/"><div className="modal-footer"><p>통합 서비스 이용 약관 및 운영 정책에 동의</p><p>보기</p></div></Link>
+          </div>
+        );
+      }
+      
     useEffect(() => {
         getDetailData();
+        getCommentData(1);
     }, [])
     const sample= {top:1,name:"오픈소스기초설계", major:"스마트시스템소프트웨어학과", person:"김강희", rank:"A1",season:"19년 2학기" ,
                     comment:[
@@ -41,8 +131,20 @@ const View = ({match}) => {
     return (
         detailData?
        <>
+       <StaticDialog
+        isOpen={popup}
+        title="한 줄 평 작성"
+        onAfterClose={(result) => {
+          setPopup(false);
+
+          // do something with dialog result
+        }}
+      >
+        {/* see previous demo */}
+        <CustomDialogContent />
+      </StaticDialog>
         <div className="detail-box">
-            <div className="detail-rank-logo"><img className={"rank-img "+ "none"} src={"/img/"+sample.rank.substring(0,1) +".svg"}/></div>
+            <div className="detail-rank-logo"><img className={"rank-img "+ "none"} src={"/img/"+sample.rank.substring(0,1) +".png"}/></div>
             <div className="detail-info">
                 <span>{detailData.title}</span>
                 
@@ -66,23 +168,28 @@ const View = ({match}) => {
         <div className="devider"></div>
         <div className="detail-comment-input">
             <div className="header">이 강의 한 줄 평</div>
-            <textarea placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
+            <textarea onChange={changeInputText} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
             <div className="detail-input-footer">
                 <div>
+<<<<<<< HEAD
             <select className="select-bar"style={selectBar}>
                 <option selected>전공 여부</option>
+=======
+            <select className="select-bar" onChange={changeInputMajor}  style={selectBar}>
+                <option defaultValue>전공 여부</option>
+>>>>>>> main
                 <option >본전공</option>
                 <option >부전공</option>
                 <option >타전공</option>
             </select>
-            <select className="select-bar" style={selectBar}>
-                <option selected>수강학기</option>
-                <option >2020년 2학기</option>
-                <option >2020년 1학기</option>
-                <option >1980년 1학기</option>
+            <select value={inputWhen} className="select-bar" style={selectBar}>
+                {detailData.historyCourses.map((index)=>{
+                    // {(index.semester==='FIRST'?<>'1학기'</>:<>2학기</>)}<option defaultValue>수강학기</option>
+                    <option key={index.year} value={index.year}> {index.year}년</option>
+                })}
             </select>
             </div>
-            <button class="submit-btn">작성</button>
+            <button class="submit-btn"onClick={()=>setPopup(true)}>작성</button>
             </div>
             
         </div>
@@ -92,11 +199,11 @@ const View = ({match}) => {
                 <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
                  <button className={(recent?"none-btn":"selec-btn")} onClick={()=>setRecent(false)}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
             </div>
-        {recent&&
-            sample.comment.map((index)=>
+        {commentData&&
+            commentData.map((index)=>
                 <div className="comment-wrapper">
-                    <div className="comment-head"><span>{index.opt1}</span><p>{index.opt2}</p></div>
-                    <div className="comment-contents">{index.contents}</div>
+                    <div className="comment-head"><span>{index.type}</span><p>{index.opt2}</p></div>
+                    <div className="comment-contents">{index.content}</div>
                     <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · 비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · <button>신고</button></div>
                 </div>
             )
