@@ -36,9 +36,9 @@ const View = ({match}) => {
         console.log(response.data);
     };
     const getCommentData = async (index) => {
-        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/evaluation/recent/${match.params.id}/${{index}}`);
-        setCommentData(response.data.detailedProfessor);
-        console.log(response.data.detailedProfessor);
+        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/evaluation/recent/${match.params.id}/${index}`);
+        setCommentData(response.data.evaluations);
+        console.log(response.data.evaluations);
     };
     const dialog = useDialog();
     const postCommentData = async (value) => {
@@ -54,6 +54,7 @@ const View = ({match}) => {
             }});
         console.log(response.data.data);
         setPopup(false);
+        window.location.reload(false);
     };
     const postReport = async () => {
         const json = JSON.stringify({ 
@@ -119,7 +120,7 @@ const View = ({match}) => {
     useEffect(() => {
         getDetailData();
         getProfClassData(1);
-        //getCommentData(1);
+        getCommentData(1);
     }, [])
     const sample= {top:1,name:"오픈소스기초설계", major:"스마트시스템소프트웨어학과", person:"김강희", rank:"A1",season:"19년 2학기" ,
                     comment:[
@@ -190,7 +191,7 @@ const View = ({match}) => {
             <div className="detail-input-footer">
                 <div>
             <select onChange={changeInputMajor} className="select-bar"style={selectBar}>
-                <option selected>전공 여부</option>
+                <option defaultValue>전공 여부</option>
                 <option >본전공</option>
                 <option >부전공</option>
                 <option >타전공</option>
@@ -205,11 +206,11 @@ const View = ({match}) => {
                 <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
                  <button className={(recent?"none-btn":"selec-btn")} onClick={()=>setRecent(false)}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
             </div>
-        {recent&&
-            sample.comment.map((index)=>
+        {commentData&&
+            commentData.map((index)=>
                 <div className="comment-wrapper">
-                    <div className="comment-head"><span>{index.opt1}</span><p>{index.opt2}</p></div>
-                    <div className="comment-contents">{index.contents}</div>
+                    <div className="comment-head"><span>{index.type}</span><p>{(index.createdAt).substr( 0, 10 ).replace(/-/g, '.')}</p></div>
+                    <div className="comment-contents">{index.content}</div>
                     <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · 비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·<button>신고</button></div>
                 </div>
             )

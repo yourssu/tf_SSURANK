@@ -94,9 +94,6 @@
   line-height: 20px;
   overflow: hidden;
 }
-.box-contents p {
-  overflow: hidden;
-}
 .header {
   height: 46px;
   color: #3c95ff;
@@ -205,6 +202,11 @@
   width: 56px;
 }
 .rank-img {
+  object-fit: cover;
+  width: 24px;
+  height: 24px;
+}
+.honor-img {
   object-fit: cover;
   width: 24px;
   height: 24px;
@@ -499,6 +501,7 @@
   align-items: center;
   display: flex;
   flex-direction: row;
+  margin-top: 12px;
 }
 
 .lock {
