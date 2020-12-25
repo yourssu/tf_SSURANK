@@ -13,7 +13,7 @@ const SearchList = (props)=>{
                 <div className= "result-left"><span>티어</span> <span>{(props.value === 1 ?<>강의</>:<>교수</>)}</span> </div>
                 <div className="">{(props.value === 1 ?<>최근 개설 학기</>:<>강의수</>)}</div>
             </div>
-            <>{console.log(props.data)}
+            <>
             {props.data && props.data.map(rank => (
                 (props.value!==1?
                 <Link to ={'/professor/view/'+rank.id}>

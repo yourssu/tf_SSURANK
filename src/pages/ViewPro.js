@@ -150,7 +150,7 @@ const View = ({match}) => {
         </div>
         <div className="detail-prof-percent">
             <p>최근 3년간 개설한 강의수 <span className="color bold">상위 {detailData.topPercent}%</span></p>
-            <p className="bold">{detailData.courseCnt}개</p>
+            <p className="bold">분반을 포함한 강의 개수 : {detailData.courseCnt}개</p>
             <div className="detail-prof-percent-list">
             {detailData.sessions.map(index=><div>{index.year}년 {index.semester==='FIRST'?<>1학기</>:<>2학기</>}</div>)}
             </div>
