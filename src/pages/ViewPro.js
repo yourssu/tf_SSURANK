@@ -9,7 +9,7 @@ const View = ({match}) => {
     const [commentData, setCommentData] = useState();
     const [inputMajor,setInputMajor] = useState();
     const [inputText,setInputText] = useState();
-    const [sender,setSender] = useState(false);
+    const [isPending,setIsPending] = useState(false);
     const [popup,setPopup] = useState(false);
     const rank = ['U','A','B','C','D'];
     const data = [
@@ -49,7 +49,7 @@ const View = ({match}) => {
             headers: {
             'Content-Type': 'application/json'
             }});
-        console.log(response.data.data);
+        setIsPending(false);
         setPopup(false);
         window.location.reload(false);
     };
@@ -83,7 +83,9 @@ const View = ({match}) => {
         console.log(inputText);
         console.log(inputMajor);
         if(inputMajor&&inputText&&value){
+            setIsPending(true);
             postCommentData(value);
+            
         }
         else{
             alert('데이터를 넣어주세요')
@@ -104,7 +106,9 @@ const View = ({match}) => {
             <button className="modal-button full bg-color"
               onClick={() => {
                 // Сlose the dialog and return the value
-                sendDataComment(value)
+                if(!isPending){
+                    sendDataComment(value);
+                }
               }}
             >
               작성
@@ -191,7 +195,7 @@ const View = ({match}) => {
         </div>
         <div className="detail-comment-list">
             <div className="detail-comment-header">
-                <button className={(recent?"selec-btn":"none-btn")}>최신순</button>
+                <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
                  <button className={(recent?"none-btn":"selec-btn")}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
             </div>
         {commentData&&
