@@ -10,7 +10,7 @@ const View = ({match}) => {
     const [inputMajor,setInputMajor] = useState();
     const [inputText,setInputText] = useState();
     const [inputWhen,setInputWhen] = useState();
-    const [sender,setSender] = useState(false);
+    const [isPending,setIsPending] = useState(false);
     const [popup,setPopup] = useState(false);
     const rank = ['U','A','B','C','D'];
     const data = [
@@ -40,14 +40,14 @@ const View = ({match}) => {
             email:value,
             courseId:match.params.id,
             type:inputMajor,
-            year:setInputWhen.substring(0, 4),
-            semester:setInputWhen.substring(6, 7)
+            year:inputWhen.substring(0, 4),
+            semester:inputWhen.substring(6, 7)
         });
         const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/course/evaluation`,json, {
             headers: {
             'Content-Type': 'application/json'
             }});
-        console.log(response.data.data);
+            setIsPending(false);
         setPopup(false);
         window.location.reload(false);
     };
@@ -83,6 +83,7 @@ const View = ({match}) => {
         console.log(inputWhen);
         if(value&&inputWhen&&inputMajor&&inputText){
             postCommentData(value);
+            setIsPending(true);
         }
         else{
             alert('데이터를 넣어주세요')
@@ -102,7 +103,9 @@ const View = ({match}) => {
             <button className="modal-button full bg-color"
               onClick={() => {
                 // Сlose the dialog and return the value
-                sendDataComment(value)
+                if(!isPending){
+                    sendDataComment(value)
+                }
               }}
             >
               작성
