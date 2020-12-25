@@ -13,6 +13,7 @@ const SearchBox = ({match,category})=>{
     <input className="search_bar"onChange={search} type="search" placeholder={placeholder}/>
     <Link to={((category===1?'/class':'/professor')+`/search/${value}`)}><div className="search_bar_icon"><img src="/img/search_Icon.svg"/></div></Link>
     </div>
+    
     )
 }
 export default SearchBox;

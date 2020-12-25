@@ -40,18 +40,19 @@ const View = ({match}) => {
         setCommentData(response.data.detailedProfessor);
         console.log(response.data.detailedProfessor);
     };
-    const postCommentData = async () => {
+    const postCommentData = async (value) => {
         const dialog = useDialog();
+        
         const json = JSON.stringify({ 
             content:inputText,
-            email: inputEmail,
+            email: value,
             professorId: match.params.id,
             type: inputMajor
         });
-        const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com​/ssurank​/professor​/evaluation`,json, {
+        const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/professor/evaluation`,json, {
             headers: {
             'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
             }});
         console.log(response.data.data);
         dialog.close()
@@ -81,12 +82,12 @@ const View = ({match}) => {
             setPopup(true)
         }
     }
-    function sendDataComment(){
-        console.log(inputEmail);
+    function sendDataComment(value){
+        console.log(value);
         console.log(inputText);
         console.log(inputMajor);
-        if(inputMajor&&inputText&&inputEmail){
-            postCommentData();
+        if(inputMajor&&inputText&&value){
+            postCommentData(value);
         }
         else{
             alert('데이터를 넣어주세요')
@@ -102,15 +103,12 @@ const View = ({match}) => {
             <input className="modal-input-bar"
               type="email"
               placeholder="이메일을 입력해주세요."
-              onChange={(e) => {
-                setValue(e.target.value);
-              }}
+              onChange={(e)=>{setValue(e.target.value)}}
             />
             <button className="modal-button full bg-color"
               onClick={() => {
-                setInputEmail(value);
                 // Сlose the dialog and return the value
-                sendDataComment();
+                sendDataComment(value)
               }}
             >
               작성
@@ -144,6 +142,7 @@ const View = ({match}) => {
         title="한 줄 평 작성"
         onAfterClose={(result) => {
           setPopup(false);
+
           // do something with dialog result
         }}
       >
