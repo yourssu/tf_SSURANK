@@ -40,8 +40,8 @@ const View = ({match}) => {
             email:value,
             courseId:match.params.id,
             type:inputMajor,
-            year:2019,
-            semester:1
+            year:setInputWhen.substring(0, 4),
+            semester:setInputWhen.substring(6, 7)
         });
         const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/course/evaluation`,json, {
             headers: {
@@ -81,7 +81,11 @@ const View = ({match}) => {
         console.log(inputText);
         console.log(inputMajor);
         console.log(inputWhen);
+<<<<<<< HEAD
         if(value&&inutText&&inputMajor){
+=======
+        if(value&&inputWhen&&inputMajor&&inputText){
+>>>>>>> main
             postCommentData(value);
         }
         else{
@@ -116,7 +120,11 @@ const View = ({match}) => {
         getDetailData();
         getCommentData(1);
     }, [])
+<<<<<<< HEAD
     
+=======
+   
+>>>>>>> main
     const caseR = ["plus",'zero','minus','none'];
     const [recent,setRecent]=useState(true);
     return (
@@ -168,11 +176,10 @@ const View = ({match}) => {
                 <option >부전공</option>
                 <option >타전공</option>
             </select>
-            <select className="select-bar" onChange={changeInputMajor}  style={selectBar}>
+            <select value={inputWhen} onChange={changeInputWhen} className="select-bar" style={selectBar}>
             <option defaultValue>수강학기</option>
-            {detailData.historyCourses.map((index)=>
-                    // {(index.semester==='FIRST'?<>'1학기'</>:<>2학기</>)}<option defaultValue>수강학기</option>
-                    <option> {index.year}년 {(index.semester==='FIRST'?<>1학기</>:<>2학기</>)}</option>
+                {detailData.historyCourses.map((index)=>
+                    (index.semester==='FIRST'?<option> {index.year}년 1학기</option>:<option>{index.year}년 2학기</option>)
                 )}
             </select>
             </div>
