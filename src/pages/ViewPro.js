@@ -12,7 +12,7 @@ const View = ({match}) => {
     const [commentData, setCommentData] = useState();
     const [inputMajor,setInputMajor] = useState();
     const [inputText,setInputText] = useState();
-    const [inputEmail,setInputEmail] = useState();
+    const [sender,setSender] = useState(false);
     const [popup,setPopup] = useState(false);
     const rank = ['U','A','B','C','D'];
     const data = [
@@ -40,22 +40,20 @@ const View = ({match}) => {
         setCommentData(response.data.detailedProfessor);
         console.log(response.data.detailedProfessor);
     };
+    const dialog = useDialog();
     const postCommentData = async (value) => {
-        const dialog = useDialog();
-        
         const json = JSON.stringify({ 
             content:inputText,
-            email: value,
-            professorId: match.params.id,
-            type: inputMajor
+            email:value,
+            professorId:match.params.id,
+            type:inputMajor
         });
         const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/professor/evaluation`,json, {
             headers: {
-            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json'
             }});
         console.log(response.data.data);
-        dialog.close()
+        setPopup(false);
     };
     const postReport = async () => {
         const json = JSON.stringify({ 
