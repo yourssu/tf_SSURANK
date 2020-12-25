@@ -15,14 +15,14 @@ const Search = ({match,category}) => {
         setSearchData(response.data.professors);
         console.log(response.data);
     };
-    useEffect(() => {
+    useEffect(()=>{
         if(category===1){
             getSearchList(1);
         }
         else if(category===0){
             getSearchProList(1);
         }
-    }, [])
+    },[match.params.id]);
     return (
        <>
     {console.log(match.params.id)}
