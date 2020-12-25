@@ -40,8 +40,8 @@ const View = ({match}) => {
             email:value,
             courseId:match.params.id,
             type:inputMajor,
-            year:2019,
-            semester:1
+            year:setInputWhen.substring(0, 4),
+            semester:setInputWhen.substring(6, 7)
         });
         const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/course/evaluation`,json, {
             headers: {
@@ -81,7 +81,7 @@ const View = ({match}) => {
         console.log(inputText);
         console.log(inputMajor);
         console.log(inputWhen);
-        if(value){
+        if(value&&inputWhen&&inputMajor&&inputText){
             postCommentData(value);
         }
         else{
@@ -116,16 +116,7 @@ const View = ({match}) => {
         getDetailData();
         getCommentData(1);
     }, [])
-    const sample= {top:1,name:"오픈소스기초설계", major:"스마트시스템소프트웨어학과", person:"김강희", rank:"A1",season:"19년 2학기" ,
-                    comment:[
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세. 남산 위에 저 소나무, 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세."},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세. 남산 위에 저 소나무, 철갑을 두른 듯 바람 서리 불변함은 우리 기상일세. 무궁화 삼천리 화려 강산 대한 사람 대한으로 길이 보전하세."},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                        {opt1:"본전생",opt2:"2020년 2학기",contents:"한국인이라면 들어보세요"},
-                    ]
-};
+   
     const caseR = ["plus",'zero','minus','none'];
     const [recent,setRecent]=useState(true);
     return (
@@ -144,7 +135,7 @@ const View = ({match}) => {
         <CustomDialogContent />
       </StaticDialog>
         <div className="detail-box">
-            <div className="detail-rank-logo"><img className={"rank-img "+ "none"} src={"/img/"+sample.rank.substring(0,1) +".png"}/></div>
+            <div className="detail-rank-logo"><img className={"rank-img "+ "none"} src={"/img/"+detailData.ranking.substring(0,1) +".png"}/></div>
             <div className="detail-info">
                 <span>{detailData.title}</span>
                 
@@ -177,11 +168,11 @@ const View = ({match}) => {
                 <option >부전공</option>
                 <option >타전공</option>
             </select>
-            <select value={inputWhen} className="select-bar" style={selectBar}>
-                {detailData.historyCourses.map((index)=>{
-                    // {(index.semester==='FIRST'?<>'1학기'</>:<>2학기</>)}<option defaultValue>수강학기</option>
-                    <option key={index.year} value={index.year}> {index.year}년</option>
-                })}
+            <select value={inputWhen} onChange={changeInputWhen} className="select-bar" style={selectBar}>
+            <option defaultValue>수강학기</option>
+                {detailData.historyCourses.map((index)=>
+                    (index.semester==='FIRST'?<option> {index.year}년 1학기</option>:<option>{index.year}년 2학기</option>)
+                )}
             </select>
             </div>
             <button class="submit-btn"onClick={()=>setPopup(true)}>작성</button>
