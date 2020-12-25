@@ -3,8 +3,8 @@ import { render } from "react-dom";
 import { Link, Route } from 'react-router-dom';
 import axios from "axios";
 const PropDropdown = (props)=>{
-    const [majorData, setMajorData] = useState({});
-    const [honorData, setHonorData] = useState({});
+    const [majorData, setMajorData] = useState();
+    const [honorData, setHonorData] = useState();
     const [major,setMajor]=useState(false);
     const [honor,setHonor]=useState(false);
     const caseR = ["plus",'zero','minus',''];
@@ -46,8 +46,9 @@ const PropDropdown = (props)=>{
         <>
         <div className="major-dropdown-contents">
         <div className="dropdown">
-        <button onClick={()=>{setMajor(!major)}} className="dropdown-header"><div className="header">학과별 랭킹</div> <div className="dropdown_icon"><img src={"./img/drop"+(major?"up":"down")+"_Icon.svg"}/></div></button>
+        <button onClick={()=>{setMajor(!major)}} className="dropdown-header"><div className="header">학과별 랭킹</div> <div className="dropdown_icon"><img src={"./img/drop"+(!major?"up":"down")+"_Icon.svg"}/></div></button>
             {major&&
+                (majorData?
                 <>
                 {collegeList.map((college,index) => (
                     <div className="major-wrapper">
@@ -57,15 +58,18 @@ const PropDropdown = (props)=>{
                     ))}
                     </div>
                 ))}
-                </>
+                </>:
+                <h1>로딩중</h1>
+                )
             }
         </div>
          
      </div>
     <div className="pf-dropdown-contents">
        <div className="dropdown">
-       <button onClick={()=>{setHonor(!honor)}} className="dropdown-header"><div className="header">명예의 전당</div> <div className="dropdown_icon"><img src={"./img/drop"+(honor?"up":"down")+"_Icon.svg"}/></div></button>
+       <button onClick={()=>{setHonor(!honor)}} className="dropdown-header"><div className="header">명예의 전당</div> <div className="dropdown_icon"><img src={"./img/drop"+(!honor?"up":"down")+"_Icon.svg"}/></div></button>
        {honor&&
+       (honorData?
         <>
         {honorData.professors.map(rank => (
             <Link to={`/professor/view/${rank.id}`}><div className="dropdown-block"> 
@@ -79,6 +83,9 @@ const PropDropdown = (props)=>{
             </Link>
             ))}
         </>
+        :
+        <h1>로딩중</h1>
+        )
         }
        </div>
             
