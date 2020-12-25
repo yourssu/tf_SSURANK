@@ -41,6 +41,7 @@ const View = ({match}) => {
         console.log(response.data.detailedProfessor);
     };
     const postCommentData = async () => {
+        const dialog = useDialog();
         const json = JSON.stringify({ 
             content:inputText,
             email: inputEmail,
@@ -53,6 +54,7 @@ const View = ({match}) => {
               'Content-Type': 'application/json'
             }});
         console.log(response.data.data);
+        dialog.close()
     };
     const postReport = async () => {
         const json = JSON.stringify({ 
@@ -92,28 +94,28 @@ const View = ({match}) => {
     }
 
     function CustomDialogContent() {
-        const dialog = useDialog();
+        
         const [value, setValue] = useState();
         return (
-          <div>
-              <p>한 줄 평 작성 이벤트 참여 및 본인이 작성한 한 줄 평 수정, 삭제 시 아래 이메일을 통해 본인 인증이 이루어집니다.</p>
-            <input
+          <div className='modal-window'>
+              <p className='modal-text'>한 줄 평 작성 이벤트 참여 및 본인이 작성한 한 줄 평 수정, 삭제 시 아래 이메일을 통해 본인 인증이 이루어집니다.</p>
+            <input className="modal-input-bar"
               type="email"
+              placeholder="이메일을 입력해주세요."
               onChange={(e) => {
                 setValue(e.target.value);
               }}
             />
-            <button
+            <button className="modal-button full bg-color"
               onClick={() => {
                 setInputEmail(value);
-                
                 // Сlose the dialog and return the value
-                dialog.close(value);
+                sendDataComment();
               }}
             >
               작성
             </button>
-            <Link to="/">통합 서비스 이용 약관 및 운영 정책에 동의</Link>
+            <Link to="/"><div className="modal-footer"><p>통합 서비스 이용 약관 및 운영 정책에 동의</p><p>보기</p></div></Link>
           </div>
         );
       }
@@ -142,7 +144,6 @@ const View = ({match}) => {
         title="한 줄 평 작성"
         onAfterClose={(result) => {
           setPopup(false);
-          sendDataComment();
           // do something with dialog result
         }}
       >
@@ -193,9 +194,9 @@ const View = ({match}) => {
                 <div>
             <select onChange={changeInputMajor} className="select-bar"style={selectBar}>
                 <option selected>전공 여부</option>
-                <option >본전생</option>
-                <option >부전생</option>
-                <option >타과생</option>
+                <option >본전공</option>
+                <option >부전공</option>
+                <option >타전공</option>
             </select>
             </div>
             <button class="submit-btn" onClick={()=>setPopup(true)}>작성</button>

@@ -444,7 +444,7 @@
   margin-left: 6.6px;
 }
 .comment-wrapper {
-  height: 192px;
+  height: auto;
   padding: 16px 20px;
   box-sizing: border-box;
   display: flex;
@@ -569,18 +569,92 @@
   display: flex;
 }
 :root {
-  --st-modal-borderRadius: 4px;
-  --st-modal-boxShadow: 0;
+  --st-dialog-padding: 16px !important;
+  --st-modal-borderRadius: 4px !important;
+  --st-modal-boxShadow: 0 !important;
 
-  --st-modal-backgroundColor: #2a2a2a;
-  --st-modal-titleTextColor: #3c95ff;
-  --st-modal-secondColor: #343a40;
+  --st-modal-backgroundColor: #ffffff !important;
+  --st-modal-titleTextColor: #3c95ff !important;
+  --st-modal-secondColor: #ffffff !important;
 
-  --st-dialog-contentColor: #343a40;
+  --st-dialog-contentColor: #ffffff !important;
 
-  --st-modal-transformVisible: translate3d(-50%, -50%, 0) scale(1);
-  --st-modal-transformHidden: translate3d(-50%, -50%, 0) scale(0.1);
+  --st-modal-transformVisible: translate3d(-50%, -50%, 0) scale(1) !important;
+  --st-modal-transformHidden: translate3d(-50%, -50%, 0) scale(0.1) !important;
 
-  --st-button-primaryColor: #3c95ff;
-  --st-button-primaryTextColor: #ffffff;
+  --st-button-primaryColor: #3c95ff !important;
+  --st-button-primaryTextColor: #ffffff !important;
+}
+.modal-window {
+  padding: 12px 16px 16px 16px;
+}
+.modal-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 20px;
+  /* or 154% */
+  word-break: keep-all;
+  text-align: center;
+  letter-spacing: -0.02em;
+
+  /* Gray8 */
+
+  color: #343a40;
+}
+.modal-input-bar {
+  background: #f1f3f5;
+  border-radius: 4px;
+  width: 100%;
+  height: 40px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 9px 12px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  /* identical to box height, or 157% */
+
+  letter-spacing: -0.02em;
+
+  /* Gray6 */
+
+  color: #868e96;
+}
+.modal-button {
+  margin: 16px 0;
+  height: 40px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 22px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-footer {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 22px;
+  /* identical to box height, or 183% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.02em;
+  justify-content: space-between;
+  flex-direction: row;
+  /* Gray6 */
+
+  color: #868e96;
+}
+.full {
+  width: 100%;
+}
+.bg-color {
+  background-color: #3c95ff;
+  color: #ffffff;
 }

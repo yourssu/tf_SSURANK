@@ -19,7 +19,7 @@ const View = ({match}) => {
         background: 'url(./img/dropdown_Icon.svg) no-repeat 95% 50%'
       }
       const getDetailData = async () => {
-        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/detail/${id}`);
+        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/detail/${match.params.id}`);
         setDetailData(response.data.detailedCourse);
         console.log(response.data.detailedCourse);
     };
@@ -39,16 +39,17 @@ const View = ({match}) => {
     const caseR = ["plus",'zero','minus','none'];
     const [recent,setRecent]=useState(true);
     return (
+        detailData?
        <>
         <div className="detail-box">
             <div className="detail-rank-logo"><img className={"rank-img "+ "none"} src={"/img/"+sample.rank.substring(0,1) +".svg"}/></div>
             <div className="detail-info">
-                <span>{sample.name}</span>
+                <span>{detailData.title}</span>
                 
-                <p>{sample.person}·{sample.major}</p>
+                <p>{detailData.name}·{detailData.department}</p>
             </div>
         </div>
-        <button className="prof-detail-btn"><p>이 교수 평가 보러가기</p></button>
+        <Link to ={`/professor/view/${detailData.professorId}`}><button className="prof-detail-btn"><p>이 교수 평가 보러가기</p></button></Link>
         <div className="devider"></div>
         <div className="detail-graph">
             <div className="header">이 강의 지난 학기 평가</div>
@@ -104,7 +105,7 @@ const View = ({match}) => {
         </div>
         
         
-       </>
+       </>:<h1>로딩중</h1>
     );
 };
 
