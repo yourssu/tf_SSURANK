@@ -5,13 +5,13 @@ import Content from '../components/Content';
 import SearchBox from '../components/SearchBox';
 import ViewPro from './ViewPro';
 import Ranking from './Ranking';
-const ProHome = ({match}) => {
+const ProHome = ({match,history}) => {
     return (
        <>
         <Route exact path={match.url} render={({match})=>(<><div className="logo">
         <img src="./img/Logo_img.png"/>
-        </div> <SearchBox category={0} match={match} /><Content match={match} category={0} /></>)}/>
-        <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox category={0} match={match}/> <Search category={0} match={match}/></>)}/>
+        </div> <SearchBox  history={history} category={0} match={match} /><Content match={match} category={0} /></>)}/>
+        <Route path={`${match.url}/search/:id`} render={({match,history})=>(<><SearchBox  history={history} category={0} match={match}/> <Search category={0} match={match}/></>)}/>
         <Route path={`${match.url}/view/:id`} component={ViewPro}/>
         <Route path={`${match.url}/ranking/:id`} component={Ranking}/>
        </>

@@ -18,7 +18,7 @@ const SearchList = (props)=>{
                 (props.value!==1?
                 <Link to ={'/professor/view/'+rank.id}>
                 <div className="dropdown-block"> 
-                        <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".svg"}/></div>
+                        <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".png"}/></div>
                         <div className="block-center">
                             <span>{rank.name}</span>
                             
@@ -31,7 +31,7 @@ const SearchList = (props)=>{
                 </Link>
                 :<Link to ={'/'+(props.value===1?'class':'professor')+'/view/'+rank.courseId}>
                 <div className="dropdown-block"> 
-                        <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".svg"}/></div>
+                        <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".png"}/></div>
                         <div className="block-center">
                             <span>{rank.title}</span>
                             

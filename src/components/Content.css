@@ -587,6 +587,8 @@
 
   --st-button-primaryColor: #3c95ff !important;
   --st-button-primaryTextColor: #ffffff !important;
+  --st-overlay-transition: opacity !important;
+  --st-modal-transition: all !important;
 }
 .modal-window {
   padding: 12px 16px 16px 16px;
