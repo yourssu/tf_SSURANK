@@ -49,7 +49,8 @@ const View = ({match}) => {
         });
         const response = await axios.post(`https://ssurank.herokuapp.com​/ssurank​/professor​/evaluation`,json, {
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
+                'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json'
             }});
         console.log(response.data.data);
     };
@@ -79,7 +80,7 @@ const View = ({match}) => {
         }
     }
     function sendDataComment(){
-        console.log(inputWhen);
+        console.log(inputEmail);
         console.log(inputText);
         console.log(inputMajor);
         if(inputMajor&&inputText&&inputEmail){
@@ -104,6 +105,8 @@ const View = ({match}) => {
             />
             <button
               onClick={() => {
+                setInputEmail(value);
+                
                 // Сlose the dialog and return the value
                 dialog.close(value);
               }}
@@ -139,6 +142,7 @@ const View = ({match}) => {
         title="한 줄 평 작성"
         onAfterClose={(result) => {
           setPopup(false);
+          sendDataComment();
           // do something with dialog result
         }}
       >
