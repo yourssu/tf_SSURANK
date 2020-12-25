@@ -171,13 +171,8 @@ const View = ({match}) => {
             <textarea onChange={changeInputText} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
             <div className="detail-input-footer">
                 <div>
-<<<<<<< HEAD
-            <select className="select-bar"style={selectBar}>
-                <option selected>전공 여부</option>
-=======
             <select className="select-bar" onChange={changeInputMajor}  style={selectBar}>
                 <option defaultValue>전공 여부</option>
->>>>>>> main
                 <option >본전공</option>
                 <option >부전공</option>
                 <option >타전공</option>
