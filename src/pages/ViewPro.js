@@ -47,9 +47,9 @@ const View = ({match}) => {
             professorId: match.params.id,
             type: inputMajor
         });
-        const response = await axios.post(`https://ssurank.herokuapp.com​/ssurank​/professor​/evaluation`,json, {
+        const response = await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com​/ssurank​/professor​/evaluation`,json, {
             headers: {
-                'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': '*',
               'Content-Type': 'application/json'
             }});
         console.log(response.data.data);
