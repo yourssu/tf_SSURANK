@@ -10,12 +10,16 @@ const PropDropdown = (props)=>{
     const caseR = ["plus",'zero','minus',''];
     const college=['1','2','3'];
     const getMajorList = async () => {
-        const response = await axios.get("https://ssurank.herokuapp.com/ssurank/professor/department/lists");
+        const response = await axios.get("https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/professor/department/lists",{headers: {
+            'Access-Control-Allow-Origin': '*',
+        }});
         setMajorData(response.data);
         console.log(response.data);
     };
     const getHonorList = async () => {
-        const response = await axios.get("https://ssurank.herokuapp.com/ssurank/professor/honor");
+        const response = await axios.get("https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/professor/honor",{headers: {
+            'Access-Control-Allow-Origin': '*'
+        }});
         setHonorData(response.data);
         console.log(response.data);
     };
