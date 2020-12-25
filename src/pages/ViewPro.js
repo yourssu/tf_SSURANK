@@ -191,8 +191,8 @@ const View = ({match}) => {
         </div>
         <div className="detail-comment-list">
             <div className="detail-comment-header">
-                <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
-                 <button className={(recent?"none-btn":"selec-btn")} onClick={()=>setRecent(false)}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
+                <button className={(recent?"selec-btn":"none-btn")}>최신순</button>
+                 <button className={(recent?"none-btn":"selec-btn")}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
             </div>
         {commentData&&
             commentData.map((index)=>
