@@ -7,7 +7,7 @@ const SearchList = (props)=>{
     //1 : 강의별 , 2 : 교수별, 3: 학과랭킹
     return(
         <>
-         <div className="devider"></div>
+         <div className="divider"></div>
         <div className="search-result">
             <div className="result-header">
                 <div className= "result-left"><span>티어</span> <span>{(props.value === 1 ?<>강의</>:<>교수</>)}</span> </div>
