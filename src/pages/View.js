@@ -146,7 +146,7 @@ const View = ({match}) => {
             </div>
         </div>
         <Link to ={`/professor/view/${detailData.professorId}`}><button className="prof-detail-btn"><p>이 교수 평가 보러가기</p></button></Link>
-        <div className="devider"></div>
+        <div className="divider"></div>
         <div className="detail-graph">
             <div className="header">이 강의 지난 학기 평가</div>
             <VictoryChart
@@ -159,7 +159,7 @@ const View = ({match}) => {
     }} data={data} x="year" y="rank" labels={({ datum }) => {rank[datum.year]}}/>
             </VictoryChart>
         </div>
-        <div className="devider"></div>
+        <div className="divider"></div>
         <div className="detail-comment-input">
             <div className="header">이 강의 한 줄 평</div>
             <textarea onChange={changeInputText} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
@@ -183,7 +183,7 @@ const View = ({match}) => {
             </div>
             
         </div>
-        <div className="devider"></div>
+        <div className="divider"></div>
         <div className="detail-comment-list">
             <div className="detail-comment-header">
                 <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>

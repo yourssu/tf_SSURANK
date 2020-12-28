@@ -176,7 +176,7 @@ const View = ({match}) => {
             ))}
             </div>
         </div>
-        <div className="devider"></div>
+        <div className="divider"></div>
         <div className="detail-comment-input">
             <div className="header">이 교수 한 줄 평</div>
             <textarea onChange={changeInputText} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
