@@ -25,11 +25,12 @@ const View = ({match}) => {
       const getDetailData = async () => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/detail/${match.params.id}`);
         setDetailData(response.data.detailedProfessor);
-        console.log(response.data.detailedProfessor);
+        console.log('professor:');
+        console.log(response.data);
     };
     const getProfClassData = async (index) => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/detail/${match.params.id}/${index}`);
-        setDetailClassData(response.data);
+        setDetailClassData(response.data.detailedCourses);
         console.log(response.data);
     };
     const getCommentData = async (index) => {
@@ -37,7 +38,6 @@ const View = ({match}) => {
         setCommentData(response.data.evaluations);
         console.log(response.data.evaluations);
     };
-    const dialog = useDialog();
     const postCommentData = async (value) => {
         const json = JSON.stringify({ 
             content:inputText,

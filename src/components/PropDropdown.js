@@ -17,7 +17,7 @@ const PropDropdown = (props)=>{
         const response = await axios.get("https://ssurank.herokuapp.com/ssurank/professor/honor");
         setHonorData(response.data);
     };
-    const collegeList = ["인문대", "자연과학대학", "법과대학", "사회과학대학", "경제통상대학", "경영대학", "공과대학", "IT대학", "베어드교양대학", "융특"]
+    const collegeList = ["인문대학", "자연과학대학", "법과대학", "사회과학대학", "경제통상대학", "경영대학", "공과대학", "IT대학", "베어드교양대학", "융특"]
     const honorRank=(index)=>{
         return {objectPosition: ((index)*-24)+'px 0'}
     }
