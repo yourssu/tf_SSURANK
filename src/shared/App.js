@@ -12,7 +12,7 @@ const App = () => {
     setCategory(e);
   }
   useEffect(() => {
-    console.log(category);
+    //console.log(category);
     return () => {
      
     }
