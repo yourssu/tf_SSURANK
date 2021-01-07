@@ -267,7 +267,6 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  word-break: keep-all;
 }
 .detail-info span {
   font-family: Noto Sans;
@@ -277,6 +276,7 @@
   line-height: 22px;
   letter-spacing: -0.02em;
   color: #343a40;
+  word-break: keep-all;
 }
 .detail-info p {
   font-family: Noto Sans;
@@ -286,6 +286,7 @@
   line-height: 18px;
   margin: 0;
   color: #868e96;
+  word-break: keep-all;
 }
 .prof-detail-btn {
   width: 100%;
