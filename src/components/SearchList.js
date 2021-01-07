@@ -35,7 +35,7 @@ const SearchList = (props)=>{
                         <div className="block-center">
                             <span>{rank.title}</span>
                             
-                            <p>{rank.department}·{rank.name}</p>
+                            <p>{rank.name}·{rank.department}</p>
                         </div>
                         <div className="block-right">
                             <p>{rank.year} - {(rank.semester==='SECOND'?<>2학기</>:<>1학기</>)}</p>

@@ -4,6 +4,7 @@ import { VictoryLine,VictoryChart,VictoryTheme,VictoryContainer } from "victory"
 import  LockIcon from '@material-ui/icons/Lock';
 import { StaticDialog, useDialog } from 'react-st-modal';
 import axios from "axios";
+import Loading from '../components/Loading'
 const View = ({match}) => {
     const [detailData, setDetailData] = useState();
     const [commentData, setCommentData] = useState();
@@ -26,12 +27,12 @@ const View = ({match}) => {
       const getDetailData = async () => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/detail/${match.params.id}`);
         setDetailData(response.data.detailedCourse);
-        console.log(response.data.detailedCourse);
+        //console.log(response.data.detailedCourse);
     };
     const getCommentData = async (index) => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/evaluation/recent/${match.params.id}/${index}`);
         setCommentData(response.data.evaluations);
-        console.log(response.data.evaluations);
+        //console.log(response.data.evaluations);
     };
     const dialog = useDialog();
     const postCommentData = async (value) => {
@@ -76,17 +77,35 @@ const View = ({match}) => {
             setPopup(true)
         }
     }
+    function CheckBeforePopup(){
+       
+        if(!inputMajor&&!inputText&&!inputWhen){
+            alert('필수 정보를 입력해주세요.')
+        }
+        else if(!inputMajor){
+            alert('전공 여부를 선택해주세요.')
+        }
+        else if(!inputWhen){
+            alert('전공 학기를 선택해주세요.')
+        }
+        else if(!inputText){
+            alert('한 줄 평 내용을 작성해주세요.')
+        }
+        else{
+            setPopup(true)
+        }
+    }
     function sendDataComment(value){
-        console.log(value);
+        /*console.log(value);
         console.log(inputText);
         console.log(inputMajor);
-        console.log(inputWhen);
-        if(value&&inputWhen&&inputMajor&&inputText){
+        console.log(inputWhen);*/
+        if(value){
             postCommentData(value);
             setIsPending(true);
         }
         else{
-            alert('데이터를 넣어주세요')
+            alert('이메일을 넣어주세요.')
         }
     }
     function CustomDialogContent() {
@@ -94,6 +113,12 @@ const View = ({match}) => {
         const [value, setValue] = useState();
         return (
           <div className='modal-window'>
+               <div  className='dropdown-header'>
+                  <div className='header'>한 줄 평 작성</div>
+                <button onClick={()=>setPopup(false)} className='dropdown_icon'>
+                    <img src="./img/close_Icon.png"/>
+                </button>
+              </div>
               <p className='modal-text'>한 줄 평 작성 이벤트 참여 및 본인이 작성한 한 줄 평 수정, 삭제 시 아래 이메일을 통해 본인 인증이 이루어집니다.</p>
             <input className="modal-input-bar"
               type="email"
@@ -127,7 +152,6 @@ const View = ({match}) => {
        <>
        <StaticDialog
         isOpen={popup}
-        title="한 줄 평 작성"
         onAfterClose={(result) => {
           setPopup(false);
 
@@ -179,7 +203,7 @@ const View = ({match}) => {
                 )}
             </select>
             </div>
-            <button class="submit-btn"onClick={()=>setPopup(true)}>작성</button>
+            <button class="submit-btn"onClick={()=>CheckBeforePopup()}>작성</button>
             </div>
             
         </div>
@@ -202,7 +226,7 @@ const View = ({match}) => {
         </div>
         
         
-       </>:<h1>로딩중</h1>
+       </>:<Loading/>
     );
 };
 

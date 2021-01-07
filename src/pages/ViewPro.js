@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { Link, Route } from 'react-router-dom';
 import  LockIcon from '@material-ui/icons/Lock';
 import { StaticDialog, useDialog } from 'react-st-modal';
+import Loading from '../components/Loading'
 import axios from "axios";
 const View = ({match}) => {
     const [detailData, setDetailData] = useState();
@@ -25,18 +26,18 @@ const View = ({match}) => {
       const getDetailData = async () => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/detail/${match.params.id}`);
         setDetailData(response.data.detailedProfessor);
-        console.log('professor:');
-        console.log(response.data);
+        //console.log('professor:');
+        //console.log(response.data);
     };
     const getProfClassData = async (index) => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/detail/${match.params.id}/${index}`);
         setDetailClassData(response.data.detailedCourses);
-        console.log(response.data);
+        //console.log(response.data);
     };
     const getCommentData = async (index) => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/evaluation/recent/${match.params.id}/${index}`);
         setCommentData(response.data.evaluations);
-        console.log(response.data.evaluations);
+        //console.log(response.data.evaluations);
     };
     const postCommentData = async (value) => {
         const json = JSON.stringify({ 
@@ -78,17 +79,33 @@ const View = ({match}) => {
             setPopup(true)
         }
     }
+    function CheckBeforePopup(){
+       
+        if(!inputMajor&&!inputText){
+            alert('필수 정보를 입력해주세요.')
+        }
+        else if(!inputMajor){
+            alert('전공 여부를 선택해주세요.')
+        }
+        else if(!inputText){
+            alert('한 줄 평 내용을 작성해주세요.')
+        }
+        else{
+            setPopup(true)
+        }
+    }
     function sendDataComment(value){
-        console.log(value);
-        console.log(inputText);
-        console.log(inputMajor);
-        if(inputMajor&&inputText&&value){
+        //console.log(value);
+        //console.log(inputText);
+        //console.log(inputMajor);
+        
+        if(!value){
+            alert('이메일을 입력해주세요.')
+        }
+        else {
             setIsPending(true);
             postCommentData(value);
             
-        }
-        else{
-            alert('데이터를 넣어주세요')
         }
     }
 
@@ -96,7 +113,15 @@ const View = ({match}) => {
         
         const [value, setValue] = useState();
         return (
+        <>
+            {isPending&&<Loading/>}
           <div className='modal-window'>
+              <div  className='dropdown-header'>
+                  <div className='header'>한 줄 평 작성</div>
+                <button onClick={()=>setPopup(false)} className='dropdown_icon'>
+                    <img src="./img/close_Icon.png"/>
+                </button>
+              </div>
               <p className='modal-text'>한 줄 평 작성 이벤트 참여 및 본인이 작성한 한 줄 평 수정, 삭제 시 아래 이메일을 통해 본인 인증이 이루어집니다.</p>
             <input className="modal-input-bar"
               type="email"
@@ -114,7 +139,7 @@ const View = ({match}) => {
               작성
             </button>
             <Link to="/"><div className="modal-footer"><p>통합 서비스 이용 약관 및 운영 정책에 동의</p><p>보기</p></div></Link>
-          </div>
+          </div></>
         );
       }
       
@@ -128,9 +153,9 @@ const View = ({match}) => {
     const [recent,setRecent]=useState(true);
     return (detailData?
        <>
+        
       <StaticDialog
         isOpen={popup}
-        title="한 줄 평 작성"
         onAfterClose={(result) => {
           setPopup(false);
 
@@ -150,7 +175,7 @@ const View = ({match}) => {
         </div>
         <div className="detail-prof-percent">
             <p>최근 3년간 개설한 강의수 <span className="color bold">상위 {detailData.topPercent}%</span></p>
-            <p className="bold">분반을 포함한 강의 개수 : {detailData.courseCnt}개</p>
+            <p className="bold">분반을 포함하여 {detailData.courseCnt}개</p>
             <div className="detail-prof-percent-list">
             {detailData.sessions.map(index=><div>{index.year}년 {index.semester==='FIRST'?<>1학기</>:<>2학기</>}</div>)}
             </div>
@@ -190,7 +215,7 @@ const View = ({match}) => {
                 <option >타전공</option>
             </select>
             </div>
-            <button class="submit-btn" onClick={()=>setPopup(true)}>작성</button>
+            <button class="submit-btn" onClick={()=>CheckBeforePopup()}>작성</button>
             </div>
             
         </div>
@@ -212,7 +237,7 @@ const View = ({match}) => {
         </div>
         
         
-       </>:<h1>로딩중</h1>
+       </>:<Loading/>
     );
 };
 

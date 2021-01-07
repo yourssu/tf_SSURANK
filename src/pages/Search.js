@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { Link, Route } from 'react-router-dom';
 import SearchList from '../components/SearchList'
 import View from './View'
+import Loading from '../components/Loading'
 import axios from "axios";
 const Search = ({match,category}) => {
     const [searchData, setSearchData] = useState();
@@ -13,19 +14,19 @@ const Search = ({match,category}) => {
         setSearchData(response.data.courses);
         const responsePage = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/search/${match.params.id}`);
         setMaxPage(responsePage.data);
-        console.log(response.data);
-        console.log(responsePage.data);
+        //console.log(response.data);
+        //console.log(responsePage.data);
     };
     const getSearchProList = async (index) => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/search/${match.params.id}/${index}`);
         setSearchData(response.data.professors);
         const responsePage = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/search/${match.params.id}`);
         setMaxPage(responsePage.data);
-        console.log(response.data);
-        console.log(responsePage.data);
+        //console.log(response.data);
+        //console.log(responsePage.data);
     };
     const selected = (index)=>{
-        console.log(pageIndex)
+        //console.log(pageIndex)
         if(pageIndex==index+1){
             return {
                 color:'#3c95ff',
@@ -64,13 +65,11 @@ const Search = ({match,category}) => {
     },[match.params.id]);
     return (
        <>
-    {console.log(match.params.id)}
       <Route exact path={match.url} render={()=>( 
       <>
         <SearchList data={searchData} value={category}/>
         {maxPage?
             <div className="pagenation"> 
-            {console.log(parseInt(maxPage/pageRowCnt))}
                 <a onClick={nextPage} className="justify-content-end"><div className="icon sm"><img src="/img/prev_Icon.png"/></div></a>
                 <ul>
                     {   
@@ -82,7 +81,7 @@ const Search = ({match,category}) => {
                 </ul>
                 <a onClick={prevPage} className="justify-content-start"><div className="icon sm"><img src="/img/next_Icon.png"/></div></a>
             </div> 
-      :<h4>페이지를 불러오는 중..</h4>}
+      :<Loading/>}
         </>)}/>
       <Route path={`${match.url}+/view/:id`} component={View}/>
        </>

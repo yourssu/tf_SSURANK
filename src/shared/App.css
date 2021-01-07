@@ -81,4 +81,5 @@ Button::-moz-focus-inner {
 }
 .wrapper section {
   flex: 1;
+  position: relative;
 }
