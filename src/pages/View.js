@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { Link, Route } from 'react-router-dom';
-import { VictoryLine,VictoryChart,VictoryTheme,VictoryContainer } from "victory";
+import { VictoryLine,VictoryChart,VictoryArea,VictoryTheme,VictoryContainer,VictoryAxis } from "victory";
 import  LockIcon from '@material-ui/icons/Lock';
 import { StaticDialog, useDialog } from 'react-st-modal';
 import axios from "axios";
@@ -13,9 +13,16 @@ const View = ({match}) => {
     const [inputWhen,setInputWhen] = useState();
     const [isPending,setIsPending] = useState(false);
     const [popup,setPopup] = useState(false);
-    const rank = ['U','A','B','C','D'];
+    const [rankData,setRankData]=useState(false);
+    const [graphData,setGraphData]=useState(false);
+    const [yearData,setYearData]=useState(false);
+    const [width, setWidth] = useState(608)
+    //const rank = {'A0':10,'A1':9,'A2':8,'B0':7,'B1':6,'B2':5,'C0':4,'C1':3,'C2':2,'D':1,'U':0};
+    const rank = {'A0':4,'B0':3,'C0':2,'D':1,'U':0};
+    const rankName=['U','D','C','B','A'];
+    const year = {'FIRST':'01','SECOND':'02'}
     const data = [
-    { year: 1, rank: 1 },//1 -> A , 2 -> B , 3 -> C
+    { year: 1, rank: 1 },//A+ A0 A- B+ B0 B- C+ C0 C- D U -> 10 9 8 7 6 5 4 3 2 1
       { year: 2, rank: 2 },
       { year: 3, rank: 2 },
       { year: 4, rank: 1 },
@@ -24,11 +31,30 @@ const View = ({match}) => {
       const selectBar = {
         background: 'url(./img/dropdown_Icon.svg) no-repeat 95% 50%'
       }
+      const updateWidth = (ev) => {
+          if(ev.target.innerWidth>=608){
+            setWidth(608)
+          }
+        else{setWidth(ev.target.innerWidth)}
+    }
       const getDetailData = async () => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/detail/${match.params.id}`);
         setDetailData(response.data.detailedCourse);
-        //console.log(response.data.detailedCourse);
-    };
+        console.log(response.data.detailedCourse.historyCourses)
+        console.log(
+            response.data.detailedCourse.historyCourses.map(
+                (index,key)=>(
+                   {year: (String(index.year)).substr(2,4)+'/'+year[index.semester],
+                   ranking: rank[index.ranking]}
+                    )))
+        setRankData( response.data.detailedCourse.historyCourses.map(
+            (index,key)=>(
+               {year: (String(index.year)).substr(2,4)+'/'+year[index.semester],
+                ranking: rank[index.ranking]
+            }
+                )))
+        setYearData(response.data.detailedCourse.historyCourses.map(({year,semester})=>({year,semester})))
+        }
     const getCommentData = async (index) => {
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/evaluation/recent/${match.params.id}/${index}`);
         setCommentData(response.data.evaluations);
@@ -77,24 +103,7 @@ const View = ({match}) => {
             setPopup(true)
         }
     }
-    function CheckBeforePopup(){
-       
-        if(!inputMajor&&!inputText&&!inputWhen){
-            alert('필수 정보를 입력해주세요.')
-        }
-        else if(!inputMajor){
-            alert('전공 여부를 선택해주세요.')
-        }
-        else if(!inputWhen){
-            alert('전공 학기를 선택해주세요.')
-        }
-        else if(!inputText){
-            alert('한 줄 평 내용을 작성해주세요.')
-        }
-        else{
-            setPopup(true)
-        }
-    }
+    
     function sendDataComment(value){
         /*console.log(value);
         console.log(inputText);
@@ -105,7 +114,7 @@ const View = ({match}) => {
             setIsPending(true);
         }
         else{
-            alert('이메일을 넣어주세요.')
+            alert('신고 사유를 입력해주세요.')
         }
     }
     function CustomDialogContent() {
@@ -114,20 +123,23 @@ const View = ({match}) => {
         return (
           <div className='modal-window'>
                <div  className='dropdown-header'>
-                  <div className='header'>한 줄 평 작성</div>
+                  <div className='header'>신고</div>
                 <button onClick={()=>setPopup(false)} className='dropdown_icon'>
                     <img src="./img/close_Icon.png"/>
                 </button>
               </div>
-              <p className='modal-text'>한 줄 평 작성 이벤트 참여 및 본인이 작성한 한 줄 평 수정, 삭제 시 아래 이메일을 통해 본인 인증이 이루어집니다.</p>
-            <input className="modal-input-bar"
-              type="email"
-              placeholder="이메일을 입력해주세요."
+              <p className='modal-text'>폭력성</p>
+              <p className='modal-text'>스팸</p>
+              <p className='modal-text'>혐오조장</p>
+              <p className='modal-text'>기타</p>
+            {
+                <>
+            <textarea className="modal-input-bar"
+              placeholder="신고 사유를 입력해주세요."
               onChange={(e)=>{setValue(e.target.value)}}
             />
             <button className="modal-button full bg-color"
               onClick={() => {
-                // Сlose the dialog and return the value
                 if(!isPending){
                     sendDataComment(value)
                 }
@@ -135,7 +147,9 @@ const View = ({match}) => {
             >
               작성
             </button>
-            <Link to="/"><div className="modal-footer"><p>통합 서비스 이용 약관 및 운영 정책에 동의</p><p>보기</p></div></Link>
+            </>
+
+            }
           </div>
         );
       }
@@ -143,13 +157,20 @@ const View = ({match}) => {
     useEffect(() => {
         getDetailData();
         getCommentData(1);
+        window.addEventListener('resize', updateWidth)
     }, [])
-   
+    useEffect(() => {
+        window.addEventListener('resize', updateWidth)
+        return () => {
+            window.removeEventListener('resize', updateWidth)
+        }
+    },[width])
     const caseR = ["plus",'zero','minus','none'];
     const [recent,setRecent]=useState(true);
     return (
         detailData?
        <>
+       {console.log(rankData)}
        <StaticDialog
         isOpen={popup}
         onAfterClose={(result) => {
@@ -173,15 +194,37 @@ const View = ({match}) => {
         <div className="divider"></div>
         <div className="detail-graph">
             <div className="header">이 강의 지난 학기 평가</div>
-            <VictoryChart
-            
+            {
+                rankData&&
+            <VictoryChart 
+                height={135}
+                width={width}
+                padding={30}
+            responsive={false}  containerComponent={
+                <VictoryContainer
+                
+                    style={{
+                        pointerEvents: "auto",
+                        userSelect: "auto",
+                        touchAction: "auto"
+                    }}
+                />
+                }
             >
-            <VictoryLine   style={{
-      data: { stroke:  "#3C95FF" },
-      parent: { border: "1px solid #ccc"},
-      height: 135 
-    }} data={data} x="year" y="rank" labels={({ datum }) => {rank[datum.year]}}/>
+            <VictoryArea
+                domain={{y: [0, 4]}}
+                
+                categories={{
+                    x: rankData.year,
+                    
+                  }}
+                style={{
+                    data: { fill: "#3C95FF",opacity: 0.5 ,stroke:  "#3C95FF" },
+                    parent: { border: "1px solid #ccc"},
+                    }} data={rankData} x="year" y="ranking" labels={({datum})=>rankName[datum.ranking]}/>
+            <VictoryAxis crossAxis={false}/>
             </VictoryChart>
+            }
         </div>
         <div className="divider"></div>
         <div className="detail-comment-input">
@@ -203,7 +246,7 @@ const View = ({match}) => {
                 )}
             </select>
             </div>
-            <button class="submit-btn"onClick={()=>CheckBeforePopup()}>작성</button>
+            <button class="submit-btn">작성</button>
             </div>
             
         </div>
@@ -211,14 +254,14 @@ const View = ({match}) => {
         <div className="detail-comment-list">
             <div className="detail-comment-header">
                 <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
-                 <button className={(recent?"none-btn":"selec-btn")}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
+                 <button className={(recent?"none-btn":"selec-btn")} onClick={()=>setRecent(false)}>추천순</button>
             </div>
         {commentData&&
             commentData.map((index)=>
                 <div className="comment-wrapper">
                     <div className="comment-head"><span>{index.type}</span><p>{index.opt2}</p></div>
                     <div className="comment-contents">{index.content}</div>
-                    <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · 비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · <button>신고</button></div>
+                    <div className="comment-footer">추천 · 비추천 · <button onClick={()=>setPopup(true)}><span>신고</span></button></div>
                 </div>
             )
         }
