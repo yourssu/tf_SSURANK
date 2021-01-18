@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_PATH=src webpack serve --progress --mode development",
     "start": "cross-env NODE_PATH=src webpack --mode development",
-    "build": "cross-env NODE_PATH=src webpack --progress --mode production"
+    "build": "cross-env NODE_PATH=src webpack --progress --mode production",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +18,12 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "@emotion/css": "^11.0.0",
+    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-links": "^6.1.11",
+    "@storybook/node-logger": "^6.1.11",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.11",
     "babel-loader": "^8.2.1",
     "copy-webpack-plugin": "^6.3.2",
     "cross-env": "^7.0.3",

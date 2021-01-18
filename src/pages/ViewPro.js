@@ -100,7 +100,7 @@ const View = ({match}) => {
         //console.log(inputMajor);
         
         if(!value){
-            alert('이메일을 입력해주세요.')
+            alert('신고 사유를 입력해주세요.')
         }
         else {
             setIsPending(true);
@@ -113,33 +113,71 @@ const View = ({match}) => {
         
         const [value, setValue] = useState();
         return (
-        <>
-            {isPending&&<Loading/>}
           <div className='modal-window'>
-              <div  className='dropdown-header'>
-                  <div className='header'>한 줄 평 작성</div>
+               <div  className='dropdown-header'>
+                  <div className='header'>신고</div>
                 <button onClick={()=>setPopup(false)} className='dropdown_icon'>
                     <img src="./img/close_Icon.png"/>
                 </button>
               </div>
-              <p className='modal-text'>한 줄 평 작성 이벤트 참여 및 본인이 작성한 한 줄 평 수정, 삭제 시 아래 이메일을 통해 본인 인증이 이루어집니다.</p>
-            <input className="modal-input-bar"
-              type="email"
-              placeholder="이메일을 입력해주세요."
+              <p className='modal-text'>폭력성</p>
+              <p className='modal-text'>스팸</p>
+              <p className='modal-text'>혐오조장</p>
+              <p className='modal-text'>기타</p>
+            {
+                <>
+            <textarea className="modal-input-bar"
+              placeholder="신고 사유를 입력해주세요."
               onChange={(e)=>{setValue(e.target.value)}}
             />
             <button className="modal-button full bg-color"
               onClick={() => {
-                // Сlose the dialog and return the value
                 if(!isPending){
-                    sendDataComment(value);
+                    sendDataComment(value)
                 }
               }}
             >
               작성
             </button>
-            <Link to="/"><div className="modal-footer"><p>통합 서비스 이용 약관 및 운영 정책에 동의</p><p>보기</p></div></Link>
-          </div></>
+            </>
+
+            }
+          </div>
+        );
+      }function CustomDialogContent() {
+        
+        const [value, setValue] = useState();
+        return (
+          <div className='modal-window'>
+               <div  className='dropdown-header'>
+                  <div className='header'>신고</div>
+                <button onClick={()=>setPopup(false)} className='dropdown_icon'>
+                    <img src="./img/close_Icon.png"/>
+                </button>
+              </div>
+              <p className='modal-text'>폭력성</p>
+              <p className='modal-text'>스팸</p>
+              <p className='modal-text'>혐오조장</p>
+              <p className='modal-text'>기타</p>
+            {
+                <>
+            <textarea className="modal-input-bar"
+              placeholder="신고 사유를 입력해주세요."
+              onChange={(e)=>{setValue(e.target.value)}}
+            />
+            <button className="modal-button full bg-color"
+              onClick={() => {
+                if(!isPending){
+                    sendDataComment(value)
+                }
+              }}
+            >
+              작성
+            </button>
+            </>
+
+            }
+          </div>
         );
       }
       
@@ -194,7 +232,7 @@ const View = ({match}) => {
                             <p>{rank.department}·{rank.name}</p>
                         </div>
                         <div className="block-right">
-                            <p>{rank.year} - {(rank.semester==='SECOND'?<>2학기</>:<>1학기</>)}</p>
+                            <p>{rank.year}년 {(rank.semester==='SECOND'?<>2학기</>:<>1학기</>)}</p>
                         </div>
                     </div>
                 </Link>
@@ -215,21 +253,21 @@ const View = ({match}) => {
                 <option >타전공</option>
             </select>
             </div>
-            <button class="submit-btn" onClick={()=>CheckBeforePopup()}>작성</button>
+            <button class="submit-btn">작성</button>
             </div>
             
         </div>
         <div className="detail-comment-list">
             <div className="detail-comment-header">
                 <button className={(recent?"selec-btn":"none-btn")} onClick={()=>setRecent(true)}>최신순</button>
-                 <button className={(recent?"none-btn":"selec-btn")}>추천순 <LockIcon color="#343A40" fontSize="small" /></button>
+                 <button className={(recent?"none-btn":"selec-btn")} onClick={()=>setRecent(false)}>추천순</button>
             </div>
         {commentData&&
             commentData.map((index)=>
                 <div className="comment-wrapper">
                     <div className="comment-head"><span>{index.type}</span><p>{(index.createdAt).substr( 0, 10 ).replace(/-/g, '.')}</p></div>
                     <div className="comment-contents">{index.content}</div>
-                    <div className="comment-footer">추천<LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/> · 비추천 <LockIcon color="#3C95FF"  style={{ fontSize: 15 }}/>·<button>신고</button></div>
+                    <div className="comment-footer">추천 · 비추천 · <button onClick={()=>setPopup(true)}><span>신고</span></button></div>
                 </div>
             )
         }
