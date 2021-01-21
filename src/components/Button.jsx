@@ -14,6 +14,5 @@ Button.propTypes={
     url:PropTypes.number.isRequired,
     string:PropTypes.string.isRequired
 }
-  
 
 export default Button;

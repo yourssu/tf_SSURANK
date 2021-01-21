@@ -39,6 +39,6 @@ const HistoryGraph = ({rankData,width}) => {
 HistoryGraph.propTypes={
     rankData: PropTypes.array.isRequired,
     width:PropTypes.number.isRequired
-  }
+}
 export default HistoryGraph;
 
