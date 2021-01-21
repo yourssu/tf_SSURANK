@@ -257,17 +257,17 @@
 .detail-graph {
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
 }
 .detail-box {
   display: flex;
   flex-direction: row;
-  height: 80px;
   align-items: center;
 }
 .detail-rank-logo {
   width: 48px;
   height: 48px;
-  margin-right: 16px;
+  margin-right: 12px;
 }
 .detail-rank-logo img {
   width: 100%;
@@ -300,7 +300,9 @@
   word-break: keep-all;
 }
 .prof-detail-btn {
-  width: 100%;
+  width: calc(100% - 32px);
+  width: -moz-calc(100% - 32px);
+  width: -webkit-calc(100% - 32px);
   height: 50px;
   align-items: center;
   justify-content: center;
@@ -317,7 +319,6 @@
   /* Gray8 */
 
   color: #343a40;
-  margin: 16px 0;
 }
 .selec-btn {
   font-style: normal;
@@ -463,7 +464,7 @@
 }
 .comment-wrapper {
   height: auto;
-  padding: 16px 0;
+  padding: 16px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -491,6 +492,7 @@
   font-size: 13px;
   line-height: 18px;
   color: #868e96;
+  margin: 0;
 }
 .comment-contents {
   height: 80%;
@@ -499,7 +501,7 @@
   font-size: 13px;
   line-height: 20px;
   /* or 154% */
-
+  margin: 12px 0;
   display: flex;
   align-items: start;
   letter-spacing: -0.02em;
@@ -565,7 +567,7 @@
   margin-top: 16px;
 }
 .detail-prof-percent {
-  margin: 16px 0;
+  box-sizing: border-box;
 }
 .detail-prof-percent p {
   color: #343a40;
@@ -735,4 +737,31 @@
   to {
     -webkit-transform: rotate(359deg);
   }
+}
+
+.pd-16-side {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.pd-16-top {
+  padding-top: 16px;
+}
+.pd-16-bt {
+  padding-bottom: 16px;
+}
+.pd-12-top {
+  padding-top: 12px;
+}
+.pd-12-bt {
+  padding-bottom: 12px;
+}
+.mg-12-bt {
+  margin-bottom: 12px;
+}
+.mg-12-top {
+  margin-top: 12px;
+}
+.mg-16-side {
+  margin-left: 16px;
+  margin-right: 16px;
 }

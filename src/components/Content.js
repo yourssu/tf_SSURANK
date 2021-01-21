@@ -1,8 +1,8 @@
-import React,{useState} from "react";
-import { render } from "react-dom";
+import React from "react";
 import "./Content.css";
 import { Link } from 'react-router-dom';
-import ProDropdown from "./PropDropdown"
+import ProDropdown from "./PropDropdown";
+import PropTypes from 'prop-types';
 const sample = {
     class:[ // 강의 제목 , 교수이름, 내용, 작성일자, 게시글 id
         {className:"일반물리학",proName:"홍길동", comment:"물리학은 너무 어려운것같아요 제가 LA에 있을 때 너무나도 많은 물리적 법칙을 경험했습니다 이 강의를 들으며 저는 하늘을 날아 여기 쨘 저기 쨘 윤기 쨘 하는 법을 배울 수 있었습니다", createdAt:"20161027T171340Z", id:"14" },
@@ -18,16 +18,14 @@ const sample = {
     ],
 }
 const Content = ({category,match})=>{
-
-   
     return(
     <div className="contents">
        
         <div className="header">최근 등록된 한 줄 평</div>
         {category>0&&
         <div className="comment-list">
-            {sample.class.map((comment,index) => (
-            <Link to ={`${match.url}/view/`+comment.id}>
+            {sample.class.map((comment,key) => (
+            <Link key={key} to ={`${match.url}/view/`+comment.id}>
             <div className="comment-box">
                  <div className="box-header"><span>{comment.className}</span> - {comment.proName}</div>
                  <div className="box-contents"><p>{comment.comment}</p></div>
@@ -39,8 +37,8 @@ const Content = ({category,match})=>{
         }{category<1&&
         <>
             <div className="comment-list">
-            {sample.pro.map((comment,index) => (
-             <Link to ={`${match.url}/view/`+comment.id}>
+            {sample.pro.map((comment,key) => (
+             <Link key={key} to ={`${match.url}/view/`+comment.id}>
             <div className="comment-box">
                  <div className="box-header">{comment.proName} - {comment.major}</div>
                  <div className="box-contents"><p>{comment.comment}</p></div>
@@ -52,6 +50,13 @@ const Content = ({category,match})=>{
         </>}
         
     </div>);
+}
+
+Content.propTypes ={
+    category:PropTypes.string.isRequired,
+    match: PropTypes.shape({
+        url: PropTypes.string.isRequired
+      }),
 }
 
 export default Content;

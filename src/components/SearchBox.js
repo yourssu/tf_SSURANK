@@ -1,8 +1,9 @@
-import React,{useState,useEffect} from "react";
-import { render } from "react-dom";
-import { Link, Route,Redirect } from 'react-router-dom';
+import React,{useState} from "react";
+import { Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
-const SearchBox = ({history,match,category})=>{
+const SearchBox = ({history,category})=>{
     const [value,setValue]=useState()
     const placeholder = (category===1?'강의 검색하기':'교수 검색하기')
     function search(e){
@@ -20,5 +21,10 @@ const SearchBox = ({history,match,category})=>{
     </div>
     
     )
+}
+
+SearchBox.propTypes ={
+    history: ReactRouterPropTypes.history.isRequired,
+    category:PropTypes.string.isRequired,
 }
 export default SearchBox;
