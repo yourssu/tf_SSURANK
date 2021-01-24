@@ -5,18 +5,42 @@ import Footer from "../components/Footer.js"
 import { Route, Switch,Redirect } from 'react-router-dom';
 import { ProHome, ClassHome} from '../pages';
 import 'regenerator-runtime/runtime'
+import Modal from '../pages/Modal'
 const App = () => {
   const [category,setCategory]=useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const HAS_VISITED_BEFORE = localStorage.getItem('visited');
 
   function setContents(e){
     setCategory(e);
   }
+  const onClick = () => {
+    console.log('dd');
+   setShowModal(false)};
+  useEffect(() => {
+    const handleShowModal = () => {
+      if (HAS_VISITED_BEFORE && HAS_VISITED_BEFORE > new Date()) {
+        return;
+      }
+
+      if (!HAS_VISITED_BEFORE) {
+        setShowModal(true);
+        let expires = new Date();
+        expires = expires.setHours(expires.getHours() + 24);
+        localStorage.setItem('visited', expires);
+      }
+    };
+
+    window.setTimeout(handleShowModal, 2000);
+  }, [HAS_VISITED_BEFORE]);
+
   useEffect(() => {
     //console.log(category);
     return () => {
      
     }
   }, [category])
+  
   return (
       <div className="wrapper">
         <section>
@@ -29,8 +53,9 @@ const App = () => {
             <Route path="/class" component={ClassHome}/>
             <Route path="/professor" component={ProHome}/>
             </Switch>
-            
+            {showModal && <Modal onClose={onClick} />}
             </section>
+            
             <Footer/>
         </div>
   )
