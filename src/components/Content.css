@@ -785,6 +785,48 @@
   height: 24px;
   margin-right: 8px;
 }
+
+.modal {
+  position: fixed;
+  inset: 0px;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  height: 72px;
+  justify-content: center;
+  z-index: 999;
+  background-color: #3c95ff;
+  color: rgb(255, 255, 255);
+  font-size: 13px;
+  border-radius: 10px;
+  align-items: center;
+  flex-direction: row;
+  text-align: left;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+.modal-right-btn {
+  flex: 1;
+}
+.modal-left-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 4px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal p {
+  margin: 0;
+}
+.modal span {
+  font-weight: bold;
+}
+
 .bs {
   box-sizing: border-box;
 }
