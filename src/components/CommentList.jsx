@@ -18,7 +18,7 @@ const CommentList = ({commentData,setPopup,date})=>{
             </div>
             )
         }
-        <button className="detail-comment-more">더보기<img src={"/img/dropdown_Icon.svg"}/></button>
+        <button className="detail-comment-more">더보기<img src={"/img/more.svg"}/></button>
         </div>
        
     )

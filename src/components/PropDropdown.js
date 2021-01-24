@@ -35,7 +35,7 @@ const PropDropdown = (props)=>{
         <>
         <div className="major-dropdown-contents">
         <div className="dropdown">
-        <button onClick={()=>{setMajor(!major)}} className="dropdown-header"><div  className="header">학과별 랭킹</div> <div className="dropdown_icon"><img src={"./img/drop"+(major?"up":"down")+"_Icon.svg"}/></div></button>
+        <button onClick={()=>{setMajor(!major)}} className="dropdown-header"><div  className="header">학과별 랭킹</div> <div className="dropdown_icon"><img src={"./img/"+(major?"less":"more")+".svg"}/></div></button>
             {major&&
                 (majorData?
                 <>
@@ -56,7 +56,7 @@ const PropDropdown = (props)=>{
      </div>
     <div className="pf-dropdown-contents">
        <div className="dropdown">
-       <button onClick={()=>{setHonor(!honor)}} className="dropdown-header"><div className="header">명예의 전당</div> <div className="dropdown_icon"><img src={"./img/drop"+(honor?"up":"down")+"_Icon.svg"}/></div></button>
+       <button onClick={()=>{setHonor(!honor)}} className="dropdown-header"><div className="header">명예의 전당</div> <div className="dropdown_icon"><img src={"./img/"+(honor?"less":"more")+".svg"}/></div></button>
        {honor&&
        (honorData?
         <>

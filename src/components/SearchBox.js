@@ -15,8 +15,8 @@ const SearchBox = ({history,category})=>{
         }
     }
     return(
-    <div className="search">
-    <input className="search_bar"  onChange={search} onKeyDown={(e) => enterSubmit(e) } type="search" placeholder={placeholder}/>
+    <div className="search bs pd-16-side">
+    <input className="search_bar" onChange={search} onKeyDown={(e) => enterSubmit(e) } type="search" placeholder={placeholder}/>
     <Link to={((category===1?'/class':'/professor')+`/search/${value}`)}><div className="search_bar_icon"><img src="/img/search_Icon.svg"/></div></Link>
     </div>
     

@@ -147,7 +147,7 @@ const View = ({match}) => {
         <Header detailData={detailData}/>
         <Button url={detailData.professorId} string="이 교수 평가 보러가기"/>
         <Divider/>
-        {rankData&&
+        {rankData&&detailData&&
         <HistoryGraph rankData={rankData} width={width}/>}
         <Divider/>
         <CommentBox semester={detailData.historyCourses} setPopup={setPopup} />

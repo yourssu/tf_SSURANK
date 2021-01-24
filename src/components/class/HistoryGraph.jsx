@@ -22,7 +22,7 @@ const HistoryGraph = ({rankData,width}) => {
                         }}
                     />}>
             <VictoryArea
-                domain={{y: [0, 4]}}
+                domain={{y: [0, 5]}}
                 categories={{
                     x: rankData.year,
                   }}

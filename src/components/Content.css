@@ -71,7 +71,6 @@
   box-sizing: border-box;
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
 }
 .box-header {
@@ -83,6 +82,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: flex;
+  margin-bottom: 8px;
 }
 .box-header span {
   max-width: 70%;
@@ -102,6 +102,7 @@
   font-size: 13px;
   line-height: 20px;
   overflow: hidden;
+  flex: 1;
 }
 .box-contents p {
   margin: 0;
@@ -355,6 +356,7 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .detail-comment-input textarea {
   background: #f1f3f5;
@@ -700,11 +702,11 @@
 .pagenation a {
   flex-grow: 1;
   display: flex;
-  height: 1.2em;
 }
 .pagenation li {
   list-style: none;
   display: inline;
+  margin: auto;
 }
 .justify-content-end {
   justify-content: flex-end;
@@ -739,6 +741,53 @@
   }
 }
 
+.cover-ground {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: #3c94ffe6;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-style: normal;
+}
+.cover-ground p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  /* or 143% */
+}
+.cover-ground span {
+  font-weight: bold;
+}
+.cover-ground button {
+  font-size: 13px;
+  line-height: 20px;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 12px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  /* identical to box height, or 154% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.02em;
+  /* Ground Blue */
+  color: #1a6ce2;
+  background-color: white;
+}
+.cover-ground button .icon {
+  height: 24px;
+  margin-right: 8px;
+}
+.bs {
+  box-sizing: border-box;
+}
 .pd-16-side {
   padding-left: 16px;
   padding-right: 16px;

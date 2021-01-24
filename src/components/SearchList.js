@@ -8,8 +8,8 @@ const SearchList = (props)=>{
     return(
         <>
          <div className="divider"></div>
-        <div className="search-result">
-            <div className="result-header">
+        <div className="search-result ">
+            <div className="result-header bs pd-16-side">
                 <div className= "result-left"><span>티어</span> <span>{(props.value === 1 ?<>강의</>:<>교수</>)}</span> </div>
                 <div className="">{(props.value === 1 ?<>최근 개설 학기</>:<>강의수</>)}</div>
             </div>
@@ -17,7 +17,7 @@ const SearchList = (props)=>{
             {props.data && props.data.map(rank => (
                 (props.value!==1?
                 <Link to ={'/professor/view/'+rank.id}>
-                <div className="dropdown-block"> 
+                <div className="dropdown-block bs mg-16-side"> 
                         <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".png"}/></div>
                         <div className="block-center">
                             <span>{rank.name}</span>
@@ -30,7 +30,7 @@ const SearchList = (props)=>{
                     </div>
                 </Link>
                 :<Link to ={'/'+(props.value===1?'class':'professor')+'/view/'+rank.courseId}>
-                <div className="dropdown-block"> 
+                <div className="dropdown-block mg-16-side bs"> 
                         <div className="block-left"><img className={"rank-img "+ rank.ranking.substring(0,1) +" "+ caseR[parseInt((rank.ranking.substring(1,2)))]} src={"/img/"+rank.ranking.substring(0,1) +".png"}/></div>
                         <div className="block-center">
                             <span>{rank.title}</span>
@@ -38,7 +38,7 @@ const SearchList = (props)=>{
                             <p>{rank.name}·{rank.department}</p>
                         </div>
                         <div className="block-right">
-                            <p>{rank.year} - {(rank.semester==='SECOND'?<>2학기</>:<>1학기</>)}</p>
+                            <p>{rank.year}년 {(rank.semester==='SECOND'?<>2학기</>:<>1학기</>)}</p>
                         </div>
                     </div>
                     </Link>)

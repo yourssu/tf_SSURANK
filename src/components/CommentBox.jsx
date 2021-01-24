@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 const CommentBox = ({setPopup,semester})=>{
     const [inputMajor,setInputMajor] = useState();
     const [inputText,setInputText] = useState();
@@ -14,7 +14,14 @@ const CommentBox = ({setPopup,semester})=>{
         }
     }
     return (
-        <div className="detail-comment-input pd-16-side">
+        <div className="detail-comment-input ">
+            <div className="cover-ground pd-16-side bs">
+                <p><span>이 강의 좋았어요!</span></p>
+                <p>숭실대학교 학생 커뮤니티</p>
+                <p>Ground에서 한 줄 평을 남겨주세요</p>
+                <Link to=""><button><img className="icon" src={"/img/GroundLogo.png"} />Ground 설치하기</button></Link>
+            </div>
+            <div className="bs mg-16-side">
             <div className="header">이 {semester?<>강의</>:<>교수</>} 한 줄 평</div>
             <textarea onChange={(e)=>setInputText(e.target.value)} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
             <div className="detail-input-footer">
@@ -37,7 +44,7 @@ const CommentBox = ({setPopup,semester})=>{
             
             <button className="submit-btn">작성</button>
             </div>
-            
+            </div>
         </div>
     )
 }
