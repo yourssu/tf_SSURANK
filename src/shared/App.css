@@ -69,6 +69,14 @@ Button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+#modal_root {
+  bottom: 0;
+  position: fixed;
+  min-width: 100vw;
+  height: 72px;
+  overflow: auto;
+  z-index: 9999;
+}
 .wrapper {
   background-color: white;
   min-width: 320px;

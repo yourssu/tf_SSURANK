@@ -787,14 +787,13 @@
 }
 
 .modal {
-  position: fixed;
   inset: 0px;
   max-width: 640px;
   margin: 0 auto;
   display: flex;
+  flex: 1;
   height: 72px;
   justify-content: center;
-  z-index: 999;
   background-color: #3c95ff;
   color: rgb(255, 255, 255);
   font-size: 13px;

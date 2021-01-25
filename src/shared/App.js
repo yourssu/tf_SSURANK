@@ -9,7 +9,7 @@ import Modal from '../pages/Modal'
 const App = () => {
   const [category,setCategory]=useState(1);
   const [showModal, setShowModal] = useState(false);
-  const HAS_VISITED_BEFORE = localStorage.getItem('visited');
+  const HAS_VISITED_BEFORE = localStorage.getItem('visddited');
 
   function setContents(e){
     setCategory(e);
@@ -27,7 +27,7 @@ const App = () => {
         setShowModal(true);
         let expires = new Date();
         expires = expires.setHours(expires.getHours() + 24);
-        localStorage.setItem('visited', expires);
+        localStorage.setItem('visitesddfsd', expires);
       }
     };
 
