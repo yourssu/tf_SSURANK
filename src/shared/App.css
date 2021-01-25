@@ -70,7 +70,7 @@ Button::-moz-focus-inner {
   padding: 0;
 }
 #modal_root {
-  bottom: 0;
+  bottom: 50px;
   position: fixed;
   min-width: 100vw;
   height: 72px;

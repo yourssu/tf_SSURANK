@@ -27,12 +27,13 @@ const Search = ({match,category}) => {
         const responsePage = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/search/${match.params.id}`);
         setMaxPage(responsePage.data);
         setMaxIndex(parseInt((responsePage.data+(pageRowCnt-1))/pageRowCnt));
-        
+        setList(responsePage.data)
     }
     const getMaxProPage = async ()=>{
         const responsePage = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/search/${match.params.id}`);
         setMaxPage(responsePage.data);
         setMaxIndex(parseInt((responsePage.data+(pageRowCnt-1))/pageRowCnt));
+        setList(responsePage.data)
     }
     const selected = (index)=>{
         //console.log(pageIndex)
@@ -50,20 +51,6 @@ const Search = ({match,category}) => {
         }
     }
     Array.range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
-    const pageIndexArray = () => {
-        console.log('실행')
-        
-        
-        if (maxIndex<=5){// 최대 페이지가 5보다 많을경우
-            console.log(Array.range(0, maxIndex+1))
-            return(Array.range(0, maxIndex+1))
-        } 
-        else if (maxIndex <= pageIndex + 2) {//최대 페이지까지 거의 다 왔을경우 
-            console.log(Array.range(maxIndex - 4, maxIndex));
-            return (Array.range(maxIndex - 5, maxIndex))
-        }
-        
-    }
     const nextPage = ()=>{
         if(pageIndex<=parseInt(pageIndex/5)*5){
             let temp = pageIndex-pageIndex%5+6;
@@ -98,8 +85,8 @@ const Search = ({match,category}) => {
         }
     }
     const setList = (n)=>{
-        if(n<5){
-            setPageList([...Array.range(0, n+1)])
+        if((n/pageRowCnt)<5){
+            setPageList([...Array.range(0, (n/pageRowCnt)+1)])
         }
         else{
             setPageList([...Array.range(0, 5)])
@@ -114,11 +101,11 @@ const Search = ({match,category}) => {
             getSearchProList(1);
             getMaxProPage()
         }
-        setList(maxPage)
+        
         getPage(0)
 
     },[match.params.id]);
-    
+    useEffect(()=>{},[pageList])
     return (
        <>
       <Route path={match.url} render={()=>( 
