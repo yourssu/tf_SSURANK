@@ -15,7 +15,7 @@ const Ranking = ({match}) => {
     }, [])
     return (
        <>
-       <div className="contents-text"><span>학과별 랭킹</span><br/>{match.params.id}</div>
+       <div className="pd-16-side bs contents-text"><span>학과별 랭킹</span><br/>{match.params.id}</div>
       
       <Route exact path={match.url} render={()=>( <SearchList data={rankingData.professors} value={3}/>)}/>
       <Route path={`/professor/view/:id`} component={View}/>
