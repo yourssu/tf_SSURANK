@@ -14,7 +14,7 @@ const CommentList = ({commentData,setPopup,date})=>{
                 <div key={key} className="comment-wrapper">
                 <div className="comment-head"><span>{index.type}</span>{date?<p>{(index.createdAt).substr( 0, 10 ).replace(/-/g, '.')}</p>:<p>1900년 {'FIRSTS'==='FIRST'?<>1학기</>:<>2학기</>}</p>}</div>
                 <div className="comment-contents">{index.content}</div>
-                <div className="comment-footer">추천 · 비추천 · <button onClick={()=>setPopup(true)}><span>신고</span></button></div>
+                <div className="comment-footer">추천 · 비추천 ·&nbsp;<button onClick={()=>setPopup(true)}><span>신고</span></button></div>
             </div>
             )
         }

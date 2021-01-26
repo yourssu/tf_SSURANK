@@ -3,13 +3,13 @@ import "./App.css";
 import Nav from "../components/Nav.js"
 import Footer from "../components/Footer.js"
 import { Route, Switch,Redirect } from 'react-router-dom';
-import { ProHome, ClassHome} from '../pages';
+import { ProHome, ClassHome,Credit} from '../pages';
 import 'regenerator-runtime/runtime'
 import Modal from '../pages/Modal'
 const App = () => {
   const [category,setCategory]=useState(1);
   const [showModal, setShowModal] = useState(false);
-  const HAS_VISITED_BEFORE = localStorage.getItem('visddited');
+  const HAS_VISITED_BEFORE = localStorage.getItem('visited');
 
   function setContents(e){
     setCategory(e);
@@ -27,7 +27,7 @@ const App = () => {
         setShowModal(true);
         let expires = new Date();
         expires = expires.setHours(expires.getHours() + 24);
-        localStorage.setItem('visitesddfsd', expires);
+        localStorage.setItem('visited', expires);
       }
     };
 
@@ -52,6 +52,7 @@ const App = () => {
             </Route>
             <Route path="/class" component={ClassHome}/>
             <Route path="/professor" component={ProHome}/>
+            <Route path="/credit" component={Credit}/>
             </Switch>
             {showModal && <Modal onClose={onClick} />}
             </section>

@@ -52,27 +52,33 @@ const Search = ({match,category}) => {
     }
     Array.range = (start, end) => Array.from({length: (end - start)}, (v, k) => k + start);
     const nextPage = ()=>{
-        if(pageIndex<=parseInt(pageIndex/5)*5){
-            let temp = pageIndex-pageIndex%5+6;
-            if(pageIndex%5===0){
-                temp = pageIndex+1;
-            }
-            console.log(pageIndex);
-            setPageIndex(temp);
-            console.log(temp);
-            setPageList(Array.range(temp-1 , (temp+4>maxIndex?maxIndex:temp+4)))
+        let temp;
+        if(pageIndex%5===0&&(pageIndex-1)/5<maxIndex/5){
+            temp = pageIndex;
         }
+        else if(pageIndex/5<maxIndex/5){
+            temp = pageIndex-pageIndex%5+5;
+        }
+        else{
+            return;
+        }
+        console.log(pageIndex);
+        setPageIndex(temp);
+        console.log(temp);
+        setPageList(Array.range(temp , (temp+4>maxIndex?maxIndex:temp+5)))
+        getPage(temp);
     }
     const prevPage = ()=>{
         if(pageIndex/5>1){
-            let temp = pageIndex-pageIndex%5;
+            let temp = pageIndex-pageIndex%5-1;
             if(pageIndex%5===0){
                 temp = (pageIndex/5 - 1)*5;
             }
             console.log(pageIndex);
             setPageIndex(temp);
             console.log(temp);
-            setPageList(Array.range(temp-5,temp))
+            setPageList(Array.range(temp-4,temp+1));
+            getPage(temp);
         }
     }
     const getPage = (index)=>{
@@ -105,7 +111,6 @@ const Search = ({match,category}) => {
         getPage(0)
 
     },[match.params.id]);
-    useEffect(()=>{},[pageList])
     return (
        <>
       <Route path={match.url} render={()=>( 
@@ -113,14 +118,14 @@ const Search = ({match,category}) => {
         <SearchList data={searchData} value={category}/>
         {maxPage&&pageList?
             <div className="pagenation"> 
-                <a onClick={prevPage} className="justify-content-end"><div className="icon sm"><img src="/img/prev_Icon.png"/></div></a>
+                <a onClick={prevPage} className="justify-content-end"><div className="icon sm"><img src="/img/left.svg"/></div></a>
                 <ul>
                {
                 pageList.map((i,key)=>(
                     <li key={key}><a style={selected(i)} className="none" onClick={()=>getPage(i)}>{i+1}</a></li>)
                 )}
                 </ul>
-                <a  onClick={nextPage} className="justify-content-start"><div className="icon sm"><img src="/img/next_Icon.png"/></div></a>
+                <a  onClick={nextPage} className="justify-content-start"><div className="icon sm"><img src="/img/right.svg"/></div></a>
             </div> 
       :<Loading/>}
         </>)}/>

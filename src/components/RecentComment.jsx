@@ -16,16 +16,23 @@ const sample = {
         {proName:"박한별",major:"천체물리학과", comment:"한별아...-기로로-", createdAt:"20161027T171340Z", id:"5" }//전공도 위와 비슷하게
     ],
 }
+const firstChild = (index) =>{
+    if(index==0){
+        return(
+        {marginLeft:'16px'}
+        )
+    }
+}
 const RecentComment = ({category,match})=>{
     return(
-    <div className="contents pd-16-side">
+    <div className="contents ">
        
-        <div className="header">최근 등록된 한 줄 평</div>
+        <div className="header pd-16-side">최근 등록된 한 줄 평</div>
         {category>0&&
         <div className="comment-list">
-            {sample.class.map((comment,index) => (
-            <Link to ={`${match.url}/view/`+comment.id}>
-            <div className="comment-box">
+            {sample.class.map((comment,key) => (
+            <Link key={key} to ={`${match.url}/view/`+comment.id}>
+            <div className="comment-box" style={firstChild(key)}>
                  <div className="box-header"><span>{comment.className}</span> - {comment.proName}</div>
                  <div className="box-contents"><p>{comment.comment}</p></div>
              </div>
@@ -36,9 +43,9 @@ const RecentComment = ({category,match})=>{
         }{category<1&&
         <>
             <div className="comment-list">
-            {sample.pro.map((comment,index) => (
-             <Link to ={`${match.url}/view/`+comment.id}>
-            <div className="comment-box">
+            {sample.pro.map((comment,key) => (
+             <Link key={key} to ={`${match.url}/view/`+comment.id}>
+            <div className="comment-box" style={firstChild(key)}>
                  <div className="box-header">{comment.proName} - {comment.major}</div>
                  <div className="box-contents"><p>{comment.comment}</p></div>
              </div>
