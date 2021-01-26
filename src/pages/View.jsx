@@ -25,7 +25,7 @@ const View = ({match}) => {
         else{setWidth(ev.target.innerWidth)}
     }
       const getDetailData = async () => {
-        const rank = {'A0':4,'B0':3,'C0':2,'D':1,'U':0};
+        const rank = {'A0':4,'B0':3,'C0':2,'D0':1};
         const year = {'FIRST':'01','SECOND':'02'}
         const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/detail/${match.params.id}`);
         setDetailData(response.data.detailedCourse);
@@ -131,7 +131,6 @@ const View = ({match}) => {
     return (
         detailData?
        <>
-       {console.log(rankData)}
        <StaticDialog
         isOpen={popup}
         onAfterClose={() => {

@@ -30,7 +30,7 @@ a {
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: rgb(180, 180, 180);
+  background-color: #f1f3f5;
 }
 ::-webkit-scrollbar-button {
   width: 0;
@@ -73,7 +73,6 @@ Button::-moz-focus-inner {
   bottom: 50px;
   position: fixed;
   min-width: 100vw;
-  height: 72px;
   overflow: auto;
   z-index: 9999;
 }

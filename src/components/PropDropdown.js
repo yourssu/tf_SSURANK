@@ -33,7 +33,7 @@ const PropDropdown = (props)=>{
     }
     return(
         <>
-        <div className="major-dropdown-contents">
+        <div className="pd-16-side major-dropdown-contents">
         <div className="dropdown">
         <button onClick={()=>{setMajor(!major)}} className="dropdown-header"><div  className="header">학과별 랭킹</div> <div className="dropdown_icon"><img src={"./img/"+(major?"less":"more")+".svg"}/></div></button>
             {major&&
@@ -43,7 +43,7 @@ const PropDropdown = (props)=>{
                     <div className="major-wrapper" key={index}>
                     {majorData['list'][college].map((data,indexID) => (
                         //<>{console.log(data.originalName)}</>
-                        <Link to={`/professor/ranking/${data.originalName}`}><div key={indexID} className="major-block"><p>{data.shortenedName}</p></div></Link>
+                        <Link key={indexID} to={`/professor/ranking/${data.originalName}`}><div key={indexID} className="major-block"><p>{data.shortenedName}</p></div></Link>
                     ))}
                     </div>
                 ))}
@@ -54,7 +54,7 @@ const PropDropdown = (props)=>{
         </div>
          
      </div>
-    <div className="pf-dropdown-contents">
+    <div className="pd-16-side pf-dropdown-contents">
        <div className="dropdown">
        <button onClick={()=>{setHonor(!honor)}} className="dropdown-header"><div className="header">명예의 전당</div> <div className="dropdown_icon"><img src={"./img/"+(honor?"less":"more")+".svg"}/></div></button>
        {honor&&
@@ -62,7 +62,7 @@ const PropDropdown = (props)=>{
         <>
         {honorData.professors.map((rank,level) => (
             
-            <Link to={`/professor/view/${rank.id}`}><div className="dropdown-block"> 
+            <Link key={level} to={`/professor/view/${rank.id}`}><div className="dropdown-block"> 
                     <div className="block-left"><img className={"honor-img "} src={"./img/rank.png"} style={honorRank(level)}/></div>
                     <div className="block-center">
                         <span>{rank.name}</span>

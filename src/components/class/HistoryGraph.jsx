@@ -1,8 +1,8 @@
 import React  from "react";
 import PropTypes from 'prop-types';
-import { VictoryChart,VictoryArea,VictoryContainer,VictoryAxis } from "victory";
+import { VictoryChart,VictoryArea,VictoryContainer,VictoryScatter,VictoryAxis } from "victory";
 const HistoryGraph = ({rankData,width}) => {
-    const rankName=['U','D','C','B','A'];
+    const rankName=['','D','C','B','A'];
         return(
             <div className="detail-graph pd-16-side">
             <div className="header">이 강의 지난 학기 평가</div>
@@ -22,15 +22,34 @@ const HistoryGraph = ({rankData,width}) => {
                         }}
                     />}>
             <VictoryArea
-                domain={{y: [0, 5]}}
+                domain={{y: [0.5, 5]}}
                 categories={{
                     x: rankData.year,
                   }}
                 style={{
                     data: { fill: "#3C95FF",opacity: 0.5 ,stroke:  "#3C95FF" },
                     parent: { border: "1px solid #ccc"},
-                    }} data={rankData} x="year" y="ranking" labels={({datum})=>rankName[datum.ranking]}/>
-            <VictoryAxis crossAxis={false}/>
+                    }} data={rankData} x="year" y="ranking" />
+                    <VictoryScatter
+                    labels={({datum})=>rankName[datum.ranking]}
+                data={rankData}
+                x="year" y="ranking" 
+                style={{ 
+                    labels:{
+                        fontSize: 13,
+                        fill:"#3C95FF"
+                    },
+                    data: { fill: "#3C95FF" } }}
+                size={2}
+            />
+            <VictoryAxis crossAxis={false} style={{
+                axis: {stroke:"none"},
+                tickLabels:{
+                    fill:"#868E96",
+                    fontSize:10
+                }
+            }}/>
+            
             </VictoryChart>
             }
         </div>
