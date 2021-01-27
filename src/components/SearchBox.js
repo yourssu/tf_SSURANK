@@ -11,13 +11,13 @@ const SearchBox = ({history,category})=>{
     }
     function enterSubmit(e){
         if (e.keyCode === 13) {
-            history.push((category===1?'/class':'/professor')+`/search/${value}`);
+            history.push((category===1?'/class':'/professor')+`/search/${encodeURIComponent(value)}`);
         }
     }
     return(
     <div className="search bs pd-16-side">
     <input className="search_bar" onChange={search} onKeyDown={(e) => enterSubmit(e) } type="search" placeholder={placeholder}/>
-    <Link to={((category===1?'/class':'/professor')+`/search/${value}`)}><div className="search_bar_icon"><img src="/img/search_Icon.svg"/></div></Link>
+    <Link to={((category===1?'/class':'/professor')+`/search/${encodeURIComponent(value)}`)}><div className="search_bar_icon"><img src="/img/search_Icon.svg"/></div></Link>
     </div>
     
     )

@@ -16,14 +16,27 @@ const sample = {
         {proName:"박한별",major:"천체물리학과", comment:"한별아...-기로로-", createdAt:"20161027T171340Z", id:"5" }//전공도 위와 비슷하게
     ],
 }
-const firstChild = (index) =>{
-    if(index==0){
-        return(
-        {marginLeft:'16px'}
-        )
-    }
-}
+
 const RecentComment = ({category,match})=>{
+    const firstChild = (index) =>{
+        if(index==0){
+            return(
+            {marginLeft:'16px'}
+            )
+        }
+        if(category<1){
+            if(sample.pro.length-1==index)
+            return(
+                {marginRight:'16px'}
+                )
+        }
+        else{
+            if(sample.class.length-1==index)
+            return(
+                {marginRight:'16px'}
+            )
+        }
+    }
     return(
     <div className="contents ">
        
