@@ -118,14 +118,14 @@ const Search = ({match,category}) => {
         <SearchList data={searchData} value={category}/>
         {maxPage&&pageList?
             <div className="pagenation"> 
-                <a onClick={prevPage} className="justify-content-end"><div className="icon sm"><img src="/img/left.svg"/></div></a>
+                <a onClick={prevPage} className="justify-content-end"><div className="icon sm"><img src="/img/Left.svg"/></div></a>
                 <ul>
                {
                 pageList.map((i,key)=>(
                     <li key={key}><a style={selected(i)} className="none" onClick={()=>getPage(i)}>{i+1}</a></li>)
                 )}
                 </ul>
-                <a  onClick={nextPage} className="justify-content-start"><div className="icon sm"><img src="/img/right.svg"/></div></a>
+                <a  onClick={nextPage} className="justify-content-start"><div className="icon sm"><img src="/img/Right.svg"/></div></a>
             </div> 
       :<Loading/>}
         </>)}/>
