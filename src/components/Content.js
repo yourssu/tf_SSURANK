@@ -46,7 +46,6 @@ const Content = ({category,match})=>{
              </Link>
             ))}
         </div>
-        <ProDropdown/>
         </>}
         
     </div>);
