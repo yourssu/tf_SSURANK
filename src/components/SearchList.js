@@ -30,7 +30,7 @@ const SearchList = (props)=>{
                     </div>
                 </Link>
                 :<Link to ={'/class/view/'+rank.courseId}>
-                <div className="dropdown-block"> 
+                <div className="dropdown-block pd-16-side bs"> 
                         <div className="block-left"><img className={"rank-img none "} src={"/img/"+rank.ranking.substring(0,1) +".png"}/></div>
                         <div className="block-center mg-16-side">
                             <span>{rank.title}</span>

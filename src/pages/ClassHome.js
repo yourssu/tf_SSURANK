@@ -11,7 +11,7 @@ const ClassHome = ({history,match}) => {
         <>
         <Route exact path={match.url} render={({match})=>(<>
         <Logo/>
-        <SearchBox history={history} category={1} match={match}/><RecentComment category={1} match={match}/></>)}/>
+        <SearchBox history={history} category={1} match={match}/>{/*<RecentComment category={1} match={match}/>*/}</>)}/>
         <Route path={`${match.url}/search/:id`} render={({match})=>(<><SearchBox history={history} category={1} match={match}/> <Search category={1} match={match}/></>)}/>
         <Route path={`${match.url}/view/:id`} component={View}/>
         
