@@ -9,29 +9,26 @@ import Modal from '../pages/Modal'
 const App = () => {
   const [category,setCategory]=useState(1);
   const [showModal, setShowModal] = useState(false);
-  const HAS_VISITED_BEFORE = localStorage.getItem('visited');
+  const HAS_VISITED_BEFORE = localStorage.getItem('PopupVisited');
 
   function setContents(e){
     setCategory(e);
   }
   const onClick = () => {
-    console.log('dd');
+    let expires = new Date();
+    expires = expires.setHours(expires.getHours() + 24);
+    localStorage.setItem('PopupVisited', expires);
    setShowModal(false)};
   useEffect(() => {
     const handleShowModal = () => {
       if (HAS_VISITED_BEFORE && HAS_VISITED_BEFORE > new Date()) {
         return;
       }
-
       if (!HAS_VISITED_BEFORE) {
         setShowModal(true);
-        let expires = new Date();
-        expires = expires.setHours(expires.getHours() + 24);
-        localStorage.setItem('visited', expires);
       }
     };
-
-    window.setTimeout(handleShowModal, 2000);
+    window.setTimeout(handleShowModal, 0);
   }, [HAS_VISITED_BEFORE]);
 
   useEffect(() => {

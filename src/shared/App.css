@@ -70,9 +70,9 @@ Button::-moz-focus-inner {
   padding: 0;
 }
 #modal_root {
-  bottom: 50px;
+  bottom: 20px;
   position: fixed;
-  min-width: 100vw;
+  min-width: 100%;
   overflow: auto;
   z-index: 9999;
 }

@@ -166,8 +166,7 @@
   color: #343a40;
 }
 .block-right {
-  width: 25%;
-  text-align: right;
+  text-align: center;
 }
 .dropdown_icon {
   height: 46px;
@@ -206,11 +205,11 @@
   color: #868e96;
 }
 .block-center {
-  width: 100%;
+  flex: 1;
+  margin: 0 16px;
 }
 
 .block-left {
-  width: 56px;
 }
 .rank-img {
   object-fit: cover;
