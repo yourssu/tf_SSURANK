@@ -11,24 +11,29 @@ import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
 const ViewProf = ({match}) => {
     const [detailData, setDetailData] = useState();
-    const [detailClassData, setDetailClassData] = useState();
+    const [detailClassData, setDetailClassData] = useState([]);
+    const [getClassMax,setGetClassMax]=useState();
     const [commentData, setCommentData] = useState();
     const [isPending,setIsPending] = useState(false);
     const [popup,setPopup] = useState(false);
 
       const getDetailData = async () => {
-        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/detail/${match.params.id}`);
+        const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/detail/${match.params.id}`);
+        console.log(response.status)
         setDetailData(response.data.detailedProfessor);
-        //console.log('professor:');
-        //console.log(response.data);
     };
     const getProfClassData = async (index) => {
-        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/detail/${match.params.id}/${index}`);
-        setDetailClassData(response.data.detailedCourses);
+        const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/detail/${match.params.id}/${index}`);
+        setDetailClassData(detailClassData.concat(response.data.detailedCourses));
         //console.log(response.data);
     };
+    const getProfClassMaxData = async () => {
+      const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/${match.params.id}/courses`);
+      setGetClassMax(response.data);
+      //console.log(response.data);
+    };
     const getCommentData = async (index) => {
-        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/evaluation/recent/${match.params.id}/${index}`);
+        const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/evaluation/recent/${match.params.id}/${index}`);
         setCommentData(response.data.evaluations);
         //console.log(response.data.evaluations);
     };
@@ -36,21 +41,28 @@ const ViewProf = ({match}) => {
         const json = JSON.stringify({ 
             content:value
         });
-        await axios.post(`https://cors-anywhere.herokuapp.com/https://ssurank.herokuapp.com/ssurank/professor/evaluation`,json, {
+        await axios.post(`https://cors-anywhere.herokuapp.com/http://54.180.59.213:8080/ssurank/professor/evaluation`,json, {
             headers: {
             'Content-Type': 'application/json'
             }});
         setIsPending(false);
         setPopup(false);
         window.location.reload(false);
-    };/*
+    };
+    window.printAlert = new Event('printAlert');
+    window.addEventListener('printAlert', function() {
+      alert('You called printAlert function');
+  }, {once:true});
+
+    /*
+    
     const postReport = async () => {
         const json = JSON.stringify({ 
             content: "string",
             id: 0,
             reportCategory: "기타"
         });
-        const response = await axios.post(`https://ssurank.herokuapp.com/ssurank/professor/evaluation/report`,json, {
+        const response = await axios.post(`http://54.180.59.213:8080/ssurank/professor/evaluation/report`,json, {
             headers: {
               'Content-Type': 'application/json'
             }});
@@ -112,6 +124,7 @@ const ViewProf = ({match}) => {
         getDetailData();
         getProfClassData(1);
         getCommentData(1);
+        getProfClassMaxData();
     }, [])
     return (detailData?
        <>
@@ -128,8 +141,20 @@ const ViewProf = ({match}) => {
         <Header detailData={detailData}/>
         <RecentClass detailData={detailData}/>
         <Divider/>
-        {detailClassData&&<ClassList detailClassData={detailClassData}/>}
-        
+        {detailClassData&&
+        <>
+          <ClassList maxData={getClassMax}  detailClassData={detailClassData}/>
+          {console.log(detailClassData.length)}
+          {console.log(getClassMax)}
+          {
+            getClassMax>5&&getClassMax>detailClassData.length&&
+            <div className="pd-16-side bs"><button onClick={()=>{
+              getProfClassData(detailClassData.length/5 + 1);
+            }} className="detail-comment-more ">더보기<img src={"/img/More.svg"}/></button>
+            </div>
+          }
+        </>
+        }
         <Divider/>
         <CommentBox setPopup={setPopup} />
         <Divider/>

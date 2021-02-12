@@ -45,7 +45,7 @@ const App = () => {
             
             <Switch>
             <Route exact path="/">
-              <Redirect to="/class" />
+              <Redirect to="/professor" />
             </Route>
             <Route path="/class" component={ClassHome}/>
             <Route path="/professor" component={ProHome}/>

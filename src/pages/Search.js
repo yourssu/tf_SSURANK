@@ -4,6 +4,7 @@ import SearchList from '../components/SearchList'
 import View from './View'
 import Loading from '../components/Loading'
 import axios from "axios";
+import NoResult from '../components/NoResult';
 const Search = ({match,category}) => {
     const [searchData, setSearchData] = useState();
     const [pageIndex,setPageIndex]=useState();
@@ -12,25 +13,25 @@ const Search = ({match,category}) => {
     const [pageList,setPageList]=useState([0]);
     const pageRowCnt=10;
     const getSearchList = async (index) => {
-        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/search/${match.params.id}/${index}`);
+        const response = await axios.get(`http://54.180.59.213:8080/ssurank/course/search/${match.params.id}/${index}`);
         setSearchData(response.data.courses);
         //console.log(response.data);
         //console.log(responsePage.data);
     };
     const getSearchProList = async (index) => {
-        const response = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/search/${match.params.id}/${index}`);
+        const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/search/${match.params.id}/${index}`);
         setSearchData(response.data.professors);
         //console.log(response.data);
         //console.log(responsePage.data);
     };
     const getMaxPage = async ()=>{
-        const responsePage = await axios.get(`https://ssurank.herokuapp.com/ssurank/course/search/${match.params.id}`);
+        const responsePage = await axios.get(`http://54.180.59.213:8080/ssurank/course/search/${match.params.id}`);
         setMaxPage(responsePage.data);
         setMaxIndex(parseInt((responsePage.data+(pageRowCnt-1))/pageRowCnt));
         setList(responsePage.data)
     }
     const getMaxProPage = async ()=>{
-        const responsePage = await axios.get(`https://ssurank.herokuapp.com/ssurank/professor/search/${match.params.id}`);
+        const responsePage = await axios.get(`http://54.180.59.213:8080/ssurank/professor/search/${match.params.id}`);
         setMaxPage(responsePage.data);
         setMaxIndex(parseInt((responsePage.data+(pageRowCnt-1))/pageRowCnt));
         setList(responsePage.data)
@@ -111,10 +112,17 @@ const Search = ({match,category}) => {
         getPage(0)
 
     },[match.params.id]);
+    if(maxPage<1){
+        return(
+           <NoResult/>
+        )
+    }
     return (
        <>
+       
       <Route path={match.url} render={()=>( 
       <>
+      {console.log(maxPage)}
         <SearchList data={searchData} value={category}/>
         {maxPage&&pageList?
             <div className="pagenation"> 

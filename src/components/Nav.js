@@ -15,7 +15,7 @@ const Nav=(props)=>{
     return(
     <div className="nav pd-16-side">
         <div className="nav-logo">
-            <Link to="/"><img src="./img/Logo.png"/></Link>
+            <Link to="/"><img src="/img/Logo.png"/></Link>
         </div>
         <div className="nav-btn">
             <ul>

@@ -1,10 +1,16 @@
+
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from '../shared/App';
+import Analytics from 'react-router-ga';
+
+ 
 const Root = () => (
-    <HashRouter>
-        <App/>
-    </HashRouter>
+    <BrowserRouter>
+        <Analytics id="UA-188451512-1">
+            <App/>
+        </Analytics>
+    </BrowserRouter>
 );
 
 export default Root;

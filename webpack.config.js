@@ -33,7 +33,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
 	// 번들이 생기는 경로를 지정. webpack-dev-server도 이를 참조
     publicPath: "/",
-    filename: "bundle.js"
+    filename: "bundle.[chunkhash].js"
   },
   //오류가 났을때 어디파일에서 오류가 났는지 알려줌
   devtool:'eval-cheap-source-map',

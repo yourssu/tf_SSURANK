@@ -22,7 +22,7 @@ const CommentBox = ({setPopup,semester})=>{
                 <div className="cover-ground bs pd-16-side">
                     <p><span>이 강의 좋았어요!</span></p>
                     <p>한 줄 평 기능이 곧 추가됩니다.</p>
-                    <Link to="https://forms.gle/YuUjj9dN5nGLfmzp8" target="blank"><button className="">한 줄 평 업데이트 알림받기</button></Link>
+                    <a href="https://forms.gle/YuUjj9dN5nGLfmzp8"  rel="noreferrer" target="_blank"><button className=""><img className="icon sm" src="/img/GroundLogo.png"/>한 줄 평 업데이트 알림받기</button></a>
                 </div>
                 <textarea onChange={(e)=>setInputText(e.target.value)} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
                 <div className="detail-input-footer">
