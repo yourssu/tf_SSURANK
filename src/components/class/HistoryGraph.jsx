@@ -5,7 +5,7 @@ const HistoryGraph = ({rankData,width}) => {
     const rankName=['','D','C','B','A'];
         return(
             <div className="detail-graph pd-16-side">
-                {console.log(rankData.length)}
+                {/*console.log(rankData.length)*/}
             <div className="header">이 강의 지난 학기 평가</div>
             {   
                 rankData&&
@@ -30,7 +30,7 @@ const HistoryGraph = ({rankData,width}) => {
                                     x: rankData.year,
                                 }}
                                 style={{
-                                    data: { fill: "#3C95FF",opacity: 0.5 ,stroke:  "#3C95FF" },
+                                    data: { fill: "#0085FF",opacity: 0.5 ,stroke:  "#0085FF" },
                                     parent: { border: "1px solid #ccc"},
                                     }} 
                                 data={rankData} x="year" y="ranking"/>
@@ -38,7 +38,7 @@ const HistoryGraph = ({rankData,width}) => {
                             <VictoryBar
                             cornerRadius={5}
                             style={{ 
-                                data: { fill: "#3C95FF",opacity: 0.5 ,stroke:  "#3C95FF",width: 20 },
+                                data: { fill: "#0085FF",opacity: 0.5 ,stroke:  "#0085FF",width: 20 },
                                 parent: { border: "1px solid #ccc"}, 
                                 
                             }}
@@ -53,9 +53,9 @@ const HistoryGraph = ({rankData,width}) => {
                 style={{ 
                     labels:{
                     fontSize: 14,
-                        fill:"#3C95FF"
+                        fill:"#0085FF"
                     },
-                    data: { fill: "#3C95FF" } }}
+                    data: { fill: "#0085FF" } }}
                 size={2}
             />
             <VictoryAxis crossAxis={false} style={{

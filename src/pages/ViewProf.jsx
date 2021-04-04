@@ -18,22 +18,22 @@ const ViewProf = ({match}) => {
     const [popup,setPopup] = useState(false);
 
       const getDetailData = async () => {
-        const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/detail/${match.params.id}`);
-        console.log(response.status)
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}`);
+        //console.log(response.status)
         setDetailData(response.data.detailedProfessor);
     };
     const getProfClassData = async (index) => {
-        const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/detail/${match.params.id}/${index}`);
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}/${index}`);
         setDetailClassData(detailClassData.concat(response.data.detailedCourses));
         //console.log(response.data);
     };
     const getProfClassMaxData = async () => {
-      const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/${match.params.id}/courses`);
+      const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/${match.params.id}/courses`);
       setGetClassMax(response.data);
       //console.log(response.data);
     };
     const getCommentData = async (index) => {
-        const response = await axios.get(`http://54.180.59.213:8080/ssurank/professor/evaluation/recent/${match.params.id}/${index}`);
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/evaluation/recent/${match.params.id}/${index}`);
         setCommentData(response.data.evaluations);
         //console.log(response.data.evaluations);
     };
@@ -41,7 +41,7 @@ const ViewProf = ({match}) => {
         const json = JSON.stringify({ 
             content:value
         });
-        await axios.post(`https://cors-anywhere.herokuapp.com/http://54.180.59.213:8080/ssurank/professor/evaluation`,json, {
+        await axios.post(`https://cors-anywhere.herokuapp.com/https://test.ground.yourssu.com/timetable/v1/ssurank/professors/evaluation`,json, {
             headers: {
             'Content-Type': 'application/json'
             }});
@@ -62,7 +62,7 @@ const ViewProf = ({match}) => {
             id: 0,
             reportCategory: "기타"
         });
-        const response = await axios.post(`http://54.180.59.213:8080/ssurank/professor/evaluation/report`,json, {
+        const response = await axios.post(`https://test.ground.yourssu.com/timetable/v1/ssurank/professor/evaluation/report`,json, {
             headers: {
               'Content-Type': 'application/json'
             }});
@@ -144,8 +144,8 @@ const ViewProf = ({match}) => {
         {detailClassData&&
         <>
           <ClassList maxData={getClassMax}  detailClassData={detailClassData}/>
-          {console.log(detailClassData.length)}
-          {console.log(getClassMax)}
+          {/*console.log(detailClassData.length)*/}
+          {/*console.log(getClassMax)*/}
           {
             getClassMax>5&&getClassMax>detailClassData.length&&
             <div className="pd-16-side bs"><button onClick={()=>{

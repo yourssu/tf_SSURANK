@@ -16,14 +16,16 @@ const CommentBox = ({setPopup,semester})=>{
     return (
         <div className="detail-comment-input ">
             
-            <div className="bs mg-16-side">
-            <div className="header">이 {semester?<>강의</>:<>교수</>} 한 줄 평</div>
+            <div className="bs ">
+            <div className="header mg-16-side" >이 {semester?<>강의</>:<>교수</>} 한 줄 평</div>
             <div className="detail-input-box">
+                {(navigator.userAgent.indexOf("SSURANK")>-1)?
+                <></>:
                 <div className="cover-ground bs pd-16-side">
                     <p><span>이 강의 좋았어요!</span></p>
                     <p>한 줄 평 기능이 곧 추가됩니다.</p>
                     <a href="https://forms.gle/YuUjj9dN5nGLfmzp8"  rel="noreferrer" target="_blank"><button className=""><img className="icon sm" src="/img/GroundLogo.png"/>한 줄 평 업데이트 알림받기</button></a>
-                </div>
+                </div>}
                 <textarea onChange={(e)=>setInputText(e.target.value)} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
                 <div className="detail-input-footer">
                     <div>

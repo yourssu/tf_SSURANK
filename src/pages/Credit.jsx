@@ -16,17 +16,17 @@ const Credit = () => {
         },
         {
             part:'🤖 Android Developer',
-            member:[{name:'Conor',link:'https://github.com/ddochi93'},{name:'Jiho',link:'https://github.com/jiho1996'}]
+            member:[{name:'Ace',link:'https://github.com/acious'},{name:'Jiho',link:'https://github.com/jiho1996'}]
         },
         {
-            part:'📆 Product Owner & 🎨 Designer Gyuni',
+            part:'📆 Product Owner & 🎨 Designer',
             member:[{name:'Gyuni',link:'https://github.com/Gyuni'}]
         }
     ]
     return(
         <div className="credit" style={{fontSize:"14px"}}>
             <div className="pd-16-side pd-12-bt pd-16-top bs">
-                <span><span className="color">SSURANK</span> at YOURSSU</span>
+                <span><span className="color">SSU Rank</span> at YOURSSU</span>
                 <p>만든사람들</p>
             </div>
             <Divider/>

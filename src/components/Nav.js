@@ -7,8 +7,8 @@ const Nav=(props)=>{
         fontStyle: 'normal',
         fontSize: '14px',
         lineHeight: '19px',
-        color: '#3C95FF',
-        borderBottom: '3px solid #3C95FF',
+        color: '#0085FF',
+        borderBottom: '3px solid #0085FF',
         display: 'block',
         height: '100%'
     }

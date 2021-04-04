@@ -28,7 +28,7 @@ const View = ({match}) => {
       const getDetailData = async () => {
         const rank = {'A0':4,'B0':3,'C0':2,'D0':1};
         const year = {'FIRST':'01','SECOND':'02'}
-        const response = await axios.get(`http://54.180.59.213:8080/ssurank/course/detail/${match.params.id}`);
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/detail/${match.params.id}`);
         setDetailData(response.data.detailedCourse);
         setRankData( response.data.detailedCourse.historyCourses.map(
             (index)=>(
@@ -43,7 +43,7 @@ const View = ({match}) => {
       },false);
     
     const getCommentData = async (index) => {
-        const response = await axios.get(`http://54.180.59.213:8080/ssurank/course/evaluation/recent/${match.params.id}/${index}`);
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/evaluation/recent/${match.params.id}/${index}`);
         setCommentData(response.data.evaluations);
         //console.log(response.data.evaluations);
     };
@@ -56,7 +56,7 @@ const View = ({match}) => {
             year:inputWhen.substring(0, 4),
             semester:inputWhen.substring(6, 7)
         });
-        await axios.post(`https://cors-anywhere.herokuapp.com/http://54.180.59.213:8080/ssurank/course/evaluation`,json, {
+        await axios.post(`https://cors-anywhere.herokuapp.com/https://test.ground.yourssu.com/timetable/v1/ssurank/course/evaluation`,json, {
             headers: {
             'Content-Type': 'application/json'
             }});
@@ -70,7 +70,7 @@ const View = ({match}) => {
             id: 0,
             reportCategory: "기타"
         });
-        await axios.post(`http://54.180.59.213:8080/ssurank/course/report`,json, {
+        await axios.post(`https://test.ground.yourssu.com/timetable/v1/ssurank/course/report`,json, {
             headers: {
               'Content-Type': 'application/json'
             }});

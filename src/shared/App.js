@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import {atom,useRecoilValue} from "recoil";
 import "./App.css";
 import Nav from "../components/Nav.js"
 import Footer from "../components/Footer.js"
@@ -6,19 +7,28 @@ import { Route, Switch,Redirect } from 'react-router-dom';
 import { ProHome, ClassHome,Credit} from '../pages';
 import 'regenerator-runtime/runtime'
 import Modal from '../pages/Modal'
+
 const App = () => {
   const [category,setCategory]=useState(1);
   const [showModal, setShowModal] = useState(false);
   const HAS_VISITED_BEFORE = localStorage.getItem('PopupVisited');
+  /*const isWebAppAtom = atom({
+    key:"userAccessToken",
+    default :(document.cookie||null)
+  }) */
 
   function setContents(e){
     setCategory(e);
   }
+  const userAgent = window.navigator.userAgent.toLowerCase(),
+  safari = /safari/.test( userAgent ),
+  ios = /iphone|ipod|ipad/.test( userAgent );
   const onClick = () => {
     let expires = new Date();
     expires = expires.setHours(expires.getHours() + 24);
     localStorage.setItem('PopupVisited', expires);
    setShowModal(false)};
+{/*
   useEffect(() => {
     const handleShowModal = () => {
       if (HAS_VISITED_BEFORE && HAS_VISITED_BEFORE > new Date()) {
@@ -29,19 +39,30 @@ const App = () => {
       }
     };
     window.setTimeout(handleShowModal, 0);
-  }, [HAS_VISITED_BEFORE]);
-
+  }, [HAS_VISITED_BEFORE]);*/
+}
+  useEffect(() => {
+    //console.log('this is '+ios)
+  },[]
+  )
   useEffect(() => {
     //console.log(category);
     return () => {
      
     }
   }, [category])
+  useEffect(()=>{
+    console.log(navigator.userAgent.toLowerCase())
+  },[]);
   
   return (
       <div className="wrapper">
         <section>
-            <Nav category={category} setContents={setContents}/>
+          {
+          (navigator.userAgent.indexOf("SSURANK")>-1)||
+          <Nav category={category} setContents={setContents}/>
+          }
+            
             
             <Switch>
             <Route exact path="/">
@@ -53,8 +74,11 @@ const App = () => {
             </Switch>
             {showModal && <Modal onClose={onClick} />}
             </section>
+            {
+          (navigator.userAgent.indexOf("SSURANK")>-1)||
+          <Footer/>
+          }
             
-            <Footer/>
         </div>
   )
 }

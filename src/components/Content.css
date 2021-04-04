@@ -138,7 +138,7 @@
 }
 .header {
   height: 46px;
-  color: #3c95ff;
+  color: #0085FF;
   font-family: Noto Sans;
   font-style: normal;
   font-weight: bold;
@@ -361,8 +361,8 @@
 
   /* PointColor */
 
-  color: #3c95ff;
-  border-bottom: 2px solid #3c95ff;
+  color: #0085FF;
+  border-bottom: 2px solid #0085FF;
 }
 .none-btn {
   font-style: normal;
@@ -417,7 +417,7 @@
   margin-top: 18px;
 }
 .submit-btn {
-  background: #3c95ff;
+  background: #0085FF;
   border-radius: 4px;
   font-style: normal;
   font-weight: normal;
@@ -555,7 +555,7 @@
   margin-top: 12px;
 }
 .comment-footer span {
-  color: #3c95ff;
+  color: #0085FF;
 }
 .lock {
   background-color: rgba(0, 0, 0, 0.349);
@@ -576,7 +576,7 @@
   color: #343a40;
 }
 .contents-text span {
-  color: #3c95ff;
+  color: #0085FF;
   font-style: normal;
   font-weight: bold;
 }
@@ -589,7 +589,7 @@
   font-weight: bold;
 }
 .color {
-  color: #3c95ff;
+  color: #0085FF;
 }
 .detail-prof-percent-list {
   display: flex;
@@ -632,7 +632,7 @@
   --st-modal-boxShadow: 0 !important;
 
   --st-modal-backgroundColor: #ffffff !important;
-  --st-modal-titleTextColor: #3c95ff !important;
+  --st-modal-titleTextColor: #0085FF !important;
   --st-modal-secondColor: #ffffff !important;
 
   --st-dialog-contentColor: #ffffff !important;
@@ -640,7 +640,7 @@
   --st-modal-transformVisible: translate3d(-50%, -50%, 0) scale(1) !important;
   --st-modal-transformHidden: translate3d(-50%, -50%, 0) scale(0.1) !important;
 
-  --st-button-primaryColor: #3c95ff !important;
+  --st-button-primaryColor: #0085FF !important;
   --st-button-primaryTextColor: #ffffff !important;
   --st-overlay-transition: opacity !important;
   --st-modal-transition: all !important;
@@ -715,7 +715,7 @@
   width: 100%;
 }
 .bg-color {
-  background-color: #3c95ff;
+  background-color: #0085FF;
   color: #ffffff;
 }
 
@@ -831,7 +831,7 @@
   display: flex;
   height: 100%;
   justify-content: center;
-  background-color: #3c95ff;
+  background-color: #0085FF;
   color: rgb(255, 255, 255);
   font-size: 13px;
   border-radius: 10px;
