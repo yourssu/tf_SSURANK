@@ -1,20 +1,28 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-html,body,a,span,p,* {
-  font-family: "Noto Sans KR", sans-serif !important;
+html,
+body,
+a,
+span,
+p,
+* {
+  font-family: Avenir, "-apple-system Noto Sans KR", sans-serif !important;
 }
 
 body,
 html {
   margin: 0;
-  background-color: rgb(236, 236, 236);
+  background-color: white;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
 }
-ul{
+ul {
   margin: 0px;
 }
-a{
+a {
   text-decoration: none;
   outline: none;
 }
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -24,13 +32,16 @@ a{
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: rgb(180, 180, 180);
+  background-color: #f1f3f5;
 }
 ::-webkit-scrollbar-button {
   width: 0;
   height: 0;
 }
-Button{
+input {
+  -webkit-appearance: none;
+}
+Button {
   border: none;
   margin: 0;
   padding: 0;
@@ -60,15 +71,26 @@ Button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+#modal_root {
+  bottom: 50px;
+  position: fixed;
+  min-width: 100%;
+  overflow: auto;
+  z-index: 9999;
+}
 .wrapper {
-  background-color: white;
-  min-width: 375px;
-  width: 60vw;
+  min-width: 320px;
+  max-width: 640px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0;
   box-sizing: border-box;
 }
-
+.wrapper section {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}

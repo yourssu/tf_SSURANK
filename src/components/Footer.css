@@ -10,6 +10,10 @@
   color: #868e96;
 }
 .footer {
-  margin-bottom: 70px;
-  margin-top: 113px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.footer a {
+  color: #0085ff;
+  text-decoration: #0085ff;
 }
