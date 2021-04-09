@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from 'axios';
 import "./Content.css";
 import { Link } from 'react-router-dom';
 import ProDropdown from "./PropDropdown"
+
 const sample = {
     class:[ // 강의 제목 , 교수이름, 내용, 작성일자, 게시글 id
         {className:"일반물리학",proName:"홍길동", comment:"물리학은 너무 어려운것같아요 제가 LA에 있을 때 너무나도 많은 물리적 법칙을 경험했습니다 이 강의를 들으며 저는 하늘을 날아 여기 쨘 저기 쨘 윤기 쨘 하는 법을 배울 수 있었습니다", createdAt:"20161027T171340Z", id:"14" },
@@ -18,6 +20,20 @@ const sample = {
 }
 
 const RecentComment = ({category,match})=>{
+    const [recentCommentData,setRecentCommentData] = useState();
+    
+    const getRecentComment = async () => {
+        let temp =['professors','courses']
+        await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/${temp[category]}/evaluations/main`)
+        .then((res)=>{
+            let data =res.data.evaluations;
+            setRecentCommentData(data);
+            }
+        );
+        //etCommentData(response.data.evaluations);
+        //console.log(response.data.evaluations);
+    };
+
     const firstChild = (index) =>{
         if(index==0){
             return(
@@ -37,37 +53,49 @@ const RecentComment = ({category,match})=>{
             )
         }
     }
+    useEffect(() => {
+        getRecentComment();
+    }, []);
     return(
     <div className="contents ">
-       
         <div className="header pd-16-side">최근 등록된 한 줄 평</div>
-        {category>0&&
+        {category>0&&recentCommentData&&
+        
         <div className="comment-list">
-            {sample.class.map((comment,key) => (
-            <Link key={key} to ={`${match.url}/view/`+comment.id}>
-            <div className="comment-box" style={firstChild(key)}>
-                 <div className="box-header"><span>{comment.className}</span> - {comment.proName}</div>
-                 <div className="box-contents"><p>{comment.comment}</p></div>
-             </div>
-             </Link>
-            ))}
+            {
+                recentCommentData.length > 0? recentCommentData.map((comment,key) => (
+                <Link key={key} to ={`${match.url}/view/`+comment.id}>
+                <div className="comment-box" style={firstChild(key)}>
+                    <div className="box-header"><span>{comment.title}</span> - {comment.name}</div>
+                    <div className="box-contents"><p>{comment.content}</p></div>
+                </div>
+                </Link>
+                )):
+                <div className="comment-box">
+                    <div className="box-contents"><p>최근 등록된 데이터가 없습니다</p></div>
+                </div>
+            }
+
        
         </div>
-        }{category<1&&
+        }{category<1&&recentCommentData&&
         <>
             <div className="comment-list">
-            {sample.pro.map((comment,key) => (
-             <Link key={key} to ={`${match.url}/view/`+comment.id}>
+            {console.log(recentCommentData)}
+            {recentCommentData.length > 0?recentCommentData.map((comment,key) => (
+             <Link key={key} to ={`${match.url}/view/`+comment.professorEvaluationId}>
             <div className="comment-box" style={firstChild(key)}>
-                 <div className="box-header">{comment.proName} - {comment.major}</div>
-                 <div className="box-contents"><p>{comment.comment}</p></div>
+                 <div className="box-header">{comment.name} - {comment.department}</div>
+                 <div className="box-contents"><p>{comment.content}</p></div>
              </div>
              </Link>
-            ))}
+            )):
+            <div className="comment-box">
+                <div className="box-contents"><p>최근 등록된 데이터가 없습니다</p></div>
+            </div>}
         </div>
-        <ProDropdown/>
         </>}
-        
+    
     </div>);
 }
 

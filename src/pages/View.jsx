@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import CommentBox from '../components/CommentBox';
 import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
+import { postCommentData } from '../components/API/Api';
 import Modal from './Modal'
 const View = ({match}) => {
     const [detailData, setDetailData] = useState();
@@ -18,6 +19,7 @@ const View = ({match}) => {
     const [popup,setPopup] = useState(false);
     const [rankData,setRankData]=useState(false);
     const [width, setWidth] = useState(608)
+    const [sort,setSort]= useState(0);
     //const rank = {'A0':10,'A1':9,'A2':8,'B0':7,'B1':6,'B2':5,'C0':4,'C1':3,'C2':2,'D':1,'U':0};
       const updateWidth = (ev) => {
           if(ev.target.innerWidth>=608){
@@ -43,26 +45,10 @@ const View = ({match}) => {
       },false);
     
     const getCommentData = async (index) => {
-        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/evaluation/recent/${match.params.id}/${index}`);
+      let sortCategory =['latest','best']
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/evaluations/${sortCategory[sort]}/${match.params.id}/${index}`);
         setCommentData(response.data.evaluations);
         //console.log(response.data.evaluations);
-    };
-   /*const postCommentData = async (value) => {
-        const json = JSON.stringify({ 
-            content:inputText,
-            email:value,
-            courseId:match.params.id,
-            type:inputMajor,
-            year:inputWhen.substring(0, 4),
-            semester:inputWhen.substring(6, 7)
-        });
-        await axios.post(`https://cors-anywhere.herokuapp.com/https://test.ground.yourssu.com/timetable/v1/ssurank/course/evaluation`,json, {
-            headers: {
-            'Content-Type': 'application/json'
-            }});
-            setIsPending(false);
-        setPopup(false);
-        window.location.reload(false);
     };
     const postReport = async () => {
         const json = JSON.stringify({ 
@@ -74,19 +60,29 @@ const View = ({match}) => {
             headers: {
               'Content-Type': 'application/json'
             }});
-    };*/
-    function sendDataComment(value){
-        /*console.log(value);
-        console.log(inputText);
-        console.log(inputMajor);
-        console.log(inputWhen);*/
-        if(value){
-            //postCommentData(value);
-            setIsPending(true);
+    };
+    function sendDataComment(value){     
+      setIsPending(true);
+      let dataModel = {
+        message : '한 줄 평 작성 성공!',
+        path :'courses/evaluations/post',
+        data : JSON.stringify({ 
+          content:value.inputText,
+          courseId: match.params.id,
+          studentType: value.inputMajor,
+          year:value.inputYear,
+          semester:0
+        }),
+        headers : {
+          'Content-Type': 'application/json',
+          'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ'
         }
-        else{
-            alert('신고 사유를 입력해주세요.')
-        }
+    }
+      postCommentData(dataModel).then(
+        res=>setIsPending(false)
+      )
+
+           
     }
     function CustomDialogContent() {
         const [value, setValue] = useState();
@@ -155,9 +151,9 @@ const View = ({match}) => {
         {rankData&&detailData&&
         <HistoryGraph rankData={rankData} width={width}/>}
         <Divider/>
-        <CommentBox semester={detailData.historyCourses} setPopup={setPopup} />
+        <CommentBox sendDataComment={sendDataComment} semester={detailData.historyCourses} setPopup={setPopup} />
         <Divider/>
-        <CommentList commentData={commentData} setPopup={setPopup}/>
+        <CommentList date={1} setSort={setSort} commentData={commentData} setPopup={setPopup}/>
         
        </>:<Loading/>
     );

@@ -1,10 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 const CommentBox = ({sendDataComment,semester})=>{
     const [inputMajor,setInputMajor] = useState();
     const [inputText,setInputText] = useState();
-    const [inputWhen,setInputWhen] = useState();
+    const [inputYear,setInputYear] = useState();
+    const [inputSemester,setInputSemester] = useState();
     const selectBar = {
         background: 'url(./img/dropdown_Icon.svg) no-repeat 95% 50%'
       }
@@ -16,10 +17,21 @@ const CommentBox = ({sendDataComment,semester})=>{
     const submitComment=()=>{
         if(!inputMajor)
                 alert('전공을 선택해 주세요')
+        else if(semester&&!inputSemester)
+            alert('수강학기를 선택해 주세요')
+        else{
+            if(semester){
+                sendDataComment({inputText,inputMajor,inputYear,inputSemester})
+            }
             else{
                 sendDataComment({inputText,inputMajor})
             }
+            
+        }
     }
+    useEffect(() => {
+
+    }, [inputSemester]);
     return (
         <div className="detail-comment-input ">
             
@@ -46,10 +58,15 @@ const CommentBox = ({sendDataComment,semester})=>{
                 </select>
                 
                 {semester&&
-                <select value={inputWhen} onChange={(e)=>setInputWhen(e.target.value)} className="select-bar" style={selectBar}>
+                <select onChange={(e)=>{
+                    const value = JSON.parse(e.target.value);
+                    setInputSemester(value.semester);
+                    setInputYear(value.year);
+
+                    }} className="select-bar" style={selectBar}>
                 <option defaultValue>수강학기</option>
                     {semester.map((index,key)=>
-                        (index.semester==='FIRST'?<option key={key}> {index.year}년 1학기</option>:<option key={key}>{index.year}년 2학기</option>)
+                        (index.semester==='FIRST'?<option value={JSON.stringify(index)}  key={key}> {index.year}년 1학기</option>:<option key={key}>{index.year}년 2학기</option>)
                     )}
                 </select>}
                 </div>

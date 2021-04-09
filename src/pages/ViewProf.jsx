@@ -9,6 +9,7 @@ import ClassList from "../components/prof/ClassList";
 import CommentBox from '../components/CommentBox';
 import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
+import { postCommentData } from '../components/API/Api';
 const ViewProf = ({match}) => {
     const [detailData, setDetailData] = useState();
     const [detailClassData, setDetailClassData] = useState([]);
@@ -39,20 +40,7 @@ const ViewProf = ({match}) => {
         setCommentData(response.data.evaluations);
         //console.log(response.data.evaluations);
     };
-    const postCommentData = async (value) => {
-        await axios.post(`https://test.ground.yourssu.com/timetable/v1/ssurank/${value.path}`,value.data,{headers:value.headers})
-        .then(response=>{
-          alert(value.message)
-          window.location.reload(false);
-        })
-        .catch(err=>{
-              alert(err.response.data.message)
-          }
-        );
-      
-        setIsPending(false);
-       
-    };
+
     const getCookie = (cookieName) =>{
       cookieName = cookieName + '=';
       let cookieData = document.cookie;
@@ -96,7 +84,10 @@ const ViewProf = ({match}) => {
           'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ'
         }
     }
-      postCommentData(dataModel);
+      postCommentData(dataModel).then(
+        res=>setIsPending(false)
+      )
+
            
     }
 
