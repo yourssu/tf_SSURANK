@@ -19,6 +19,7 @@ const ViewProf = ({match}) => {
     const [popup,setPopup] = useState(false);
     const [sort,setSort]= useState(0);
     const COOKIE = document.cookie;
+    const MS = process.env.REACT_APP_MASTER_TOKEN|'';
       const getDetailData = async () => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}`);
         //console.log(response.status)
@@ -81,7 +82,7 @@ const ViewProf = ({match}) => {
         }),
         headers : {
           'Content-Type': 'application/json',
-          'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ'
+          'Authorization' : `Bearer ${MS}`
         }
     }
       postCommentData(dataModel).then(

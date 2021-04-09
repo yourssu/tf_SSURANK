@@ -20,6 +20,7 @@ const View = ({match}) => {
     const [rankData,setRankData]=useState(false);
     const [width, setWidth] = useState(608)
     const [sort,setSort]= useState(0);
+    const MS = process.env.REACT_APP_MASTER_TOKEN|'';
     //const rank = {'A0':10,'A1':9,'A2':8,'B0':7,'B1':6,'B2':5,'C0':4,'C1':3,'C2':2,'D':1,'U':0};
       const updateWidth = (ev) => {
           if(ev.target.innerWidth>=608){
@@ -75,7 +76,7 @@ const View = ({match}) => {
         }),
         headers : {
           'Content-Type': 'application/json',
-          'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ'
+          'Authorization' : `Bearer ${MS}`
         }
     }
       postCommentData(dataModel).then(
