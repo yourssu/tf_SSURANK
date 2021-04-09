@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
-
+const Dotenv = require('dotenv-webpack');
 module.exports = {
 	// entry: 웹팩에게 어플리케이션이 어디서 시작하고 어디서부터 파일들을 묶을건지 시작점을 정해준다. 
   entry: "./src/index.js",
@@ -63,5 +63,8 @@ module.exports = {
       { from: "./public" ,to:"img",flatten: true},
     ],
   }),
+  new Dotenv({
+    path: '.env'
+ })
 ]
 };
