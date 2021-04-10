@@ -15,7 +15,7 @@ const ProHome = ({match,history}) => {
             <img src="./img/Logo_img.png"/>
             </div> 
             <SearchBox  history={history} category={0} match={match} />
-            {/* <RecentComment match={match} category={0} /> */}
+            <RecentComment match={match} category={0} />
             <ProDropdown/>
         </>
         )}/>

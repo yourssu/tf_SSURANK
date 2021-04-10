@@ -1,5 +1,4 @@
 import axios from "axios";
-import react from 'React';
 
 export async function postCommentData (value){
     await axios.post(`https://test.ground.yourssu.com/timetable/v1/ssurank/${value.path}`,value.data,{headers:value.headers})

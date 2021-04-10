@@ -10,8 +10,9 @@ import Button from '../components/Button';
 import CommentBox from '../components/CommentBox';
 import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
-import { postCommentData } from '../components/API/Api';
 import Modal from './Modal'
+
+import {postCommentData} from '../components/API/Api'
 const View = ({match}) => {
     const [detailData, setDetailData] = useState();
     const [commentData, setCommentData] = useState();
@@ -20,7 +21,7 @@ const View = ({match}) => {
     const [rankData,setRankData]=useState(false);
     const [width, setWidth] = useState(608)
     const [sort,setSort]= useState(0);
-    const MS = process.env.REACT_APP_MASTER_TOKEN|'';
+    const MS = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ';
     //const rank = {'A0':10,'A1':9,'A2':8,'B0':7,'B1':6,'B2':5,'C0':4,'C1':3,'C2':2,'D':1,'U':0};
       const updateWidth = (ev) => {
           if(ev.target.innerWidth>=608){
@@ -68,7 +69,7 @@ const View = ({match}) => {
         message : '한 줄 평 작성 성공!',
         path :'courses/evaluations/post',
         data : JSON.stringify({ 
-          content:value.inputText,
+          content:value.inputText.substring(0,10000),
           courseId: match.params.id,
           studentType: value.inputMajor,
           year:value.inputYear,

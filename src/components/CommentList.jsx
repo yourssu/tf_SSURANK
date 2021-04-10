@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
 import PropTypes from 'prop-types';
 
-const CommentList = ({setPopup,date,setSort})=>{
-    const commentData = [{
+const CommentList = ({setPopup,date,commentData,setSort})=>{
+    const commentData_ = [{
         type: '슈랭크',
         content:'한 줄 평 기능 업데이트를 위해 열심히 준비중입니다. 위 버튼을 눌러 업데이트 알림을 신청해주세요!',
     }]

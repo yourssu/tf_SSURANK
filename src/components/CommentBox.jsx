@@ -15,10 +15,14 @@ const CommentBox = ({sendDataComment,semester})=>{
         }
     }
     const submitComment=()=>{
-        if(!inputMajor)
-                alert('전공을 선택해 주세요')
+        if(inputText)
+            alert('내용을 입력해 주세요')
+        else if(!inputMajor)
+            alert('전공을 선택해 주세요')
         else if(semester&&!inputSemester)
-            alert('수강학기를 선택해 주세요')
+            alert('수강 학기를 선택해 주세요')
+        else if(semester&&!inputYear)
+            alert('수강 연도를 선택해 주세요')
         else{
             if(semester){
                 sendDataComment({inputText,inputMajor,inputYear,inputSemester})
@@ -38,13 +42,13 @@ const CommentBox = ({sendDataComment,semester})=>{
             <div className="bs ">
             <div className="header mg-16-side" >이 {semester?<>강의</>:<>교수</>} 한 줄 평</div>
             <div className="detail-input-box">
-                {(navigator.userAgent.indexOf("SSURANK")>-1)?
+                {/* {(navigator.userAgent.indexOf("SSURANK")>-1)?
                 <></>:
                 <div className="cover-ground bs pd-16-side">
                     <p><span>이 강의 좋았어요!</span></p>
                     <p>한 줄 평 기능이 곧 추가됩니다.</p>
                     <a href="https://forms.gle/YuUjj9dN5nGLfmzp8"  rel="noreferrer" target="_blank"><button className=""><img className="icon sm" src="/img/GroundLogo.png"/>한 줄 평 업데이트 알림받기</button></a>
-                </div>}
+                </div>} */}
                 <div className="bs pd-16-side">
                 <textarea onChange={(e)=>setInputText(e.target.value)} onKeyDown={(e) => enterSubmit(e) } placeholder="여기에 한 줄 평을 작성해주세요."></textarea>
                 <div className="detail-input-footer">
@@ -66,7 +70,7 @@ const CommentBox = ({sendDataComment,semester})=>{
                     }} className="select-bar" style={selectBar}>
                 <option defaultValue>수강학기</option>
                     {semester.map((index,key)=>
-                        (index.semester==='FIRST'?<option value={JSON.stringify(index)}  key={key}> {index.year}년 1학기</option>:<option key={key}>{index.year}년 2학기</option>)
+                        (index.semester==='FIRST'?<option value={JSON.stringify(index)}  key={key}> {index.year}년 1학기</option>:<option value={JSON.stringify(index)} key={key}>{index.year}년 2학기</option>)
                     )}
                 </select>}
                 </div>

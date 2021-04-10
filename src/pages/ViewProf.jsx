@@ -9,7 +9,7 @@ import ClassList from "../components/prof/ClassList";
 import CommentBox from '../components/CommentBox';
 import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
-import { postCommentData } from '../components/API/Api';
+import {postCommentData} from '../components/API/Api'
 const ViewProf = ({match}) => {
     const [detailData, setDetailData] = useState();
     const [detailClassData, setDetailClassData] = useState([]);
@@ -19,7 +19,7 @@ const ViewProf = ({match}) => {
     const [popup,setPopup] = useState(false);
     const [sort,setSort]= useState(0);
     const COOKIE = document.cookie;
-    const MS = process.env.REACT_APP_MASTER_TOKEN|'';
+    const MS = process.env.REACT_APP_MASTER_TOKEN||'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ';
       const getDetailData = async () => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}`);
         //console.log(response.status)
@@ -76,7 +76,7 @@ const ViewProf = ({match}) => {
         message : '한 줄 평 작성 성공!',
         path :'professors/evaluations/post',
         data : JSON.stringify({ 
-          content:value.inputText,
+          content:value.inputText.substring(0,10000),
           professorId: match.params.id,
           studentType: value.inputMajor
         }),

@@ -24,7 +24,7 @@ const Ranking = ({match}) => {
         <>
         <div className="pd-16-side bs contents-text"><span>학과별 랭킹</span><br/>{match.params.id}</div>
       
-        <Route exact path={match.url} render={()=>( 
+        <Route exact path={match.path} render={()=>( 
             <>
             {rankingData&&
                 <>
