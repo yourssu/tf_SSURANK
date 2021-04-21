@@ -19,20 +19,27 @@ const ViewProf = ({match}) => {
     const [popup,setPopup] = useState(false);
     const [sort,setSort]= useState(0);
     const COOKIE = document.cookie;
+    const [commentToken,setCT] = useState('');
     const MS = process.env.REACT_APP_MASTER_TOKEN||'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ';
       const getDetailData = async () => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}`);
         //console.log(response.status)
         setDetailData(response.data.detailedProfessor);
     };
+
     const getProfClassData = async (index) => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}/courses/${index}`);
         setDetailClassData(detailClassData.concat(response.data.offeredCourses));
         //console.log(response.data);
-    };
+    }; 
+    const deleteComment = async (index) => {
+      const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/evaluations/delete/${match.params.id}`);
+      setDetailClassData(detailClassData.concat(response.data.offeredCourses));
+      //console.log(response.data);
+  };
     const getProfClassMaxData = async () => {
       const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}/courses/count`);
-      setGetClassMax(response.data);
+      
       //console.log(response.data);
     };
     const getCommentData = async (index) => {
@@ -42,7 +49,7 @@ const ViewProf = ({match}) => {
         //console.log(response.data.evaluations);
     };
 
-    const getCookie = (cookieName) =>{
+    const getCookie = (cookieName) =>{ //userID
       cookieName = cookieName + '=';
       let cookieData = document.cookie;
       let start = cookieData.indexOf(cookieName);
@@ -55,7 +62,9 @@ const ViewProf = ({match}) => {
       }
       return unescape(cookieValue);
       }
-
+      useEffect(() => {
+        getCookie('userID');
+      }, [])
     /*
     
     const postReport = async () => {

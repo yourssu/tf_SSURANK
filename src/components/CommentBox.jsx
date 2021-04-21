@@ -15,7 +15,7 @@ const CommentBox = ({sendDataComment,semester})=>{
         }
     }
     const submitComment=()=>{
-        if(inputText)
+        if(!inputText)
             alert('내용을 입력해 주세요')
         else if(!inputMajor)
             alert('전공을 선택해 주세요')
