@@ -9,7 +9,7 @@ import ClassList from "../components/prof/ClassList";
 import CommentBox from '../components/CommentBox';
 import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
-import {requestCommentData,getCookie,postCommentData,getDetailData} from '../components/API/Api'
+import {getCommentData,getCookie,postCommentData,getDetailData} from '../components/API/Api'
 const ViewProf = ({match}) => {
     const [detailData, setDetailData] = useState();
     const [detailClassData, setDetailClassData] = useState([]);
@@ -21,11 +21,6 @@ const ViewProf = ({match}) => {
     const COOKIE = document.cookie;
     const [commentToken,setCT] = useState();
     const MS = process.env.REACT_APP_MASTER_TOKEN||commentToken;
-      const getDetailData_ = async () => {
-        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}`);
-        //console.log(response.status)
-        setDetailData(response.data.detailedProfessor);
-    };
 
     const getProfClassData = async (index) => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}/courses/${index}`);
@@ -42,13 +37,6 @@ const ViewProf = ({match}) => {
       
       //console.log(response.data);
     };
-    const setCookie = (cookieName)=>{
-      setCT(getCookie(cookieName));
-    }
-
-      useEffect(() => {
-        setCookie('userAccessToken');
-      }, [])
 
     function requestDetailData(){     
       let dataModel = {
@@ -154,10 +142,6 @@ const ViewProf = ({match}) => {
     useEffect(() => {
       requestCommentData(1);
     }, [sort])
-    useEffect(() => {
-      getCommentData(1);
-      console.log('change!')
-  }, [sort])
     return (detailData?
        <>
         
