@@ -53,6 +53,7 @@ const App = () => {
   }, [category])
   useEffect(()=>{
     console.log(navigator.userAgent.toLowerCase())
+    console.log()
   },[]);
   
   return (

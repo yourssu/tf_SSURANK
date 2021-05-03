@@ -9,7 +9,7 @@ import ClassList from "../components/prof/ClassList";
 import CommentBox from '../components/CommentBox';
 import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
-import {postCommentData} from '../components/API/Api'
+import {requestCommentData,getCookie,postCommentData,getDetailData} from '../components/API/Api'
 const ViewProf = ({match}) => {
     const [detailData, setDetailData] = useState();
     const [detailClassData, setDetailClassData] = useState([]);
@@ -19,9 +19,9 @@ const ViewProf = ({match}) => {
     const [popup,setPopup] = useState(false);
     const [sort,setSort]= useState(0);
     const COOKIE = document.cookie;
-    const [commentToken,setCT] = useState('');
-    const MS = process.env.REACT_APP_MASTER_TOKEN||'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTk5OTksInJvbGVzIjpbIlJPTEVfVVNFUiJdfQ.0n4EumQnVj3v0twvOMtEKsDUtixNC4yp8PYd1X12AJQ';
-      const getDetailData = async () => {
+    const [commentToken,setCT] = useState();
+    const MS = process.env.REACT_APP_MASTER_TOKEN||commentToken;
+      const getDetailData_ = async () => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}`);
         //console.log(response.status)
         setDetailData(response.data.detailedProfessor);
@@ -42,45 +42,30 @@ const ViewProf = ({match}) => {
       
       //console.log(response.data);
     };
-    const getCommentData = async (index) => {
-      let sortCategory =['latest','best']
-        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/evaluations/${sortCategory[sort]}/${match.params.id}/${index}`);
-        setCommentData(response.data.evaluations);
-        //console.log(response.data.evaluations);
-    };
+    const setCookie = (cookieName)=>{
+      setCT(getCookie(cookieName));
+    }
 
-    const getCookie = (cookieName) =>{ //userID
-      cookieName = cookieName + '=';
-      let cookieData = document.cookie;
-      let start = cookieData.indexOf(cookieName);
-      let cookieValue = '';
-      if(start != -1){
-        start += cookieName.length;
-        let end = cookieData.indexOf(';', start);
-      if(end == -1)end = cookieData.length;
-        cookieValue = cookieData.substring(start, end);
-      }
-      return unescape(cookieValue);
-      }
       useEffect(() => {
-        getCookie('userID');
+        setCookie('userAccessToken');
       }, [])
-    /*
-    
-    const postReport = async () => {
-        const json = JSON.stringify({ 
-            content: "string",
-            id: 0,
-            reportCategory: "기타"
-        });
-        const response = await axios.post(`https://test.ground.yourssu.com/timetable/v1/ssurank/professor/evaluation/report`,json, {
-            headers: {
-              'Content-Type': 'application/json'
-            }});
-    };*/
-    
-    function sendDataComment(value){     
+
+    function requestDetailData(){     
+      let dataModel = {
+        message : '',
+        path :'professors/detail',
+        data : match.params.id,
+        headers : {
+          'Content-Type': 'application/json'
+        }
+      }
+      getDetailData(dataModel).then(response=>setDetailData(response.detailedProfessor));
+     
+    }
+    function requestDataComment(value){     
       setIsPending(true);
+      const token = getCookie('userAccessToken')||null;
+      console.log('we get ',token);
       let dataModel = {
         message : '한 줄 평 작성 성공!',
         path :'professors/evaluations/post',
@@ -91,16 +76,38 @@ const ViewProf = ({match}) => {
         }),
         headers : {
           'Content-Type': 'application/json',
-          'Authorization' : `Bearer ${MS}`
+          'Authorization' : `Bearer ${token}`
         }
-    }
-      postCommentData(dataModel).then(
-        res=>setIsPending(false)
-      )
+      }
+      if(token){
+        postCommentData(dataModel).then( //이거 존나 의미없어보이는데?
+          res=>setIsPending(false)
+        )}
+      else{
+        alert('비정상적인 접근');
+        setIsPending(false);
+      }
 
            
     }
-
+    function requestCommentData(index){     
+      const token = getCookie('userAccessToken')||null;
+      console.log('requestCommenData value is ',index);
+      let sortCategory =['latest','best'] 
+      let dataModel = {
+        message : '',
+        path :`professors/evaluations`,
+        data :`${sortCategory[sort]}/${match.params.id}/${String(index)}`,
+        headers : {
+          'Content-Type': 'application/json'
+        }
+      }
+      if(token){
+        dataModel['headers']['Authorization'] = `Bearer ${token}`
+      }
+      getCommentData(dataModel).then(response=>setCommentData(response.evaluations));
+     
+    }
     function CustomDialogContent() {
         
         const [value, setValue] = useState();
@@ -138,12 +145,15 @@ const ViewProf = ({match}) => {
         );
       }
     useEffect(() => {
-        getDetailData();
+        requestDetailData();
         getProfClassData(1);
-        getCommentData(1);
+        requestCommentData(1);
         getProfClassMaxData();
         console.log(COOKIE)
     }, [])
+    useEffect(() => {
+      requestCommentData(1);
+    }, [sort])
     useEffect(() => {
       getCommentData(1);
       console.log('change!')
@@ -178,9 +188,9 @@ const ViewProf = ({match}) => {
         </>
         }
         <Divider/>
-        <CommentBox sendDataComment={sendDataComment} />
+        <CommentBox sendDataComment={requestDataComment} />
         <Divider/>
-        <CommentList date={1} commentData={commentData} setPopup={setPopup} setSort={setSort}/>
+        <CommentList date={1} state={1} commentData={commentData} setPopup={setPopup} setSort={setSort}/>
         
        </>:<Loading/>
     );

@@ -64,7 +64,7 @@ const RecentComment = ({category,match})=>{
         <div className="comment-list">
             {
                 recentCommentData.length > 0? recentCommentData.map((comment,key) => (
-                <Link key={key} to ={`${match.url}/view/`+comment.id}>
+                <Link key={key} to ={`${match.url}/view/`+comment.courseId}>
                 <div className="comment-box" style={firstChild(key)}>
                     <div className="box-header"><span>{comment.title}</span> - {comment.name}</div>
                     <div className="box-contents"><p>{comment.content}</p></div>
@@ -83,7 +83,7 @@ const RecentComment = ({category,match})=>{
             <div className="comment-list">
             {console.log(recentCommentData)}
             {recentCommentData.length > 0?recentCommentData.map((comment,key) => (
-             <Link key={key} to ={`${match.url}/view/`+comment.professorEvaluationId}>
+             <Link key={key} to ={`${match.url}/view/`+comment.professorId}>
             <div className="comment-box" style={firstChild(key)}>
                  <div className="box-header">{comment.name} - {comment.department}</div>
                  <div className="box-contents"><p>{comment.content}</p></div>

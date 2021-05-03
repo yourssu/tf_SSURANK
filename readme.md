@@ -57,3 +57,10 @@
 
 10 directories, 45 files
 ```
+
+해야할일
+
+axios default 설정 (헤더 기본설정)
+api 모듈화
+recoil 토큰 들고오는 atom 만들기
+recoil 하는김에 professor/class state 갖고오는 리코일도 만들면 좋을듯?

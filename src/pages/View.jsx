@@ -12,7 +12,7 @@ import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
 import Modal from './Modal'
 
-import {postCommentData} from '../components/API/Api'
+import {getCookie,postCommentData,getCommentData} from '../components/API/Api'
 const View = ({match}) => {
     const [detailData, setDetailData] = useState();
     const [commentData, setCommentData] = useState();
@@ -46,12 +46,6 @@ const View = ({match}) => {
           alert('You called printAlert function');
       },false);
     
-    const getCommentData = async (index) => {
-      let sortCategory =['latest','best']
-        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/evaluations/${sortCategory[sort]}/${match.params.id}/${index}`);
-        setCommentData(response.data.evaluations);
-        //console.log(response.data.evaluations);
-    };
     const postReport = async () => {
         const json = JSON.stringify({ 
             content: "string",
@@ -65,6 +59,8 @@ const View = ({match}) => {
     };
     function sendDataComment(value){     
       setIsPending(true);
+      const token = getCookie('userAccessToken')||null;
+      console.log('we get ',token);
       let dataModel = {
         message : '한 줄 평 작성 성공!',
         path :'courses/evaluations/post',
@@ -77,14 +73,35 @@ const View = ({match}) => {
         }),
         headers : {
           'Content-Type': 'application/json',
-          'Authorization' : `Bearer ${MS}`
+          'Authorization' : `Bearer ${token}`
         }
+      }
+      if(token){
+        postCommentData(dataModel).then( //이거 존나 의미없어보이는데?
+          res=>setIsPending(false)
+        )}
+      else{
+        alert('비정상적인 접근');
+        setIsPending(false);
+      }  
     }
-      postCommentData(dataModel).then(
-        res=>setIsPending(false)
-      )
-
-           
+    function requestCommentData(index){     
+      const token = getCookie('userAccessToken')||null;
+      console.log('requestCommenData value is ',index);
+      let sortCategory =['latest','best'] 
+      let dataModel = {
+        message : '',
+        path :`courses/evaluations`,
+        data :`${sortCategory[sort]}/${match.params.id}/${String(index)}`,
+        headers : {
+          'Content-Type': 'application/json'
+        }
+      }
+      if(token){
+        dataModel['headers']['Authorization'] = `Bearer ${token}`
+      }
+      getCommentData(dataModel).then(response=>setCommentData(response.evaluations));
+     
     }
     function CustomDialogContent() {
         const [value, setValue] = useState();
@@ -123,9 +140,12 @@ const View = ({match}) => {
       
     useEffect(() => {
         getDetailData();
-        getCommentData(1);
+        requestCommentData(1);
         window.addEventListener('resize', updateWidth)
     }, [])
+    useEffect(() => {
+      requestCommentData(1);
+    }, [sort])
     useEffect(() => {
         window.addEventListener('resize', updateWidth)
         return () => {
@@ -133,7 +153,7 @@ const View = ({match}) => {
         }
     },[width])
     return (
-        detailData?
+        (detailData&&commentData)?
        <>
        <StaticDialog
         isOpen={popup}
@@ -155,7 +175,7 @@ const View = ({match}) => {
         <Divider/>
         <CommentBox sendDataComment={sendDataComment} semester={detailData.historyCourses} setPopup={setPopup} />
         <Divider/>
-        <CommentList date={1} setSort={setSort} commentData={commentData} setPopup={setPopup}/>
+        <CommentList date={1} state={0} setSort={setSort} commentData={commentData} setPopup={setPopup}/>
         
        </>:<Loading/>
     );

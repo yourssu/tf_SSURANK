@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import PropTypes from 'prop-types';
 
-const CommentList = ({setPopup,date,commentData,setSort})=>{
+const CommentList = ({setPopup,date, state,commentData,setSort})=>{
     const commentData_ = [{
         type: '슈랭크',
         content:'한 줄 평 기능 업데이트를 위해 열심히 준비중입니다. 위 버튼을 눌러 업데이트 알림을 신청해주세요!',
@@ -16,7 +16,10 @@ const CommentList = ({setPopup,date,commentData,setSort})=>{
         {commentData&&
             commentData.map((index,key)=>
                 <div key={key} className="comment-wrapper">
-                <div className="comment-head"><span>{index.type}</span><p>2021년 {'FIRST'==='FIRST'?<>1학기</>:<>2학기</>}</p></div>
+                <div className="comment-head">
+                    <span>{index.studentType}</span>
+                    {state==0&&<p>{index.year}년 {'FIRST'==='FIRST'?<>1학기</>:<>2학기</>}</p>}
+                </div>
                 <div className="comment-contents">{index.content}</div>
                 <div className="comment-footer">추천 · 비추천 · 신고</div>
             </div>
