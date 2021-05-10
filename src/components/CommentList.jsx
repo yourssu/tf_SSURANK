@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 
-const CommentList = ({ setPopup, date, state, commentData, setSort }) => {
+const CommentList = ({ setPopup, date, sendAction, state, commentData, setSort }) => {
     const commentData_ = [{
         type: '슈랭크',
         content: '한 줄 평 기능 업데이트를 위해 열심히 준비중입니다. 위 버튼을 눌러 업데이트 알림을 신청해주세요!',
@@ -22,7 +22,17 @@ const CommentList = ({ setPopup, date, state, commentData, setSort }) => {
                         </div>
                         <div className="comment-contents">{index.content}</div>
                         <div className="comment-footer">
-                            <a>추천</a>·<a>비추천</a>·<a>신고</a>
+                            <div className="comment-btn">
+                                <button onClick={() => sendAction(0)}> 추천</button>
+                                ·
+                                <button onClick={() => sendAction(1)} >비추천</button>
+                                ·
+                                {index.isMine ? <button onClick={() => sendAction(3)}>삭제</button> : <button onClick={() => sendAction(2)}>신고</button>}
+                            </div>
+                            <div >
+                                <span><div style={{ margin: 'auto' }}><img src={"/img/thumbsUp.png"} /></div><p>{index.thumbsUp}</p></span>
+                                <span><div style={{ margin: 'auto' }}><img src={"/img/thumbsDown.png"} /></div><p>{index.thumbsDown}</p></span>
+                            </div>
                         </div>
                     </div>
                 )

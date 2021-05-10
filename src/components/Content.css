@@ -553,9 +553,26 @@
   display: flex;
   flex-direction: row;
   margin-top: 12px;
+  justify-content: space-between;
+  height: 18px;
 }
 .comment-footer span {
+  color: #868e96;
+  margin-left: 16px;
+  display: inline-flex;
+  height: 100%;
+}
+.comment-footer p {
+  margin-left: 6px;
+}
+.comment-btn {
   color: #0085FF;
+  margin: auto 0;
+  height: 100%;
+}
+.comment-footer img{
+  margin: auto;
+  display: block;
 }
 .lock {
   background-color: rgba(0, 0, 0, 0.349);
@@ -627,6 +644,7 @@
   content: "";
 }
 :root {
+  --st-dialog-maxWidth: 380px;
   --st-dialog-padding: 16px !important;
   --st-modal-borderRadius: 4px !important;
   --st-modal-boxShadow: 0 !important;
@@ -647,6 +665,7 @@
 }
 .modal-window {
   padding: 6px 16px 16px 16px;
+  
 }
 .modal-text {
   font-style: normal;
@@ -655,7 +674,7 @@
   line-height: 20px;
   /* or 154% */
   word-break: keep-all;
-  text-align: center;
+  text-align: left;
   letter-spacing: -0.02em;
 
   /* Gray8 */
