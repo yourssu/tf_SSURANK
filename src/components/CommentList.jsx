@@ -23,9 +23,9 @@ const CommentList = ({ setPopup, date, sendAction, state, commentData, setSort }
                         <div className="comment-contents">{index.content}</div>
                         <div className="comment-footer">
                             <div className="comment-btn">
-                                <button onClick={() => sendAction(0)}> 추천</button>
+                                <button onClick={() => sendAction({mode : 0, content : index})}> 추천</button>
                                 ·
-                                <button onClick={() => sendAction(1)} >비추천</button>
+                                <button onClick={() => sendAction({mode : 1, content : index})} >비추천</button>
                                 ·
                                 {index.isMine ? <button onClick={() => sendAction(3)}>삭제</button> : <button onClick={() => sendAction(2)}>신고</button>}
                             </div>

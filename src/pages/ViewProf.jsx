@@ -87,7 +87,7 @@ const ViewProf = ({ match }) => {
       path: 'courses/evaluations/report',
       data: JSON.stringify({
         content: value.inputText.substring(0, 10000),
-        evaluationId: match.params.id,
+        evaluationId: commentData.professorEvaluationId,
         reportCategory: value.reportCategory
       }),
       headers: {
@@ -138,16 +138,16 @@ const ViewProf = ({ match }) => {
       }
     }
     if (token) {
-      switch (value) {//0 : 추천 || 1 : 비추천 || 2 : 신고 || 3 : 삭제
+      switch (value.mode) {//0 : 추천 || 1 : 비추천 || 2 : 신고 || 3 : 삭제
         case 0:
-          dataModel['path'] = `courses/evaluations/thumbs-up/${match.params.id}`;
+          dataModel['path'] = `courses/evaluations/thumbs-up/${value.content.professorEvaluationId}`;
           postActionData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )
           break;
         case 1:
           dataModel['path'] = 'courses/evaluations/thumbs-down';
-          dataModel['data'] = `${match.params.id}`;
+          dataModel['data'] = `${value.content.professorEvaluationId}`;
           postActionData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )

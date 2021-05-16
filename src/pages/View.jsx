@@ -102,7 +102,7 @@ const View = ({ match }) => {
       path: 'courses/evaluations/report',
       data: JSON.stringify({
         content: value.inputText.substring(0, 10000),
-        evaluationId: match.params.id,
+        evaluationId:commentData.courseEvaluationId,
         reportCategory: value.reportCategory
       }),
       headers: {
