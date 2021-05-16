@@ -27,7 +27,7 @@ const CommentList = ({ setPopup, date, sendAction, state, commentData, setSort }
                                 ·
                                 <button onClick={() => sendAction({mode : 1, content : index})} >비추천</button>
                                 ·
-                                {index.isMine ? <button onClick={() => sendAction(3)}>삭제</button> : <button onClick={() => sendAction(2)}>신고</button>}
+                                {index.isMine ? <button onClick={() => sendAction({mode : 3, content : index})}>삭제</button> : <button onClick={() => sendAction({mode : 2, content : index})}>신고</button>}
                             </div>
                             <div >
                                 <span><div style={{ margin: 'auto' }}><img src={"/img/thumbsUp.png"} /></div><p>{index.thumbsUp}</p></span>

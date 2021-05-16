@@ -12,14 +12,15 @@ import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
 import Modal from './Modal'
 
-import { getCookie, postActionData, postCommentData, getCommentData } from '../components/API/Api'
+import {deleteCommentData, getCookie, postActionData, postCommentData, getCommentData } from '../components/API/Api'
 const View = ({ match }) => {
   const [detailData, setDetailData] = useState();
   const [commentData, setCommentData] = useState();
   const [isPending, setIsPending] = useState(false);
   const [popup, setPopup] = useState(false);
   const [rankData, setRankData] = useState(false);
-  const [width, setWidth] = useState(608)
+  const [width, setWidth] = useState(608);
+  const [selectCommentId, setSelectCommentId] = useState();
   const [sort, setSort] = useState(0);
   //const rank = {'A0':10,'A1':9,'A2':8,'B0':7,'B1':6,'B2':5,'C0':4,'C1':3,'C2':2,'D':1,'U':0};
   const updateWidth = (ev) => {
@@ -58,27 +59,28 @@ const View = ({ match }) => {
       }
     }
     if (token) {
-      switch (value) {//0 : 추천 || 1 : 비추천 || 2 : 신고 || 3 : 삭제
+      switch (value.mode) {//0 : 추천 || 1 : 비추천 || 2 : 신고 || 3 : 삭제
         case 0:
-          dataModel['path'] = `courses/evaluations/thumbs-up/${match.params.id}`;
+          dataModel['path'] = `courses/evaluations/thumbs-up/${value.content.courseEvaluationId}`;
           postActionData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )
           break;
         case 1:
-          dataModel['path'] = 'courses/evaluations/thumbs-down';
-          dataModel['data'] = `${match.params.id}`;
+          dataModel['path'] = `courses/evaluations/thumbs-down/${value.content.courseEvaluationId}`;
+          //dataModel['data'] = `${value.id}`;
           postActionData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )
           break;
         case 2:
           dataModel['path'] = 'courses/evaluations/report';
+          setSelectCommentId(value.content.courseEvaluationId);
           setPopup(true);
           break;
         case 3:
-          dataModel['path'] = 'courses/evaluations/delete';
-          deletCommentData(dataModel).then( //이거 존나 의미없어보이는데?
+          dataModel['path'] = `courses/evaluations/delete/${value.content.courseEvaluationId}`;
+          deleteCommentData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )
           return;
@@ -102,7 +104,7 @@ const View = ({ match }) => {
       path: 'courses/evaluations/report',
       data: JSON.stringify({
         content: value.inputText.substring(0, 10000),
-        evaluationId:commentData.courseEvaluationId,
+        evaluationId:selectCommentId,
         reportCategory: value.reportCategory
       }),
       headers: {

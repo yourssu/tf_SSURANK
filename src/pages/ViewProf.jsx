@@ -9,7 +9,7 @@ import ClassList from "../components/prof/ClassList";
 import CommentBox from '../components/CommentBox';
 import Divider from '../components/Divider';
 import CommentList from '../components/CommentList';
-import { postActionData, getCommentData, getCookie, postCommentData, getDetailData } from '../components/API/Api'
+import { deleteCommentData,postActionData, getCommentData, getCookie, postCommentData, getDetailData } from '../components/API/Api'
 const ViewProf = ({ match }) => {
   const [detailData, setDetailData] = useState();
   const [detailClassData, setDetailClassData] = useState([]);
@@ -17,6 +17,7 @@ const ViewProf = ({ match }) => {
   const [commentData, setCommentData] = useState();
   const [isPending, setIsPending] = useState(false);
   const [popup, setPopup] = useState(false);
+  const [selectCommentId, setSelectCommentId] = useState();
   const [sort, setSort] = useState(0);
   const COOKIE = document.cookie;
   const [commentToken, setCT] = useState();
@@ -48,7 +49,6 @@ const ViewProf = ({ match }) => {
       }
     }
     getDetailData(dataModel).then(response => setDetailData(response.detailedProfessor));
-
   }
   function requestDataComment(value) {
     setIsPending(true);
@@ -84,10 +84,10 @@ const ViewProf = ({ match }) => {
     console.log('we get ', token);
     let dataModel = {
       message: '신고 접수 성공!',
-      path: 'courses/evaluations/report',
+      path: 'professors/evaluations/report',
       data: JSON.stringify({
         content: value.inputText.substring(0, 10000),
-        evaluationId: commentData.professorEvaluationId,
+        evaluationId: selectCommentId,
         reportCategory: value.reportCategory
       }),
       headers: {
@@ -140,28 +140,28 @@ const ViewProf = ({ match }) => {
     if (token) {
       switch (value.mode) {//0 : 추천 || 1 : 비추천 || 2 : 신고 || 3 : 삭제
         case 0:
-          dataModel['path'] = `courses/evaluations/thumbs-up/${value.content.professorEvaluationId}`;
+          dataModel['path'] = `professors/evaluations/thumbs-up/${value.content.professorEvaluationId}`;
           postActionData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )
           break;
         case 1:
-          dataModel['path'] = 'courses/evaluations/thumbs-down';
-          dataModel['data'] = `${value.content.professorEvaluationId}`;
+          dataModel['path'] = `professors/evaluations/thumbs-down/${value.content.professorEvaluationId}`;
           postActionData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )
           break;
         case 2:
-          dataModel['path'] = 'courses/evaluations/report';
+          dataModel['path'] = 'professors/evaluations/report';
+          setSelectCommentId(value.content.professorEvaluationId);
           setPopup(true);
           break;
         case 3:
-          dataModel['path'] = 'courses/evaluations/delete';
-          deletCommentData(dataModel).then( //이거 존나 의미없어보이는데?
+          dataModel['path'] = `professors/evaluations/delete/${value.content.professorEvaluationId}`;
+          deleteCommentData(dataModel).then( //이거 존나 의미없어보이는데?
             res => setIsPending(false)
           )
-          return;
+          break;
         default:
           alert('잘못된 접근');
       }
@@ -213,7 +213,7 @@ const ViewProf = ({ match }) => {
               <button className="modal-button full bg-color"
                 onClick={() => {
                   setLevel('기타');
-                  reportComment({ inputText: value, reportCategory: '기타' })
+                  reportComment({ inputText: value, reportCategory: '기타', })
                 }}
               >
                 작성
@@ -225,7 +225,7 @@ const ViewProf = ({ match }) => {
           </>
           break;
         default:
-          reportComment({ inputText: value, reportCategory: level });
+          reportComment({ inputText: value, reportCategory: level, });
           setLevel(2);
           break;
       }

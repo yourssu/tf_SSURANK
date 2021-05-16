@@ -25,12 +25,31 @@ export async function postCommentData(value) {
       window.location.reload(false);
     })
     .catch(err => {
-      alert('에러 : ', err.response.data.message)
+      if(err.response.status==409){
+        alert('이미 신고한 댓글입니다');
+        window.location.reload(false);
+      }
+      else{alert('에러 : ', err.response.data.message)}
     }
     );
 };
 export async function postActionData(value) {
-  await axios.post(`${URL}/${value.path}`, { headers: value.headers })
+  await axios.post(`${URL}/${value.path}`, value.data,{ headers: value.headers })
+    .then(response => {
+      alert(value.message)
+      window.location.reload(false);
+    })
+    .catch(err => {
+      if(err.response.status==404){
+        alert('잘못된 요청입니다');
+        window.location.reload(false);
+      }
+      else{alert('에러 : ', err.response.data.message)}
+    }
+    );
+};
+export async function deleteCommentData(value) {
+  await axios.delete(`${URL}/${value.path}`,{ headers: value.headers })
     .then(response => {
       alert(value.message)
       window.location.reload(false);
