@@ -5,7 +5,7 @@ const HistoryGraph = ({rankData,width}) => {
     const rankName=['','D','C','B','A'];
         return(
             <div className="detail-graph pd-16-side">
-                {/*console.log(rankData.length)*/}
+                {/*//console.log(rankData.length)*/}
             <div className="header">이 강의 지난 학기 평가</div>
             {   
                 rankData&&

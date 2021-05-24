@@ -22,7 +22,7 @@ const SearchBox = ({history,match,category})=>{
     }, [value])
     return(
     <div className="search bs pd-16-side">
-        {console.log(value)}
+        {/* {console.log(value)} */}
     <input className="search_bar" value={decodeKeyword()} onChange={search} onKeyDown={(e) => enterSubmit(e) } type="search" placeholder={placeholder}/>
     <Link to={()=>value.length>0&&((category===1?'/class':'/professor')+`/search/${encodeURIComponent(value.replace(/ /g,""))}`)}><div className="search_bar_icon"><img src="/img/search_Icon.svg"/></div></Link>
     </div>

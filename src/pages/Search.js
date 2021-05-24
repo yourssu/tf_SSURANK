@@ -137,7 +137,7 @@ const Search = ({history,match,category}) => {
       <>
         <SearchBox history={history} category={category} match={match}/> 
         <SearchList data={searchData} value={category}/>
-        {console.log(searchData.length)}
+        {/* {console.log(searchData.length)} */}
         {maxPage&&pageList?
             <div>
                 {

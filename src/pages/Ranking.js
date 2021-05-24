@@ -9,7 +9,7 @@ const Ranking = ({match}) => {
     const getRankingList = async (index) => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/departments/${match.params.id}/${index}`);
         setRankingData(rankingData.concat(response.data.professors));
-        console.log(response.data.professors);
+        //console.log(response.data.professors);
     };
     const getPorfMax = async () => {
         const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/departments/${match.params.id}/count`);
@@ -19,12 +19,12 @@ const Ranking = ({match}) => {
     useEffect(() => {
         getRankingList(1);
         getPorfMax();
-        console.log({match})
+        //console.log({match})
     }, [])
     return (
         <>
         <div className="pd-16-side bs contents-text"><span>학과별 랭킹</span><br/>{match.params.id}</div>
-
+      
         <Route exact path={match.path} render={()=>( 
             <>
             {rankingData&&
