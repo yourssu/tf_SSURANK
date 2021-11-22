@@ -7,12 +7,12 @@ const Ranking = ({match}) => {
     const [rankingData, setRankingData] = useState([]);
     const [maxPage,setMaxPage]=useState();
     const getRankingList = async (index) => {
-        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/departments/${match.params.id}/${index}`);
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/rank/departments/${match.params.id}/${index}`);
         setRankingData(rankingData.concat(response.data.professors));
         //console.log(response.data.professors);
     };
     const getPorfMax = async () => {
-        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/departments/${match.params.id}/count`);
+        const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/rank/departments/${match.params.id}/count`);
         setMaxPage(response.data);
         //console.log(response.data);
     };
