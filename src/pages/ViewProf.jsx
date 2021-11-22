@@ -24,32 +24,30 @@ const ViewProf = ({ match }) => {
   const MS = process.env.REACT_APP_MASTER_TOKEN || commentToken;
 
   const getProfClassData = async (index) => {
-    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}/courses/${index}`);
-    setDetailClassData(detailClassData.concat(response.data.offeredCourses));
-    //console.log(response.data);
+    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/rank/professors/${match.params.id}`);
+    setDetailClassData(response.data.professor.offeredCourses);
   };
+
+  
+
   const deleteComment = async (index) => {
-    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/evaluations/delete/${match.params.id}`);
-    setDetailClassData(detailClassData.concat(response.data.offeredCourses));
-    //console.log(response.data);
+    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/rank/courses/evaluations/delete/${match.params.id}`);
+    setDetailClassData(detailClassData.concat(response.data.professor.offeredCourses));
+    
   };
   const getProfClassMaxData = async () => {
-    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/professors/detail/${match.params.id}/courses/count`);
+    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/rank/professors/${match.params.id}`);
 
     //console.log(response.data);
   };
 
-  function requestDetailData() {
-    let dataModel = {
-      message: '',
-      path: 'professors/detail',
-      data: match.params.id,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    getDetailData(dataModel).then(response => setDetailData(response.detailedProfessor));
+  const getDetailData = async () => {
+    console.log(match.params.id);
+    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/rank/professors/${match.params.id}`);
+    console.log(response);
+    setDetailData(response.data.professor);
   }
+
   function requestDataComment(value) {
     setIsPending(true);
     const token = getCookie('userAccessToken') || null;
@@ -245,15 +243,17 @@ const ViewProf = ({ match }) => {
   }
 
   useEffect(() => {
-    requestDetailData();
     getProfClassData(1);
     requestCommentData(1);
     getProfClassMaxData();
-    console.log(COOKIE)
+    console.log(COOKIE);
+    getDetailData();
   }, [])
+
   useEffect(() => {
     requestCommentData(1);
   }, [sort])
+
   return (detailData ?
     <>
 
@@ -272,8 +272,6 @@ const ViewProf = ({ match }) => {
       {detailClassData &&
         <>
           <ClassList maxData={getClassMax} detailClassData={detailClassData} />
-
-          {/*console.log(getClassMax)*/}
           {
             getClassMax > 5 && getClassMax > detailClassData.length &&
             <div className="pd-16-side bs"><button onClick={() => {
@@ -284,7 +282,7 @@ const ViewProf = ({ match }) => {
         </>
       }
       <Divider />
-      <CommentBox sendDataComment={requestDataComment} />
+      <CommentBox sendDataComment={requestDataComment} semester={detailData.semester}/>
       <Divider />
       <CommentList sendAction={sendAction} date={1} state={1} commentData={commentData} setPopup={setPopup} setSort={setSort} />
 

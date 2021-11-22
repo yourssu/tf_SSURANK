@@ -15,7 +15,6 @@ const PropDropdown = (props) => {
     const getMajorList = async () => {
         const response = await axios.get("https://test.ground.yourssu.com/timetable/v1/rank/departments");
         setMajorData(response.data.departments);
-        console.log(majorData);
     };
 
     const getHonorList = async () => {
@@ -45,17 +44,16 @@ const PropDropdown = (props) => {
                     {major &&
                         (majorData ?
                             <>
+                            <div className="major-wrapper">
                                 {majorData.map((college, index) => (
-                                    <div className="major-wrapper" key={index}>
+                                    
                                         <Link key={index} to={`/professor/ranking/${college.originalName}`}>
                                             <div key={index} className="major-block"><p>{college.shortenedName}</p></div>
-                                        </Link>
-                                    </div>
+                                        </Link>  
                                 ))}
-                            
+                            </div>
                             </> :
                             <Loading /> 
-                            // null     
                         )
                     }
                 </div>

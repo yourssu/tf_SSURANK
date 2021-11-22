@@ -4,7 +4,8 @@ const Header = ({detailData}) =>{
       return(
         <div className="detail-box pd-16-side pd-16-top pd-16-bt">
           <div className="detail-rank-logo">
-            <img className={"rank-img "+ "none"} src={"/img/"+detailData.ranking.substring(0,1) +".png"}/></div>
+            <img className={"rank-img none"} src={"/img/"+detailData.ranking.substring(0,1) +".png"}/>
+            </div>
           <div className="detail-info">
               <span>{detailData.title}</span>
               
