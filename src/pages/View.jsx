@@ -283,7 +283,7 @@ const View = ({ match }) => {
         {rankData && detailData &&
           <HistoryGraph rankData={rankData} width={width} />}
         <Divider />
-        <CommentBox sendDataComment={sendDataComment} semester={detailData.course.courseHistory} setPopup={setPopup} />
+        <CommentBox sendDataComment={sendDataComment} semester={detailData.courseHistory} setPopup={setPopup} />
         <Divider />
         <CommentList sendAction={sendAction} date={1} state={0} setSort={setSort} commentData={commentData} setPopup={setPopup} /> 
           </>
