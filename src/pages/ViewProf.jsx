@@ -271,7 +271,7 @@ const ViewProf = ({ match }) => {
       <Divider />
       {detailClassData &&
         <>
-          <ClassList maxData={getClassMax} detailClassData={detailClassData} />
+          <ClassList maxData={getClassMax} detailClassData={detailClassData} profData={detailData}/>
           {
             getClassMax > 5 && getClassMax > detailClassData.length &&
             <div className="pd-16-side bs"><button onClick={() => {
