@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
+__webpack_base_uri__ = 'http://localhost:3000';
+
 module.exports = {
 	// entry: 웹팩에게 어플리케이션이 어디서 시작하고 어디서부터 파일들을 묶을건지 시작점을 정해준다. 
   entry: "./src/index.js",
@@ -51,7 +53,9 @@ module.exports = {
     hotOnly: true,
     historyApiFallback: true
   },
-  plugins: [
+  plugins: [new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify('development')
+  }),
 	new webpack.HotModuleReplacementPlugin(),
 	new HtmlWebpackPlugin({
 	// Dev server를 킬땐 빌드 파일을 만들어서 실행하는게 아니라 이미 있는 파일에다가 번들파일을 덮어씌우는 방식임

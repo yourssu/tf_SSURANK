@@ -44,7 +44,6 @@ const CommentList = ({ setPopup, date, sendAction, state, commentData, setSort }
 }
 
 CommentList.propTypes = {
-    commentData: PropTypes.array.isRequired,
     setPopup: PropTypes.func,
     date: PropTypes.number
 }

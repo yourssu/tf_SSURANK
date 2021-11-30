@@ -18,7 +18,7 @@ return(
     <div className="detail-prof-percent mg-12-bt">
         <div className="pd-16-side ">
             <p>최근 3년간 개설한 강의수 <span className="color bold">상위 {detailData.topPercent}%</span></p>
-            <p >분반을 포함하여<span className="bold"> {detailData.courseCnt}개</span></p>
+            <p>분반을 포함하여<span className="bold"> {detailData.courseCnt}개</span></p>
             </div>
             <div className="detail-prof-percent-list">
             {detailData.sessions

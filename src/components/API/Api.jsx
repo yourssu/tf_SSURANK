@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'https://test.ground.yourssu.com/timetable/v1/ssurank';
+const URL = 'https://test.ground.yourssu.com/timetable/v1/rank';
 
 export function getCookie(cookieName) { //userID
   cookieName = cookieName + '=';
@@ -20,7 +20,7 @@ export function getCookie(cookieName) { //userID
 
 export async function postCommentData(value) {
   await axios.post(`${URL}/${value.path}`, value.data, { headers: value.headers })
-    .then(response => {
+    .then(() => {
       alert(value.message)
       window.location.reload(false);
     })
@@ -35,7 +35,7 @@ export async function postCommentData(value) {
 };
 export async function postActionData(value) {
   await axios.post(`${URL}/${value.path}`, value.data,{ headers: value.headers })
-    .then(response => {
+    .then(() => {
       alert(value.message)
       window.location.reload(false);
     })
@@ -50,7 +50,7 @@ export async function postActionData(value) {
 };
 export async function deleteCommentData(value) {
   await axios.delete(`${URL}/${value.path}`,{ headers: value.headers })
-    .then(response => {
+    .then(() => {
       alert(value.message)
       window.location.reload(false);
     })
@@ -60,8 +60,8 @@ export async function deleteCommentData(value) {
     );
 };
 export async function getDetailData(value) {
-  return await axios.get(`${URL}/${value.path}/${value.data}`, { headers: value.headers })
-    .then(response => {
+  return await axios.get(`${URL}/${value.path}/${value.data}`,{ headers: value.headers })
+    .then(() => {
       console.log(response)
       if (response.status == 200)
         return response.data
@@ -70,6 +70,7 @@ export async function getDetailData(value) {
       }
     })
     .catch(err => {
+      console.log(value)
       alert(err.response.data.message)
     }
     );
@@ -78,8 +79,9 @@ export async function getDetailData(value) {
 }
 
 export async function getCommentData(value) {
+  console.log(value);
   return await axios.get(`${URL}/${value.path}/${value.data}`, { headers: value.headers })
-    .then(response => {
+    .then(() => {
       console.log(response)
       if (response.status == 200)
         return response.data
@@ -88,7 +90,7 @@ export async function getCommentData(value) {
       }
     })
     .catch(err => {
-      alert(err.response.data.message)
+      // alert(err.response.data.message)
     }
     );
 
