@@ -32,7 +32,8 @@ export async function postCommentData(value) {
       else{alert('에러 : ', err.response.data.message)}
     }
     );
-};
+}
+
 export async function postActionData(value) {
   await axios.post(`${URL}/${value.path}`, value.data,{ headers: value.headers })
     .then(() => {
@@ -47,7 +48,8 @@ export async function postActionData(value) {
       else{alert('에러 : ', err.response.data.message)}
     }
     );
-};
+}
+
 export async function deleteCommentData(value) {
   await axios.delete(`${URL}/${value.path}`,{ headers: value.headers })
     .then(() => {
@@ -58,7 +60,8 @@ export async function deleteCommentData(value) {
       alert('에러 : ', err.response.data.message)
     }
     );
-};
+}
+
 export async function getDetailData(value) {
   return await axios.get(`${URL}/${value.path}/${value.data}`,{ headers: value.headers })
     .then(() => {
