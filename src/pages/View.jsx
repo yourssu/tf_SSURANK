@@ -32,9 +32,12 @@ const View = ({ match }) => {
   const getDetailData = async () => {
     const rank = { 'A0': 4, 'B0': 3, 'C0': 2, 'D0': 1 };
     const year = { 'FIRST': '01', 'SECOND': '02' }
-    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/ssurank/courses/detail/${match.params.id}`);
-    setDetailData(response.data.detailedCourse);
-    setRankData(response.data.detailedCourse.historyCourses.map(
+    console.log(match.params.id);
+    const response = await axios.get(`https://test.ground.yourssu.com/timetable/v1/rank/courses/${match.params.id}`);
+    console.log(response);
+    setDetailData(response.data.course);
+    setRankData(response.data.course.courseHistory.map(
+      
       (index) => (
         {
           year: (String(index.year)).substr(2, 4) + '/' + year[index.semester],
@@ -42,6 +45,7 @@ const View = ({ match }) => {
         }
       )))
   }
+
   window.printAlert = new Event('printAlert');
   window.addEventListener('printAlert', function () {
     alert('You called printAlert function');
@@ -245,45 +249,47 @@ const View = ({ match }) => {
 
   useEffect(() => {
     getDetailData();
-    requestCommentData(1);
+    //requestCommentData(1);
     window.addEventListener('resize', updateWidth)
   }, [])
-  useEffect(() => {
-    requestCommentData(1);
-  }, [sort])
+  // useEffect(() => {
+  //   requestCommentData(1);
+  // }, [sort])
   useEffect(() => {
     window.addEventListener('resize', updateWidth)
     return () => {
       window.removeEventListener('resize', updateWidth)
     }
   }, [width])
+  
   return (
-    (detailData && commentData) ?
+     //(detailData && commentData) ?
+     detailData ?
       <>
         <StaticDialog
           isOpen={popup}
           onAfterClose={() => {
             setPopup(false);
 
-            // do something with dialog result
           }}
         >
           {/* see previous demo */}
           <CustomDialogContent />
         </StaticDialog>
 
-        <Header detailData={detailData} />
+        <Header detailData={detailData} /> 
         <Button url={detailData.professorId} string="이 교수 평가 보러가기" />
         <Divider />
         {rankData && detailData &&
           <HistoryGraph rankData={rankData} width={width} />}
         <Divider />
-        <CommentBox sendDataComment={sendDataComment} semester={detailData.historyCourses} setPopup={setPopup} />
+        <CommentBox sendDataComment={sendDataComment} semester={detailData.courseHistory} setPopup={setPopup} />
         <Divider />
-        <CommentList sendAction={sendAction} date={1} state={0} setSort={setSort} commentData={commentData} setPopup={setPopup} />
-
-      </> : <Loading />
+        <CommentList sendAction={sendAction} date={1} state={0} setSort={setSort} commentData={commentData} setPopup={setPopup} /> 
+          </>
+       : <Loading /> 
   );
+  
 };
 
 View.propTypes = {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
 import { Link, Route } from 'react-router-dom';
 const SearchList = (props) => {
+    
     const caseR = ['none', "plus", 'zero', 'minus'];
     const college = ['1', '2', '3'];
     //1 : 강의별 , 2 : 교수별, 3: 학과랭킹
@@ -29,13 +30,13 @@ const SearchList = (props) => {
                                     </div>
                                 </div>
                             </Link>
-                            : <Link to={'/class/view/' + rank.courseId}>
+                            : <Link to={'/class/view/' + rank.id}>
                                 <div className="dropdown-block pd-16-side bs">
                                     <div className="block-left"><img className={"rank-img none "} src={"/img/" + rank.ranking.substring(0, 1) + ".png"} /></div>
                                     <div className="block-center mg-16-side">
                                         <span>{rank.title}</span>
 
-                                        <p>{rank.name}·{rank.department}</p>
+                                        <p>{rank.professor}·{rank.department}</p>
                                     </div>
                                     <div className="block-right" style={{ width: '70px' }}>
                                         <p>{rank.year % 2000}년 {(rank.semester === 'SECOND' ? <>2학기</> : <>1학기</>)}</p>
