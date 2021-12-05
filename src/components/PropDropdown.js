@@ -3,30 +3,34 @@ import { render } from "react-dom";
 import { Link, Route } from 'react-router-dom';
 import axios from "axios";
 import Loading from "./Loading";
+
 const PropDropdown = (props) => {
     const [majorData, setMajorData] = useState();
     const [honorData, setHonorData] = useState();
     const [major, setMajor] = useState(false);
     const [honor, setHonor] = useState(false);
-    const caseR = ["plus", 'zero', 'minus', ''];
-    const college = ['1', '2', '3'];
+
+    const NameLists = ["대학", "공과대학", "법과대학", "사회과학대학", "인문대학", "자연과학대학", "IT대학", "경영대학", "경제통상대학"]
+
     const getMajorList = async () => {
-        const response = await axios.get("https://test.ground.yourssu.com/timetable/v1/ssurank/departments/list");
+        const response = await axios.get("https://test.ground.yourssu.com/timetable/v1/rank/departments");
         setMajorData(response.data.departments);
     };
+
     const getHonorList = async () => {
-        const response = await axios.get("https://test.ground.yourssu.com/timetable/v1/ssurank/professors/honor");
+        const response = await axios.get("https://test.ground.yourssu.com/timetable/v1/rank/professors/honor");
 
         setHonorData(response.data);
     };
-    const collegeList = ["인문대학", "자연과학대학", "법과대학", "사회과학대학", "경제통상대학", "경영대학", "공과대학", "IT대학", "베어드교양대학", "융특"]
+
     const honorRank = (index) => {
         return { objectPosition: ((index) * -24) + 'px 0' }
     }
-    useEffect(() => {
+    useEffect(()=>{
         getMajorList();
         getHonorList();
     }, [])
+    
     if (!major && !honor && !honorData) {
         return (
             <Loading />
@@ -40,16 +44,16 @@ const PropDropdown = (props) => {
                     {major &&
                         (majorData ?
                             <>
+                            <div className="major-wrapper">
                                 {majorData.map((college, index) => (
-                                    <div className="major-wrapper" key={index}>
-                                        {college['department'].map((data, indexID) => (
-                                            //<>{console.log(data.originalName)}</>
-                                            <Link key={indexID} to={`/professor/ranking/${data.originalName}`}><div key={indexID} className="major-block"><p>{data.shortenedName}</p></div></Link>
-                                        ))}
-                                    </div>
+                                    
+                                        <Link key={index} to={`/professor/ranking/${college.originalName}`}>
+                                            <div key={index} className="major-block"><p>{college.shortenedName}</p></div>
+                                        </Link>  
                                 ))}
+                            </div>
                             </> :
-                            <Loading />
+                            <Loading /> 
                         )
                     }
                 </div>
@@ -85,3 +89,4 @@ const PropDropdown = (props) => {
 }
 
 export default PropDropdown;
+

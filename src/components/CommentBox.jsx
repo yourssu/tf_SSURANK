@@ -84,7 +84,6 @@ const CommentBox = ({ sendDataComment, semester }) => {
     )
 }
 CommentBox.propTypes = {
-    setPopup: PropTypes.func.isRequired,
     semester: PropTypes.array
 }
 export default CommentBox;

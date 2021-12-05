@@ -63,8 +63,8 @@ export async function deleteCommentData(value) {
 }
 
 export async function getDetailData(value) {
-  return await axios.get(`${URL}/${value.path}/${value.data}`, { headers: value.headers })
-    .then(response => {
+  return await axios.get(`${URL}/${value.path}/${value.data}`,{ headers: value.headers })
+    .then(() => {
       console.log(response)
       if (response.status == 200)
         return response.data
@@ -73,6 +73,7 @@ export async function getDetailData(value) {
       }
     })
     .catch(err => {
+      console.log(value)
       alert(err.response.data.message)
     }
     );
@@ -81,8 +82,9 @@ export async function getDetailData(value) {
 }
 
 export async function getCommentData(value) {
+  console.log(value);
   return await axios.get(`${URL}/${value.path}/${value.data}`, { headers: value.headers })
-    .then(response => {
+    .then(() => {
       console.log(response)
       if (response.status == 200)
         return response.data
@@ -91,7 +93,7 @@ export async function getCommentData(value) {
       }
     })
     .catch(err => {
-      alert(err.response.data.message)
+      // alert(err.response.data.message)
     }
     );
 
